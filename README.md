@@ -5,7 +5,7 @@ The tool is currently actively used internally by many of our products, and is n
 
 We would love to partner with you to understand where Fairness Indicators is most useful, and where added functionality would be valuable. Please reach out at ml-fairness-partnerships@google.com. You can provide any feedback on your experience, and feature requests, here. 
 
-## What is Fairness Indicatosrs? 
+## What is Fairness Indicators? 
 Fairness Indicators enables easy computation of commonly-identified fairness metrics for **binary** and **multiclass** classifiers. 
 
 Many existing tools for evaluating fairness concerns don’t work well on large scale datasets and models. At Google, it is important for us to have tools that can work on billion-user systems. Fairness Indicators will allow you to evaluate across any size of use case. 
