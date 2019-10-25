@@ -31,8 +31,7 @@ Tensorflow Models
 * Access Fairness Indicators in Tensorboard when evaluating other real-time metrics \[documentation for Fairness Indicators for Tensorboard]
 
 Not using existing Tensorflow tools? No worries!
-* Access Fairness Indicators as part of the Evaluator component in Tensorflow Extended \[documentation for Evaluator, example colab]
-* Access Fairness Indicators in Tensorboard when evaluating other real-time metrics \[documentation for Fairness Indicators for Tensorboard]
+* Download the Fairness Indicators pip package, and use Tensorflow Model Analysis as a standalone tool [documentation for TFMA] 
 
 Non-Tensorflow Models
 * Model Agnostic TFMA enables you to compute Fairness Indicators based on the output of any model \[documentation for Model Agnostic TFMA]
