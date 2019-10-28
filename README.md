@@ -17,7 +17,7 @@ In particular, Fairness Indicators includes the ability to:
   * Ensure user privacy with K-anonymity configuration
 * Dive deep into individual slices to explore root causes and opportunities for improvement
 
-This Introductory Video provides an example of how Fairness Indicators can be used on of our own products to evaluate fairness concerns overtime. This Demo Colab provides a hands-on experience of using Fairness Indicators.
+This [Introductory Video](https://www.youtube.com/watch?v=pHT-ImFXPQo) provides an example of how Fairness Indicators can be used on of our own products to evaluate fairness concerns overtime. This Demo Colab provides a hands-on experience of using Fairness Indicators.
 
 The pip package download includes: 
 * **Tensorflow Data Analysis (TFDV)** \[analyze distribution of your dataset] 
