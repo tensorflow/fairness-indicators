@@ -3,7 +3,7 @@ Fairness Indicators is designed to support teams in evaluating and improving mod
 
 The tool is currently actively used internally by many of our products, and is now available in BETA for you to try for your own use cases. 
 
-We would love to partner with you to understand where Fairness Indicators is most useful, and where added functionality would be valuable. Please reach out at ml-fairness-partnerships@google.com. You can provide any feedback on your experience, and feature requests, here. 
+We would love to partner with you to understand where Fairness Indicators is most useful, and where added functionality would be valuable. Please reach out at tfx@tensorflow.org. You can provide any feedback on your experience, and feature requests, here. 
 
 ## What is Fairness Indicators? 
 Fairness Indicators enables easy computation of commonly-identified fairness metrics for **binary** and **multiclass** classifiers. 
