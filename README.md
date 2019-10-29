@@ -25,14 +25,14 @@ The pip package download includes:
 
 ## How can I use Fairness Indicators?
 Tensorflow Models
-* Access Fairness Indicators as part of the Evaluator component in Tensorflow Extended \[documentation for Evaluator, example colab]
-* Access Fairness Indicators in Tensorboard when evaluating other real-time metrics \[documentation for Fairness Indicators for Tensorboard]
+* Access Fairness Indicators as part of the Evaluator component in Tensorflow Extended \[docs](https://www.tensorflow.org/tfx/guide/evaluator)
+* Access Fairness Indicators in Tensorboard when evaluating other real-time metrics \[docs](https://github.com/catherinaxu/tensorboard/blob/fi-documentation/docs/fairness-indicators.md)
 
 Not using existing Tensorflow tools? No worries!
-* Download the Fairness Indicators pip package, and use Tensorflow Model Analysis as a standalone tool [documentation for TFMA] 
+* Download the Fairness Indicators pip package, and use Tensorflow Model Analysis as a standalone tool [docs](https://g3doc.corp.google.com/third_party/tfx/opensource_only/g3doc/guide/fairness_indicators.md?cl=catherinaxu%2F164)
 
 Non-Tensorflow Models
-* Model Agnostic TFMA enables you to compute Fairness Indicators based on the output of any model \[documentation for Model Agnostic TFMA]
+* Model Agnostic TFMA enables you to compute Fairness Indicators based on the output of any model [docs](https://g3doc.corp.google.com/third_party/tfx/opensource_only/g3doc/guide/fairness_indicators.md?cl=catherinaxu%2F164)
 
 ## [Example Colab](https://github.com/tensorflow/fairness-indicators/blob/master/demo/Fairness_Indicators_Example_Colab.ipynb)
 
