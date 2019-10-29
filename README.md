@@ -1,4 +1,7 @@
 # Fairness Indicators BETA 
+
+![Fairness_Indicators](https://raw.githubusercontent.com/tensorflow/fairness-indicators/master/images/fairnessIndicators.png?token=ACG55GRI4H2D3245ZFC37CS5YIC4C)
+
 Fairness Indicators is designed to support teams in evaluating and improving models for fairness concerns in partnership with the broader Tensorflow toolkit.  
 
 The tool is currently actively used internally by many of our products, and is now available in BETA for you to try for your own use cases. We would love to partner with you to understand where Fairness Indicators is most useful, and where added functionality would be valuable. Please reach out at tfx@tensorflow.org. You can provide any feedback on your experience, and feature requests, here. 
@@ -15,9 +18,9 @@ In particular, Fairness Indicators includes the ability to:
   * Feel confident about your results with confidence intervals and evals at multiple thresholds
 * Dive deep into individual slices to explore root causes and opportunities for improvement
 
-[![](http://img.youtube.com/vi/pHT-ImFXPQo/0.jpg)](http://www.youtube.com/watch?v=pHT-ImFXPQo "")
-
 This [Introductory Video](https://www.youtube.com/watch?v=pHT-ImFXPQo) provides an example of how Fairness Indicators can be used on of our own products to evaluate fairness concerns overtime. This Demo Colab provides a hands-on experience of using Fairness Indicators.
+
+[![](http://img.youtube.com/vi/pHT-ImFXPQo/0.jpg)](http://www.youtube.com/watch?v=pHT-ImFXPQo "")
 
 The pip package download includes:
 
@@ -34,11 +37,11 @@ Tensorflow Models
 
 Not using existing Tensorflow tools? No worries!
 
-* Download the Fairness Indicators pip package, and use Tensorflow Model Analysis as a standalone tool \[[docs](https://g3doc.corp.google.com/third_party/tfx/opensource_only/g3doc/guide/fairness_indicators.md?cl=catherinaxu%2F164)]
+* Download the Fairness Indicators pip package, and use Tensorflow Model Analysis as a standalone tool \[[docs](https://www.tensorflow.org/tfx/guide/fairness_indicators)]
 
 Non-Tensorflow Models
 
-* Model Agnostic TFMA enables you to compute Fairness Indicators based on the output of any model \[[docs](https://g3doc.corp.google.com/third_party/tfx/opensource_only/g3doc/guide/fairness_indicators.md?cl=catherinaxu%2F164)]
+* Model Agnostic TFMA enables you to compute Fairness Indicators based on the output of any model \[[docs](https://www.tensorflow.org/tfx/guide/fairness_indicators)]
 
 ## Examples
 
@@ -47,4 +50,5 @@ The [examples](https://github.com/tensorflow/fairness-indicators/tree/master/exa
 * [Fairness_Indicators_Example_Colab.ipynb](https://github.com/tensorflow/fairness-indicators/blob/master/demo/Fairness_Indicators_Example_Colab.ipynb) gives an overview of Fairness Indicators in [TensorFlow Model Analysis](https://www.tensorflow.org/tfx/guide/tfma) and how to use it with a real dataset. This notebook also goes over [TensorFlow Data Validation](https://www.tensorflow.org/tfx/data_validation/get_started) and [What-If Tool](https://pair-code.github.io/what-if-tool/), two tools for analyzing TensorFlow models that are packaged with Fairness Indicators.
 * [Fairness_Indicators_on_TF_Hub.ipynb](https://github.com/tensorflow/fairness-indicators/blob/master/demo/Fairness_Indicators_on_TF_Hub.ipynb) demonstrates how to use Fairness Indicators to compare models trained on different [text embeddings](https://en.wikipedia.org/wiki/Word_embedding). This notebook uses text embeddings from [TensorFlow Hub](https://www.tensorflow.org/hub), TensorFlow's library to publish, discover, and reuse model components.
 
-## [Guidance and Metrics](https://github.com/tensorflow/fairness-indicators/blob/master/documentation/guidance.md)
+## More questions? 
+For more information on how to think about fairness evaluation in the context of your use case, see [this link](https://github.com/tensorflow/fairness-indicators/blob/master/documentation/guidance.md).
