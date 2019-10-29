@@ -41,6 +41,11 @@ Non-Tensorflow Models
 
 * Model Agnostic TFMA enables you to compute Fairness Indicators based on the output of any model \[[docs](https://g3doc.corp.google.com/third_party/tfx/opensource_only/g3doc/guide/fairness_indicators.md?cl=catherinaxu%2F164)]
 
-## [Example Colab](https://github.com/tensorflow/fairness-indicators/blob/master/demo/Fairness_Indicators_Example_Colab.ipynb)
+## Examples
+
+The [demo](https://github.com/tensorflow/fairness-indicators/tree/master/demo) directory contains several examples.
+
+* [Fairness_Indicators_Example_Colab.ipynb](https://github.com/tensorflow/fairness-indicators/blob/master/demo/Fairness_Indicators_Example_Colab.ipynb) gives an overview of Fairness Indicators in [TensorFlow Model Analysis](https://www.tensorflow.org/tfx/guide/tfma) and how to use it with a real dataset. This notebook also goes over [TensorFlow Data Validation](https://www.tensorflow.org/tfx/data_validation/get_started) and [What-If Tool](https://pair-code.github.io/what-if-tool/), two tools for analyzing TensorFlow models that are packaged with Fairness Indicators.
+* [Fairness_Indicators_on_TF_Hub.ipynb](https://github.com/tensorflow/fairness-indicators/blob/master/demo/Fairness_Indicators_on_TF_Hub.ipynb) demonstrates how to use Fairness Indicators to compare models trained on different [text embeddings](https://en.wikipedia.org/wiki/Word_embedding). This notebook uses text embeddings from [TensorFlow Hub](https://www.tensorflow.org/hub), TensorFlow's library to publish, discover, and reuse model components.
 
 ## [Guidance and Metrics](https://docs.google.com/document/d/1GbsRvRdNqcemrQuQC9_5LGs5TqbUZJHdDL52T3C9-Ek/edit?ts=5db72d6b#heading=h.olp5n6c0y9vi)
