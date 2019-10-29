@@ -19,11 +19,11 @@ from setuptools import setup
 
 REQUIRED_PACKAGES = [
     'setuptools >= 40.2.0',
-    'tensorflow >= 1.14',
-    'tensorflow-model-analysis >= 0.15.0',
-    'tensorflow-data-validation >= 0.15.0',
-    'witwidget >= 1.4.4',
-    'tensorboard >= 1.14.0',
+    'tensorflow >= 1.15, < 3',
+    'tensorflow-model-analysis >= 0.15.4, < 1',
+    'tensorflow-data-validation >= 0.15.0, < 1',
+    'witwidget >= 1.4.4, < 2',
+    'tensorboard >= 1.14.0, < 2',
     # python3 specifically requires wheel 0.26
     'wheel; python_version < "3"',
     'wheel >= 0.26; python_version >= "3"',
@@ -34,7 +34,7 @@ with open('README.md', 'r') as fh:
 
 setup(
     name='fairness_indicators',
-    version='0.1.0.dev1',
+    version='0.1.0.dev2',
     description='Fairness Indicators',
     long_description=long_description,
     url='https://github.com/tensorflow/fairness-indicators',
