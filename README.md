@@ -36,4 +36,4 @@ Non-Tensorflow Models
 
 ## [Example Colab](https://github.com/tensorflow/fairness-indicators/blob/master/demo/Fairness_Indicators_Example_Colab.ipynb)
 
-## [Guidance and Metrics](https://bit.ly/fairness-indicators-guidance)
+## [Guidance and Metrics](https://docs.google.com/document/d/1GbsRvRdNqcemrQuQC9_5LGs5TqbUZJHdDL52T3C9-Ek/edit?ts=5db72d6b#heading=h.olp5n6c0y9vi)
