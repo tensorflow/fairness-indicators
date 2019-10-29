@@ -34,6 +34,6 @@ Not using existing Tensorflow tools? No worries!
 Non-Tensorflow Models
 * Model Agnostic TFMA enables you to compute Fairness Indicators based on the output of any model \[documentation for Model Agnostic TFMA]
 
-## Example Colab
+## [Example Colab](https://github.com/tensorflow/fairness-indicators/blob/master/demo/Fairness_Indicators_Example_Colab.ipynb)
 
-## Guidance and Metrics
+## [Guidance and Metrics](https://bit.ly/fairness-indicators-guidance)
