@@ -52,3 +52,5 @@ The [examples](https://github.com/tensorflow/fairness-indicators/tree/master/exa
 
 ## More questions? 
 For more information on how to think about fairness evaluation in the context of your use case, see [this link](https://github.com/tensorflow/fairness-indicators/blob/master/documentation/guidance.md).
+
+If you have found a bug in Fairness Indicators, please file a GitHub issue with as much supporting information as you can provide. 
