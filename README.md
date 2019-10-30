@@ -1,6 +1,6 @@
 # Fairness Indicators BETA 
 
-![Fairness_Indicators](https://raw.githubusercontent.com/tensorflow/fairness-indicators/master/images/fairnessIndicators.png?token=ACG55GRI4H2D3245ZFC37CS5YIC4C)
+![Fairness_Indicators](./images/fairnessIndicators.png)
 
 Fairness Indicators is designed to support teams in evaluating and improving models for fairness concerns in partnership with the broader Tensorflow toolkit.  
 
