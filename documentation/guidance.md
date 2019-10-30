@@ -19,7 +19,15 @@ experience?
 
 When considering AI's impact on people, it is important to always remember that human societies are extremely complex! Understanding people, and their social identities, social structures and cultural systems are each huge fields of open research in their own right. Throw in the complexities of cross-cultural differences around the globe, and getting even a foothold on understanding societal impact can be challenging. Whenever possible, we recommend consulting with appropriate domain experts, which may include social scientists, sociolinguists, and cultural anthropologists, as well as with members of the populations on which technology will be deployed.
 
-A single model, for example, the toxicity model that we leverage in our [example colab](https://github.com/tensorflow/fairness-indicators/blob/master/demo/Fairness_Indicators_Example_Colab.ipynb), can be used in many different contexts. A toxicity model deployed on a website to filter offensive comments, for example, is a very different use case than the model being deployed in an example web UI where users can type in a sentence and see what score the model gives. Depending on the use case, and how users experience the model prediction, your product will have different risks, effects, and opportunities and you may want to evaluate for different fairness concerns. 
+A single model, for example, the toxicity model that we leverage in our
+[example colab](https://github.com/tensorflow/fairness-indicators/blob/master/examples/Fairness_Indicators_Example_Colab.ipynb),
+can be used in many different contexts. A toxicity model deployed on a website
+to filter offensive comments, for example, is a very different use case than the
+model being deployed in an example web UI where users can type in a sentence and
+see what score the model gives. Depending on the use case, and how users
+experience the model prediction, your product will have different risks,
+effects, and opportunities and you may want to evaluate for different fairness
+concerns.
 
 The questions above are the foundation of what ethical considerations, including
 fairness, you may want to take into account when designing and developing your
