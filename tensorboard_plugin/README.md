@@ -28,7 +28,7 @@ source ~/tensorboard_demo/bin/activate
 pip install --upgrade pip
 pip install tensorboard_plugin_fairness_indicators
 pip install "tensorflow_model_analysis>=0.15.1"
-pip uninstall -y tensorboard tb-nightly
+pip uninstall -y tensorboard
 pip install --upgrade tb-nightly
 ```
 
