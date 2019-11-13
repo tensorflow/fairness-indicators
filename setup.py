@@ -29,12 +29,18 @@ REQUIRED_PACKAGES = [
     'wheel >= 0.26; python_version >= "3"',
 ]
 
+# Get version from version module.
+with open('version.py') as fp:
+  globals_dict = {}
+  exec(fp.read(), globals_dict)  # pylint: disable=exec-used
+__version__ = globals_dict['__version__']
+
 with open('README.md', 'r') as fh:
   long_description = fh.read()
 
 setup(
     name='fairness_indicators',
-    version='0.1.0.dev2',
+    version=__version__,
     description='Fairness Indicators',
     long_description=long_description,
     url='https://github.com/tensorflow/fairness-indicators',
