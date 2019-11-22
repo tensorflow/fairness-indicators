@@ -30,7 +30,7 @@ REQUIRED_PACKAGES = [
 ]
 
 # Get version from version module.
-with open('version.py') as fp:
+with open('fairness_indicators/version.py') as fp:
   globals_dict = {}
   exec(fp.read(), globals_dict)  # pylint: disable=exec-used
 __version__ = globals_dict['__version__']
@@ -43,6 +43,7 @@ setup(
     version=__version__,
     description='Fairness Indicators',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     url='https://github.com/tensorflow/fairness-indicators',
     author='Google LLC',
     author_email='packages@tensorflow.org',
