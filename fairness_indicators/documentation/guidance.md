@@ -2,8 +2,7 @@
 
 *Written by*: Ben Hutchinson, Meg Mitchell, Catherina Xu, Tulsee Doshi
 
-
-### Interested in leveraging the Fairness Indicators Beta? 
+### Interested in leveraging the Fairness Indicators Beta?
 
 Before you do, we ask that you read through the following guidance.
 
@@ -17,7 +16,15 @@ through which a user may experience your product. Who are the different types of
 users your product is expected to serve? Who else may be affected by the
 experience?
 
-When considering AI's impact on people, it is important to always remember that human societies are extremely complex! Understanding people, and their social identities, social structures and cultural systems are each huge fields of open research in their own right. Throw in the complexities of cross-cultural differences around the globe, and getting even a foothold on understanding societal impact can be challenging. Whenever possible, we recommend consulting with appropriate domain experts, which may include social scientists, sociolinguists, and cultural anthropologists, as well as with members of the populations on which technology will be deployed.
+When considering AI's impact on people, it is important to always remember that
+human societies are extremely complex! Understanding people, and their social
+identities, social structures and cultural systems are each huge fields of open
+research in their own right. Throw in the complexities of cross-cultural
+differences around the globe, and getting even a foothold on understanding
+societal impact can be challenging. Whenever possible, we recommend consulting
+with appropriate domain experts, which may include social scientists,
+sociolinguists, and cultural anthropologists, as well as with members of the
+populations on which technology will be deployed.
 
 A single model, for example, the toxicity model that we leverage in our
 [example colab](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_Example_Colab.ipynb),
@@ -34,7 +41,8 @@ fairness, you may want to take into account when designing and developing your
 ML-based product. These questions also motivate _which_ metrics and _which_
 groups of users you should the tool to evaluate.
 
-Before diving in further, here are three resources we recommend as you get started:
+Before diving in further, here are three resources we recommend as you get
+started:
 
 *   **[The People + AI Guidebook](https://pair.withgoogle.com/) for
     Human-centered AI design:** This guidebook is a great resource for the
@@ -55,16 +63,21 @@ always translate to acceptable performance for other metrics (false positive
 rate, false negative rate) that are equally important in assessing opportunity
 and harm for users.
 
-The below sections will walk through some of the aspects to consider. 
+The below sections will walk through some of the aspects to consider.
 
+#### Which groups should I slice by?
 
-#### Which groups should I slice by? 
-
-In general, a good practice is to slice by as many groups as may be affected by your product, since you never know when performance might differ for one of the other. However, if you aren’t sure, think about the different users who may be engaging with your product, and how they might be affected. Consider, especially, slices related to sensitive characteristics such as race, ethnicity, gender, nationality, income, sexual orientation, and disability status. 
+In general, a good practice is to slice by as many groups as may be affected by
+your product, since you never know when performance might differ for one of the
+other. However, if you aren’t sure, think about the different users who may be
+engaging with your product, and how they might be affected. Consider,
+especially, slices related to sensitive characteristics such as race, ethnicity,
+gender, nationality, income, sexual orientation, and disability status.
 
 **What if I don’t have data labelled for the slices I want to investigate?**
 
-Good question. We know that many datasets don’t have ground-truth labels for individual identity attributes.
+Good question. We know that many datasets don’t have ground-truth labels for
+individual identity attributes.
 
 If you find yourself in this position, we recommend a few approaches:
 
@@ -98,11 +111,19 @@ If you find yourself in this position, we recommend a few approaches:
 
 **Always make sure to evaluate on multiple, diverse datasets.**
 
-If your evaluation data is not adequately representative of your user base, or the types of data likely to be encountered, you may end up with deceptively good fairness metrics. Similarly, high model performance on one dataset doesn’t guarantee high performance on others. 
+If your evaluation data is not adequately representative of your user base, or
+the types of data likely to be encountered, you may end up with deceptively good
+fairness metrics. Similarly, high model performance on one dataset doesn’t
+guarantee high performance on others.
 
 **Keep in mind subgroups aren’t always the best way to classify individuals.**
 
-People are multidimensional and belong to more than one group, even within a single dimension -- consider someone who is multiracial, or belongs to multiple racial groups. Also, while overall metrics for a given racial group may look equitable, particular interactions, such as race and gender together may show unintended bias. Moreover, many subgroups have fuzzy boundaries which  are constantly being redrawn. 
+People are multidimensional and belong to more than one group, even within a
+single dimension -- consider someone who is multiracial, or belongs to multiple
+racial groups. Also, while overall metrics for a given racial group may look
+equitable, particular interactions, such as race and gender together may show
+unintended bias. Moreover, many subgroups have fuzzy boundaries which are
+constantly being redrawn.
 
 **When have I tested enough slices, and how do I know which slices to test?**
 
@@ -115,25 +136,45 @@ that your product works for _all_ users, and getting diverse user feedback and
 testing is important to ensure that you are continually identifying new
 opportunities.
 
-To get started, we recommend thinking through your particular use case and the different ways users may engage with your product. How might different users have different experiences? What does that mean for slices you should evaluate? Collecting feedback from diverse users may also highlight potential slices to prioritize.
+To get started, we recommend thinking through your particular use case and the
+different ways users may engage with your product. How might different users
+have different experiences? What does that mean for slices you should evaluate?
+Collecting feedback from diverse users may also highlight potential slices to
+prioritize.
 
+#### Which metrics should I choose?
 
-#### Which metrics should I choose? 
+When selecting which metrics to evaluate for your system, consider who will be
+experiencing your model, how it will be experienced, and the effects of that
+experience.
 
-When selecting which metrics to evaluate for your system, consider who will be experiencing your model, how it will be experienced, and the effects of that experience. 
+For example, how does your model give people more dignity or autonomy, or
+positively impact their emotional, physical or financial wellbeing? In contrast,
+how could your model’s predictions reduce people's dignity or autonomy, or
+negatively impact their emotional, physical or financial wellbeing?
 
-For example, how does your model give people more dignity or autonomy, or positively impact their emotional, physical or financial wellbeing? In contrast, how could your model’s predictions reduce people's dignity or autonomy, or negatively impact their emotional, physical or financial wellbeing?
+**In general, we recommend slicing _all your existing performance metrics as
+good practice. We also recommend evaluating your metrics across
+<span style="text-decoration:underline;">multiple thresholds</span>_** in order
+to understand how the threshold can affect the performance for different groups.
 
-**In general, we recommend slicing _all your existing performance metrics as good practice. We also recommend evaluating your metrics across <span style="text-decoration:underline;">multiple thresholds</span>_** in order to understand how the threshold can affect the performance for different groups.
-
-In addition, if there is a predicted label which is uniformly "good" or “bad”, then consider reporting (for each subgroup) the rate at which that label is predicted. For example, a “good” label would be a label whose prediction grants a person access to some resource, or enables them to perform some action.
-
+In addition, if there is a predicted label which is uniformly "good" or “bad”,
+then consider reporting (for each subgroup) the rate at which that label is
+predicted. For example, a “good” label would be a label whose prediction grants
+a person access to some resource, or enables them to perform some action.
 
 #### Critical fairness metrics for classification
 
-When thinking about a classification model, think about the effects of _errors_ (the differences between the actual “ground truth” label, and the label from the model). If some errors may pose more opportunity or harm to your users, make sure you evaluate the rates of these errors across groups of users. These error rates are defined below, in the metrics currently supported by the Fairness Indicators beta. 
+When thinking about a classification model, think about the effects of _errors_
+(the differences between the actual “ground truth” label, and the label from the
+model). If some errors may pose more opportunity or harm to your users, make
+sure you evaluate the rates of these errors across groups of users. These error
+rates are defined below, in the metrics currently supported by the Fairness
+Indicators beta.
 
-**Over the course of the next year, we hope to release case studies of different use cases and the metrics associated with these so that we can better highlight when different metrics might be most appropriate.**
+**Over the course of the next year, we hope to release case studies of different
+use cases and the metrics associated with these so that we can better highlight
+when different metrics might be most appropriate.**
 
 **Metrics available today in Fairness Indicators**
 
@@ -158,11 +199,17 @@ out further._
 
 **True Positive Rate / False Negative Rate**
 
-
-
-*   _<span style="text-decoration:underline;">Definition:</span>_ The percentage of positive data points (as labeled in the ground truth) that are _correctly_ labeled positive, or the percentage of positive data points that are _incorrectly_ labeled negative 
-*   _<span style="text-decoration:underline;">Relates to:</span>_ Equality of Opportunity (for the positive class), when equal across subgroups
-*   _<span style="text-decoration:underline;">When to use this metric:</span>_ Fairness use cases where it is important that the same % of qualified candidates are rated positive in each group. This is most commonly recommended in cases of classifying positive outcomes, such as loan applications, school admissions, or whether content is kid-friendly
+*   _<span style="text-decoration:underline;">Definition:</span>_ The percentage
+    of positive data points (as labeled in the ground truth) that are
+    _correctly_ labeled positive, or the percentage of positive data points that
+    are _incorrectly_ labeled negative
+*   _<span style="text-decoration:underline;">Relates to:</span>_ Equality of
+    Opportunity (for the positive class), when equal across subgroups
+*   _<span style="text-decoration:underline;">When to use this metric:</span>_
+    Fairness use cases where it is important that the same % of qualified
+    candidates are rated positive in each group. This is most commonly
+    recommended in cases of classifying positive outcomes, such as loan
+    applications, school admissions, or whether content is kid-friendly
 
 **True Negative Rate / False Positive Rate**
 
@@ -179,7 +226,13 @@ out further._
     These are also important for Facial Analysis Technologies such as face
     detection or face attributes
 
-**Note:** When both “positive” and “negative” mistakes are equally important, the metric is called “equality of <span style="text-decoration:underline;">odds</span>”. This can be measured by evaluating and aiming for equality across both the TNR & FNR, or both the TPR & FPR. For example, an app that counts how many cars go past a stop sign is roughly equally bad whether or not it accidentally includes an extra car (a false positive) or accidentally excludes a car (a false negative).
+**Note:** When both “positive” and “negative” mistakes are equally important,
+the metric is called “equality of
+<span style="text-decoration:underline;">odds</span>”. This can be measured by
+evaluating and aiming for equality across both the TNR & FNR, or both the TPR &
+FPR. For example, an app that counts how many cars go past a stop sign is
+roughly equally bad whether or not it accidentally includes an extra car (a
+false positive) or accidentally excludes a car (a false negative).
 
 **Accuracy & AUC**
 
@@ -206,15 +259,36 @@ out further._
     consider, in addition to metrics which take into account all types of errors
     such as accuracy or AUC.
 
-**Don’t see the metrics you’re looking for? Add your own!**
+**Don’t see the metrics you’re looking for?**
 
+Follow the documentation
+[here](https://github.com/tensorflow/model-analysis/blob/master/g3doc/post_export_metrics.md)
+to add you own custom metric.
 
 #### Final notes
 
-**A gap in metric between two groups can be a sign that your model may have unfair skews**. You should interpret your results according to your use case. However, the first sign that you may be treating one set of users _unfairly_ is when the metrics between that set of users and your overall are significantly different. Make sure to account for confidence intervals when looking at these differences. When you have too few samples in a particular slice, the difference between metrics may not be accurate.
+**A gap in metric between two groups can be a sign that your model may have
+unfair skews**. You should interpret your results according to your use case.
+However, the first sign that you may be treating one set of users _unfairly_ is
+when the metrics between that set of users and your overall are significantly
+different. Make sure to account for confidence intervals when looking at these
+differences. When you have too few samples in a particular slice, the difference
+between metrics may not be accurate.
 
-**Achieving equality across groups on Fairness Indicators doesn’t mean the model is fair.** Systems are highly complex, and achieving equality on one (or even all) of the provided metrics can’t guarantee Fairness. 
+**Achieving equality across groups on Fairness Indicators doesn’t mean the model
+is fair.** Systems are highly complex, and achieving equality on one (or even
+all) of the provided metrics can’t guarantee Fairness.
 
-**Fairness evaluations should be run throughout the development process and post-launch (not the day before launch).** Just like improving your product is an ongoing process and subject to adjustment based on user and market feedback, making your product fair and equitable requires ongoing attention. As different aspects of the model changes, such as training data, inputs from other models, or the design itself, fairness metrics are likely to change. “Clearing the bar” once isn’t enough to ensure that all of the interacting components have remained intact over time. 
+**Fairness evaluations should be run throughout the development process and
+post-launch (not the day before launch).** Just like improving your product is
+an ongoing process and subject to adjustment based on user and market feedback,
+making your product fair and equitable requires ongoing attention. As different
+aspects of the model changes, such as training data, inputs from other models,
+or the design itself, fairness metrics are likely to change. “Clearing the bar”
+once isn’t enough to ensure that all of the interacting components have remained
+intact over time.
 
-**Adversarial testing should be performed for rare, malicious examples.** Fairness evaluations aren’t meant to replace adversarial testing. Additional defense against rare, targeted examples is crucial as these examples probably will not manifest in training or evaluation data. 
+**Adversarial testing should be performed for rare, malicious examples.**
+Fairness evaluations aren’t meant to replace adversarial testing. Additional
+defense against rare, targeted examples is crucial as these examples probably
+will not manifest in training or evaluation data.
