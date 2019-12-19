@@ -29,7 +29,7 @@ Usage:
 
 import os
 import tempfile
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import tensorflow_hub as hub
 import tensorflow_model_analysis as tfma
 from tensorflow_model_analysis.addons.fairness.post_export_metrics import fairness_indicators  # pylint: disable=unused-import

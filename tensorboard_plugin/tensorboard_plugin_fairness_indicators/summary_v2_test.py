@@ -23,7 +23,7 @@ import os
 # Standard imports
 from tensorboard_plugin_fairness_indicators import metadata
 from tensorboard_plugin_fairness_indicators import summary_v2
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from tensorboard.compat import tf2
 
 try:

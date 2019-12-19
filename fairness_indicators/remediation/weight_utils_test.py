@@ -9,7 +9,7 @@ import collections
 
 # Standard imports
 from fairness_indicators.remediation import weight_utils
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 
 EvalResult = collections.namedtuple('EvalResult', ['slicing_metrics'])

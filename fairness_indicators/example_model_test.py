@@ -22,7 +22,7 @@ import datetime
 import os
 import tempfile
 from fairness_indicators import example_model
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import tensorflow_model_analysis as tfma
 from tensorflow_model_analysis.slicer import slicer_lib as slicer
 

@@ -24,7 +24,7 @@ import shutil
 # Standard imports
 from tensorboard_plugin_fairness_indicators import plugin
 from tensorboard_plugin_fairness_indicators import summary_v2
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import tensorflow_model_analysis as tfma
 from tensorflow_model_analysis.eval_saved_model.example_trainers import linear_classifier
 from werkzeug import test as werkzeug_test

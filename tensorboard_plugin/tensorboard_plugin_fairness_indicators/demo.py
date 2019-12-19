@@ -21,7 +21,7 @@ from __future__ import print_function
 from absl import app
 from absl import flags
 from tensorboard_plugin_fairness_indicators import summary_v2
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 tf.compat.v1.enable_eager_execution()
 tf = tf.compat.v2

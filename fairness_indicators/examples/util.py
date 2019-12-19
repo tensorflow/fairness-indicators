@@ -16,7 +16,7 @@
 
 import os
 import tempfile
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 TEXT_FEATURE = 'comment_text'
 LABEL = 'toxicity'
