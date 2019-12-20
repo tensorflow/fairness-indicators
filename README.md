@@ -8,6 +8,7 @@ The tool is currently actively used internally by many of our products, and is n
 
 ## Key links
 * [Introductory Video](https://www.youtube.com/watch?v=pHT-ImFXPQo)
+* [Fairness Indicators Case Study](https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body)
 * [Fairness Indicators Example Colab](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_Example_Colab.ipynb)
 * [Fairness Indicators: Thinking about Fairness Evaluation](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/guidance.md)
 
@@ -23,7 +24,7 @@ In particular, Fairness Indicators includes the ability to:
   * Feel confident about your results with confidence intervals and evals at multiple thresholds
 * Dive deep into individual slices to explore root causes and opportunities for improvement
 
-This [Introductory Video](https://www.youtube.com/watch?v=pHT-ImFXPQo) provides an example of how Fairness Indicators can be used on of our own products to evaluate fairness concerns overtime. This Demo Colab provides a hands-on experience of using Fairness Indicators.
+This [case study](https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body), complete with [videos](https://www.youtube.com/watch?v=pHT-ImFXPQo) and programming exercises, of how Fairness Indicators can be used on one of our own products to evaluate fairness concerns over time.
 
 [![](http://img.youtube.com/vi/pHT-ImFXPQo/0.jpg)](http://www.youtube.com/watch?v=pHT-ImFXPQo "")
 
