@@ -32,7 +32,7 @@ except ImportError:
   tf2 = None
 
 try:
-  tf.compat.v1.enable_eager_execution()
+  tf.enable_eager_execution()
 except AttributeError:
   # TF 2.0 doesn't have this symbol because eager is the default.
   pass
@@ -49,7 +49,7 @@ class SummaryV2Test(tf.test.TestCase):
   def _get_event(self):
     event_files = sorted(glob.glob(os.path.join(self.get_temp_dir(), '*')))
     self.assertEqual(len(event_files), 1)
-    events = list(tf.compat.v1.train.summary_iterator(event_files[0]))
+    events = list(tf.train.summary_iterator(event_files[0]))
     # Expect a boilerplate event for the file_version, then the summary one.
     self.assertEqual(len(events), 2)
     return events[1]

@@ -22,9 +22,10 @@ from absl import app
 from absl import flags
 from tensorboard_plugin_fairness_indicators import summary_v2
 import tensorflow.compat.v1 as tf
+import tensorflow.compat.v2 as tf2
 
-tf.compat.v1.enable_eager_execution()
-tf = tf.compat.v2
+tf.enable_eager_execution()
+tf = tf2
 
 FLAGS = flags.FLAGS
 

@@ -25,6 +25,7 @@ import shutil
 from tensorboard_plugin_fairness_indicators import plugin
 from tensorboard_plugin_fairness_indicators import summary_v2
 import tensorflow.compat.v1 as tf
+import tensorflow.compat.v2 as tf2
 import tensorflow_model_analysis as tfma
 from tensorflow_model_analysis.eval_saved_model.example_trainers import linear_classifier
 from werkzeug import test as werkzeug_test
@@ -39,8 +40,8 @@ try:
 except ImportError:
   import mock  # pylint: disable=g-import-not-at-top,unused-import
 
-tf.compat.v1.enable_eager_execution()
-tf = tf.compat.v2
+tf.enable_eager_execution()
+tf = tf2
 
 
 class PluginTest(tf.test.TestCase):
