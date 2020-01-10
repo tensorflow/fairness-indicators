@@ -145,16 +145,11 @@ class PluginTest(tf.test.TestCase):
         self._makeExample(age=5.0, language="hindi", label=1.0)
     ]
     data_location = self._writeTFExamplesToTFRecords(examples)
-    eval_config = tfma.EvalConfig(
-        input_data_specs=[tfma.InputDataSpec(location=data_location)],
-        model_specs=[tfma.ModelSpec(location=model_location)],
-        output_data_specs=[
-            tfma.OutputDataSpec(default_location=self._eval_result_output_dir)
-        ])
     _ = tfma.run_model_analysis(
-        eval_config=eval_config,
         eval_shared_model=tfma.default_eval_shared_model(
-            eval_saved_model_path=model_location, example_weight_key="age"))
+            eval_saved_model_path=model_location, example_weight_key="age"),
+        data_location=data_location,
+        output_path=self._eval_result_output_dir)
 
     response = self._server.get(
         "/data/plugin/fairness_indicators/get_evaluation_result?run=.")

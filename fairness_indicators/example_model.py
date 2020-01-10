@@ -134,14 +134,9 @@ def evaluate_model(classifier, validate_tf_file, tfma_eval_result_path,
       eval_saved_model_path=tfma_export_dir,
       add_metrics_callbacks=add_metrics_callbacks)
 
-  eval_config = tfma.EvalConfig(
-      input_data_specs=[tfma.InputDataSpec(location=validate_tf_file)],
-      model_specs=[tfma.ModelSpec(location=tfma_export_dir)],
-      output_data_specs=[
-          tfma.OutputDataSpec(default_location=tfma_eval_result_path)
-      ],
-      slicing_specs=[s.to_proto() for s in slice_spec])
-
   # Run the fairness evaluation.
   tfma.run_model_analysis(
-      eval_config=eval_config, eval_shared_model=eval_shared_model)
+      eval_shared_model=eval_shared_model,
+      data_location=validate_tf_file,
+      output_path=tfma_eval_result_path,
+      slice_spec=slice_spec)
