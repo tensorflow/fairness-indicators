@@ -21,7 +21,7 @@ from __future__ import print_function
 import os
 import tempfile
 
-from fairness_indicators.examples import util
+from fairness_indicators.colab_examples import util
 import tensorflow.compat.v1 as tf
 
 from google.protobuf import text_format
