@@ -125,10 +125,12 @@ def evaluate_model(classifier, validate_tf_file, tfma_eval_result_path,
   ]
 
   # Add the fairness metrics.
+  # pytype: disable=module-attr
   add_metrics_callbacks = [
       tfma.post_export_metrics.fairness_indicators(
           thresholds=[0.1, 0.3, 0.5, 0.7, 0.9], labels_key=label)
   ]
+  # pytype: enable=module-attr
 
   eval_shared_model = tfma.default_eval_shared_model(
       eval_saved_model_path=tfma_export_dir,

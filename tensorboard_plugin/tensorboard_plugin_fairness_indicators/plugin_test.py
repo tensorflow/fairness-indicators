@@ -1,3 +1,4 @@
+# Lint as: python2, python3
 # Copyright 2019 The TensorFlow Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,6 +25,7 @@ import shutil
 # Standard imports
 from tensorboard_plugin_fairness_indicators import plugin
 from tensorboard_plugin_fairness_indicators import summary_v2
+import six
 import tensorflow.compat.v1 as tf
 import tensorflow.compat.v2 as tf2
 import tensorflow_model_analysis as tfma
@@ -94,7 +96,7 @@ class PluginTest(tf.test.TestCase):
     example = tf.train.Example()
     example.features.feature["age"].float_list.value[:] = [age]
     example.features.feature["language"].bytes_list.value[:] = [
-        language.encode("utf8")
+        six.ensure_binary(language, "utf8")
     ]
     example.features.feature["label"].float_list.value[:] = [label]
     return example

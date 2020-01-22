@@ -1,4 +1,4 @@
-# Lint as: python3
+# Lint as: python2, python3
 """Utilities to suggest weights based on model analysis results."""
 
 from __future__ import absolute_import
@@ -46,7 +46,7 @@ def _get_metric_value(nested_dict, metric_name):
       raise ValueError('Unsupported value type: %s' % typed_value)
     else:
       raise ValueError('Key %s not found in %s' %
-                       (metric_name, nested_dict[key][''].keys()))
+                       (metric_name, list(nested_dict[key][''].keys())))
 
 
 def get_baseline_value(eval_result, baseline_name, metric_name):

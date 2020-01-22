@@ -1,3 +1,4 @@
+# Lint as: python2, python3
 # Copyright 2019 The TensorFlow Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,6 +24,7 @@ import os
 # Standard imports
 from tensorboard_plugin_fairness_indicators import metadata
 from tensorboard_plugin_fairness_indicators import summary_v2
+import six
 import tensorflow.compat.v1 as tf
 from tensorboard.compat import tf2
 
@@ -62,8 +64,9 @@ class SummaryV2Test(tf.test.TestCase):
 
     summary_value = event.summary.value[0]
     self.assertEqual(metadata.PLUGIN_NAME, summary_value.tag)
-    self.assertEqual('output_dir',
-                     summary_value.tensor.string_val[0].decode('utf-8'))
+    self.assertEqual(
+        'output_dir',
+        six.ensure_text(summary_value.tensor.string_val[0], 'utf-8'))
     self.assertEqual(metadata.PLUGIN_NAME,
                      summary_value.metadata.plugin_data.plugin_name)
 

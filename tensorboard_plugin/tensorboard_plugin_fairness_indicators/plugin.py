@@ -1,3 +1,4 @@
+# Lint as: python2, python3
 # Copyright 2019 The TensorFlow Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,6 +23,7 @@ import os
 # Standard imports
 from absl import logging
 from tensorboard_plugin_fairness_indicators import metadata
+import six
 import tensorflow_model_analysis as tfma
 from tensorflow_model_analysis.addons.fairness.view import widget_view
 from werkzeug import wrappers
@@ -103,13 +105,13 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
   def _get_evaluation_result(self, request):
     run = request.args.get('run')
     try:
-      run = run.decode()
+      run = six.ensure_text(run)
     except (UnicodeDecodeError, AttributeError):
       pass
     try:
-      eval_result_output_dir = self._multiplexer.Tensors(
-          run, FairnessIndicatorsPlugin.plugin_name
-      )[0].tensor_proto.string_val[0].decode('utf-8')
+      eval_result_output_dir = six.ensure_text(
+          self._multiplexer.Tensors(run, FairnessIndicatorsPlugin.plugin_name)
+          [0].tensor_proto.string_val[0], 'utf-8')
       eval_result = tfma.load_eval_result(output_path=eval_result_output_dir)
       # TODO(b/141283811): Allow users to choose different model output names
       # and class keys in case of multi-output and multi-class model.

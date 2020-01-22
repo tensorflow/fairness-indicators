@@ -22,6 +22,7 @@ import datetime
 import os
 import tempfile
 from fairness_indicators import example_model
+import six
 import tensorflow.compat.v1 as tf
 import tensorflow_model_analysis as tfma
 from tensorflow_model_analysis.slicer import slicer_lib as slicer
@@ -51,10 +52,10 @@ class ExampleModelTest(tf.test.TestCase):
   def _create_example(self, comment_text, label, slice_value):
     example = tf.train.Example()
     example.features.feature[TEXT_FEATURE].bytes_list.value[:] = [
-        bytes(comment_text, 'utf-8')
+        six.ensure_binary(comment_text, 'utf8')
     ]
     example.features.feature[SLICE].bytes_list.value[:] = [
-        bytes(slice_value, 'utf-8')
+        six.ensure_binary(slice_value, 'utf8')
     ]
     example.features.feature[LABEL].float_list.value[:] = [label]
     return example
