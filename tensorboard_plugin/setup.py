@@ -29,7 +29,7 @@ REQUIRED_PACKAGES = [
     'wheel >= 0.26; python_version >= "3"',
 ]
 
-with open('README.md', 'r') as fh:
+with open('README.md', 'r', encoding='utf-8') as fh:
   long_description = fh.read()
 
 setup(
