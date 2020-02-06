@@ -1,3 +1,3 @@
-# PROJECT_NAME examples
+# fairness-indicators examples
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.

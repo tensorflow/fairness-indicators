@@ -14,26 +14,26 @@ upper_tabs:
     - name: Tutorials
       contents:
       - title: Tutorials overview
-        path: /PROJECT_NAME/tutorials/
+        path: /fairness-indicators/tutorials/
       - title: Foo tutorial
-        path: /PROJECT_NAME/tutorials/foo_tutorial
+        path: /fairness-indicators/tutorials/foo_tutorial
 #      - title: Notebook tutorial
-#        path: /PROJECT_NAME/tutorials/notebook
+#        path: /fairness-indicators/tutorials/notebook
     - name: Guide
       contents:
       - title: Guide overview
-        path: /PROJECT_NAME/overview
+        path: /fairness-indicators/overview
       - title: Bar guide
-        path: /PROJECT_NAME/bar_guide
+        path: /fairness-indicators/bar_guide
     - name: Examples
       contents:
       - title: Examples overview
-        path: /PROJECT_NAME/examples/
+        path: /fairness-indicators/examples/
       - title: Baz example
-        path: /PROJECT_NAME/examples/baz_example
+        path: /fairness-indicators/examples/baz_example
     - name: API
       skip_translation: true
       contents:
-      - include: /PROJECT_NAME/api_docs/python/_toc.yaml
+      - include: /fairness-indicators/api_docs/python/_toc.yaml
 
 - include: /_upper_tabs_right.yaml
