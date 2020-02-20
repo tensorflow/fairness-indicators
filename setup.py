@@ -20,7 +20,7 @@ from setuptools import setup
 REQUIRED_PACKAGES = [
     'setuptools >= 40.2.0',
     'tensorflow >= 1.15, < 3',
-    'tensorflow-model-analysis >= 0.21.0, < 1',
+    'tensorflow-model-analysis >= 0.21.0, < 0.21.3',
     'tensorflow-data-validation >= 0.15.0, < 1',
     'witwidget >= 1.4.4, < 2',
     # python3 specifically requires wheel 0.26
