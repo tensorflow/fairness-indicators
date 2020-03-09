@@ -2,7 +2,7 @@
 
 ![Fairness_Indicators](https://raw.githubusercontent.com/tensorflow/fairness-indicators/master/fairness_indicators/images/fairnessIndicators.png)
 
-Fairness Indicators is designed to support teams in evaluating and improving models for fairness concerns in partnership with the broader Tensorflow toolkit.  
+Fairness Indicators is designed to support teams in evaluating, improving, and comparing models for fairness concerns in partnership with the broader Tensorflow toolkit.
 
 The tool is currently actively used internally by many of our products, and is now available in BETA for you to try for your own use cases. We would love to partner with you to understand where Fairness Indicators is most useful, and where added functionality would be valuable. Please reach out at tfx@tensorflow.org. You can provide any feedback on your experience, and feature requests, here. 
 
@@ -12,10 +12,10 @@ The tool is currently actively used internally by many of our products, and is n
 * [Fairness Indicators Example Colab](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_Example_Colab.ipynb)
 * [Fairness Indicators: Thinking about Fairness Evaluation](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/guidance.md)
 
-## What is Fairness Indicators? 
-Fairness Indicators enables easy computation of commonly-identified fairness metrics for **binary** and **multiclass** classifiers. 
+## What is Fairness Indicators?
+Fairness Indicators enables easy computation of commonly-identified fairness metrics for **binary** and **multiclass** classifiers.
 
-Many existing tools for evaluating fairness concerns don’t work well on large scale datasets and models. At Google, it is important for us to have tools that can work on billion-user systems. Fairness Indicators will allow you to evaluate across any size of use case. 
+Many existing tools for evaluating fairness concerns don’t work well on large scale datasets and models. At Google, it is important for us to have tools that can work on billion-user systems. Fairness Indicators will allow you to evaluate across any size of use case.
 
 In particular, Fairness Indicators includes the ability to:
 
