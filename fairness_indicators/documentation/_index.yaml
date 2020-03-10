@@ -1,0 +1,148 @@
+book_path: /tfx/_book.yaml
+#project_path: /tfx/_project.yaml
+title: Fairness Indicators
+landing_page:
+  custom_css_path: /site-assets/css/style.css
+  nav: left
+  meta_tags:
+  - name: description
+    content: >
+      Fairness Indicators tool suite for TensorFlow.
+  rows:
+  - classname: devsite-landing-row-100
+  - heading: Fairness Indicators
+    options:
+    - description-50
+    items:
+    - image_path: /tfx/fairness_indicators/images/fairnessIndicators.png
+      description: >
+        <p>
+        Fairness Indicators is a library that enables easy computation of commonly-identified
+        fairness metrics for binary and multiclass classifiers. With the Fairness Indicators tool
+        suite, you can:
+        <ul>
+          <li>
+              Compute commonly-identified fairness metrics for classification models
+          </li>
+          <li>
+              Compare model performance across subgroups to a baseline, or to other models
+          </li>
+          <li>
+              Use confidence intervals to surface statistically significant disparities
+          </li>
+          <li>
+              Perform evaluation over multiple thresholds
+          </li>
+        </ul>
+        </p>
+        <p>
+        Use Fairness Indicators via the:
+        <ul>
+          <li>
+              <a href="https://www.tensorflow.org/tfx/guide/evaluator">Evaluator
+              component </a>in a <a href ="https://www.tensorflow.org/tfx">TFX pipeline</a>
+          </li>
+          <li>
+              <a href="https://github.com/tensorflow/tensorboard/blob/master/docs/fairness-indicators.md">
+              TensorBoard plugin</a>
+          </li>
+          <li>
+              <a href="https://www.tensorflow.org/tfx/guide/fairness_indicators">TensorFlow Model
+              Analysis library</a>
+          </li>
+          <li>
+              <a href="https://www.tensorflow.org/tfx/guide/fairness_indicators#model_agnostic_evaluation">Model
+              Agnostic TFMA library</a>
+          </li>
+  - classname: devsite-landing-row-100
+    items:
+    - description: >
+        <h3>Resources</h3>
+  - classname: devsite-landing-row-cards
+    items:
+    - heading: "ML Practicum: Fairness in Perspective API using Fairness Indicators"
+      image_path: ./images/mlpracticum.png
+      path: https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body
+      buttons:
+      - label: "Try the Case Study"
+        path: https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body
+
+    - heading: "Fairness Indicators on the TensorFlow blog"
+      image_path: /resources/images/tf-logo-card-16x9.png
+      path: https://blog.tensorflow.org/2019/12/fairness-indicators-fair-ML-systems.html
+      buttons:
+      - label: "Read on the TensorFlow blog"
+        path: https://blog.tensorflow.org/2019/12/fairness-indicators-fair-ML-systems.html
+
+    - heading: "Fairness Indicators on GitHub"
+      image_path: /resources/images/github-card-16x9.png
+      path: https://github.com/tensorflow/fairness-indicators
+      buttons:
+      - label: "View on GitHub"
+        path: https://github.com/tensorflow/fairness-indicators
+
+  - classname: devsite-landing-row-cards
+    items:
+    - heading: "Fairness Indicators on the Google AI Blog"
+      image_path: ./images/googleai.png
+      path: https://ai.googleblog.com/2019/12/fairness-indicators-scalable.html
+      buttons:
+      - label: "Read on Google AI blog"
+        path: https://ai.googleblog.com/2019/12/fairness-indicators-scalable.html
+
+    - heading: "Fairness Indicators at Google I/O"
+      path: https://www.youtube.com/watch?v=6CwzDoE8J4M
+      youtube_id: 6CwzDoE8J4M?rel=0&show_info=0
+      buttons:
+      - label: "Watch the video"
+        path: https://www.youtube.com/watch?v=6CwzDoE8J4M
+
+  - classname: devsite-landing-row-100
+    items:
+    - description: >
+        <h3>Notebook tutorials</h3>
+  - classname: devsite-landing-row-cards
+    items:
+    - heading: "Tutorial: Introduction to Fairness Indicators"
+      image_path: ./images/fairnessIndicators.png
+      path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_Example_Colab.ipynb
+      buttons:
+      - label: "Open in Colab"
+        path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_Example_Colab.ipynb
+
+    - heading: "Use Fairness Indicators with TensorBoard"
+      image_path: ./images/tensorboard.png
+      path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb
+      buttons:
+      - label: "Open in Colab"
+        path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb
+
+    - heading: "Use Fairness Indicators with TFHub to evaluate downstream fairness effects of text embedding choice"
+      image_path: ./images/tfhub.png
+      path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_on_TF_Hub_Text_Embeddings.ipynb
+      buttons:
+      - label: "Open in Colab"
+        path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_on_TF_Hub_Text_Embeddings.ipynb
+
+  - classname: devsite-landing-row-cards
+    items:
+    - heading: "Use Fairness Indicators and ML Metadata to pinpoint sources of bias in the COMPAS dataset"
+      image_path: /resources/images/tf-logo-card-16x9.png
+      path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/
+      buttons:
+      - label: "Open in Colab"
+        path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/
+
+    - heading: "Build a Model Card for your face detection model with Fairness Indicators"
+      image_path: ./images/facedetection.png
+      path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Facessd_Fairness_Indicators_Example_Colab.ipynb
+      buttons:
+      - label: "Open in Colab"
+        path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Facessd_Fairness_Indicators_Example_Colab.ipynb
+
+    - heading: "Use Fairness Indicators with TF Constrained Optimization to improve fairness metrics for a smile detection model"
+      image_path: /resources/images/tf-logo-card-16x9.png
+      path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/
+      buttons:
+      - label: "Open in Colab"
+        path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/
