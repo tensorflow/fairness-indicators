@@ -13,8 +13,7 @@ landing_page:
     options:
     - description-50
     items:
-    - image_path: /tfx/fairness_indicators/images/fairnessIndicators.png
-      description: >
+    - description: >
         <p>
         Fairness Indicators is a library that enables easy computation of commonly-identified
         fairness metrics for binary and multiclass classifiers. With the Fairness Indicators tool
@@ -53,6 +52,36 @@ landing_page:
               <a href="https://www.tensorflow.org/tfx/guide/fairness_indicators#model_agnostic_evaluation">Model
               Agnostic TFMA library</a>
           </li>
+
+    - code_block: |
+          <pre class = "prettyprint">
+          eval_config_pbtxt = """
+
+          model_specs {
+              label_key: "%s"
+          }
+
+          metrics_specs {
+              metrics {
+                  class_name: "FairnessIndicators"
+                  config: '{ "thresholds": [0.25, 0.5, 0.75] }'
+              }
+              metrics {
+                  class_name: "ExampleCount"
+              }
+          }
+
+          slicing_specs {}
+          slicing_specs {
+              feature_keys: "%s"
+          }
+
+          options {
+              compute_confidence_intervals { value: False }
+              disabled_outputs{values: "analysis"}
+          }
+          """ % (LABEL_KEY, GROUP_KEY)
+          </pre>
   - classname: devsite-landing-row-100
     items:
     - description: >
@@ -139,9 +168,18 @@ landing_page:
       - label: "Open in Colab"
         path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Facessd_Fairness_Indicators_Example_Colab.ipynb
 
+  - classname: devsite-landing-row-cards
+    items:
     - heading: "Use Fairness Indicators with TF Constrained Optimization to improve fairness metrics for a smile detection model"
       image_path: /resources/images/tf-logo-card-16x9.png
-      path: https://colab.research.google.com/github/tensorflow/fairness_indicators/examples/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb
+      path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb
       buttons:
       - label: "Open in Colab"
-        path: https://colab.research.google.com/github/tensorflow/fairness_indicators/examples/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb
+        path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb
+
+    - heading: "Use Fairness Indicators with TF Constrained Optimization to improve fairness metrics for a comment toxicity detection model"
+      image_path: ./images/toxicity_detection.png
+      path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_TFCO_Wiki_Case_Study.ipynb
+      buttons:
+      - label: "Open in Colab"
+        path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_TFCO_Wiki_Case_Study.ipynb
