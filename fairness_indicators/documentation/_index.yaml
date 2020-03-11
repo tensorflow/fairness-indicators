@@ -1,5 +1,4 @@
 book_path: /tfx/_book.yaml
-#project_path: /tfx/_project.yaml
 title: Fairness Indicators
 landing_page:
   custom_css_path: /site-assets/css/style.css
@@ -105,44 +104,44 @@ landing_page:
     items:
     - heading: "Tutorial: Introduction to Fairness Indicators"
       image_path: ./images/fairnessIndicators.png
-      path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_Example_Colab.ipynb
+      path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_Example_Colab.ipynb
       buttons:
       - label: "Open in Colab"
-        path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_Example_Colab.ipynb
+        path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_Example_Colab.ipynb
 
     - heading: "Use Fairness Indicators with TensorBoard"
       image_path: ./images/tensorboard.png
-      path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb
+      path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb
       buttons:
       - label: "Open in Colab"
-        path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb
+        path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb
 
     - heading: "Use Fairness Indicators with TFHub to evaluate downstream fairness effects of text embedding choice"
       image_path: ./images/tfhub.png
-      path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_on_TF_Hub_Text_Embeddings.ipynb
+      path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_on_TF_Hub_Text_Embeddings.ipynb
       buttons:
       - label: "Open in Colab"
-        path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_on_TF_Hub_Text_Embeddings.ipynb
+        path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_on_TF_Hub_Text_Embeddings.ipynb
 
   - classname: devsite-landing-row-cards
     items:
     - heading: "Use Fairness Indicators and ML Metadata to pinpoint sources of bias in the COMPAS dataset"
       image_path: /resources/images/tf-logo-card-16x9.png
-      path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/
+      path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_Lineage_Case_Study.ipynb
       buttons:
       - label: "Open in Colab"
-        path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/
+        path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_Lineage_Case_Study.ipynb
 
     - heading: "Build a Model Card for your face detection model with Fairness Indicators"
       image_path: ./images/facedetection.png
-      path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Facessd_Fairness_Indicators_Example_Colab.ipynb
+      path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Facessd_Fairness_Indicators_Example_Colab.ipynb
       buttons:
       - label: "Open in Colab"
-        path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Facessd_Fairness_Indicators_Example_Colab.ipynb
+        path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Facessd_Fairness_Indicators_Example_Colab.ipynb
 
     - heading: "Use Fairness Indicators with TF Constrained Optimization to improve fairness metrics for a smile detection model"
       image_path: /resources/images/tf-logo-card-16x9.png
-      path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/
+      path: https://colab.research.google.com/github/tensorflow/fairness_indicators/examples/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb
       buttons:
       - label: "Open in Colab"
-        path: https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/
+        path: https://colab.research.google.com/github/tensorflow/fairness_indicators/examples/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb
