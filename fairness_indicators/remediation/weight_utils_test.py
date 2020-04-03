@@ -158,9 +158,34 @@ class WeightUtilsTest(tf.test.TestCase):
       # Test slice not found.
       weight_utils.get_baseline_value(test_eval_result,
                                       (('nonexistant', 'slice'),), 'accuracy')
+    with self.assertRaises(KeyError):
       # Test metric not found.
       weight_utils.get_baseline_value(test_eval_result, (('gender', 'female'),),
                                       'nonexistent_metric')
+
+  def test_get_metric_value_raise_key_error(self):
+    input_dict = {'': {'': {'accuracy': 0.1}}}
+    metric_name = 'nonexistent_metric'
+    with self.assertRaises(KeyError):
+      weight_utils._get_metric_value(input_dict, metric_name)
+
+  def test_get_metric_value_raise_unsupported_value(self):
+    input_dict = {
+        '': {
+            '': {
+                'accuracy': {
+                    'boundedValue': {1}
+                }
+            }
+        }
+    }
+    metric_name = 'accuracy'
+    with self.assertRaises(TypeError):
+      weight_utils._get_metric_value(input_dict, metric_name)
+
+  def test_get_metric_value_raise_empty_dict(self):
+    with self.assertRaises(KeyError):
+      weight_utils._get_metric_value({}, 'metric_name')
 
   def test_create_difference_dictionary(self):
     test_eval_result = self.create_eval_result()
