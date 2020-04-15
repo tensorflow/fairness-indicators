@@ -5,6 +5,8 @@ on:
     branches: [ master, shuklak13-patch-1 ]
   pull_request:
     branches: [ master, shuklak13-patch-1 ]
+  schedule:
+    - cron:  '0 11 * * *'
 
 jobs:
   build:
