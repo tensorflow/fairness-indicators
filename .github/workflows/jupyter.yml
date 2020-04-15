@@ -2,9 +2,9 @@ name: Jupyter
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, shuklak13-patch-1 ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, shuklak13-patch-1 ]
 
 jobs:
   build:
