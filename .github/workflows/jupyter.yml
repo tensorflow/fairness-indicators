@@ -2,9 +2,9 @@ name: jupyter
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, shuklak13-patch-1 ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, shuklak13-patch-1 ]
   schedule:
     - cron:  '0 11 * * *'
 
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8]
+        python-version: [3.7]
 
     steps:
     - uses: actions/checkout@v2
