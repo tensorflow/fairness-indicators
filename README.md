@@ -1,4 +1,6 @@
-# Fairness Indicators BETA 
+# Fairness Indicators BETA
+
+![](https://github.com/tensorflow/fairness-indicators/workflows/jupyter/badge.svg)
 
 ![Fairness_Indicators](https://raw.githubusercontent.com/tensorflow/fairness-indicators/master/fairness_indicators/images/fairnessIndicators.png)
 
