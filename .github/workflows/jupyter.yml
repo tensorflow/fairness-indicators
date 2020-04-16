@@ -47,4 +47,4 @@ jobs:
         jupyter nbextension enable --py tensorflow_model_analysis --sys-prefix
         
     - name: Test Jupyter Notebooks
-      run: python test_runner.py
+      run: python jupyter_test.py
