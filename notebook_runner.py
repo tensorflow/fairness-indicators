@@ -26,9 +26,7 @@ def run_notebook(notebook_path):
             for output in cell['outputs']:
                 if output.output_type == 'error':
                     errors.append(output)
+                    
+    print(errors[0])
 
     return nb, errors
-
-if __name__ == '__main__':
-    nb, errors = run_notebook('Testing.ipynb')
-    print(errors)
