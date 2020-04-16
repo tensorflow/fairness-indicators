@@ -1,6 +1,38 @@
+import os
 import unittest
+from nbconvert.preprocessors import ExecutePreprocessor
+import nbformat
 
-import notebook_runner
+
+# TODO(karanshukla): names: _run_notebook and _write_notebook?
+def _run_notebook(path):
+
+  # TODO(karanshukla): can I comment this out?
+  def _write_notebook(notebook):
+    dirname = os.path.dirname(path)
+    notebookname, _ = os.path.splitext(os.path.basename(path))
+    output_path = os.path.join(dirname,
+                               '{}_all_output.ipynb'.format(notebookname))
+    with open(output_path, mode='wt') as f:
+      nbformat.write(notebook, f)
+
+  with open(path) as f:
+    notebook = nbformat.read(f, as_version=4)
+
+  proc = ExecutePreprocessor(timeout=None, kernel_name='python3')
+  proc.allow_errors = True
+  proc.preprocess(notebook, {'metadata': {'path': '/'}})
+
+  _write_notebook(notebook)
+
+  errors = []
+  for cell in notebook.cells:
+    if 'outputs' in cell:
+      for output in cell['outputs']:
+        if output.output_type == 'error':
+          errors.append(output)
+
+  return errors
 
 
 class TestNotebook(unittest.TestCase):
