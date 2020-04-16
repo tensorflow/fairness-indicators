@@ -8,13 +8,13 @@ import nbformat
 def _run_notebook(path):
 
   # TODO(karanshukla): can I comment this out?
-  def _write_notebook(notebook):
-    dirname = os.path.dirname(path)
-    notebookname, _ = os.path.splitext(os.path.basename(path))
-    output_path = os.path.join(dirname,
-                               '{}_all_output.ipynb'.format(notebookname))
-    with open(output_path, mode='wt') as f:
-      nbformat.write(notebook, f)
+#   def _write_notebook(notebook):
+#     dirname = os.path.dirname(path)
+#     notebookname, _ = os.path.splitext(os.path.basename(path))
+#     output_path = os.path.join(dirname,
+#                                '{}_all_output.ipynb'.format(notebookname))
+#     with open(output_path, mode='wt') as f:
+#       nbformat.write(notebook, f)
 
   with open(path) as f:
     notebook = nbformat.read(f, as_version=4)
@@ -23,7 +23,7 @@ def _run_notebook(path):
   proc.allow_errors = True
   proc.preprocess(notebook, {'metadata': {'path': '/'}})
 
-  _write_notebook(notebook)
+#   _write_notebook(notebook)
 
   errors = []
   for cell in notebook.cells:
@@ -53,10 +53,10 @@ class TestNotebook(unittest.TestCase):
 #         'fairness_indicators/examples/Fairness_Indicators_Lineage_Case_Study.ipynb')
 #     self.assertEqual(errors, [])
 
-#   def test_tb(self):
-#     errors = _run_notebook(
-#         'fairness_indicators/examples/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb')
-#     self.assertEqual(errors, [])
+  def test_tb(self):
+    errors = _run_notebook(
+        'fairness_indicators/examples/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb')
+    self.assertEqual(errors, [])
 
 #   def test_tfco_celeba(self):
 #     errors = _run_notebook(
