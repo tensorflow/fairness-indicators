@@ -31,4 +31,4 @@ def run_notebook(notebook_path):
     print(type(errors))
     print(errors)
 
-    return nb, errors
+    return errors
