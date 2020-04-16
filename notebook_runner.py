@@ -27,6 +27,8 @@ def run_notebook(notebook_path):
                 if output.output_type == 'error':
                     errors.append(output)
                     
+    print('ERRORS')
+    print(type(errors))
     print(errors)
 
     return nb, errors
