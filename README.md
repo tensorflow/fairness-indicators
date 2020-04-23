@@ -1,12 +1,10 @@
-# Fairness Indicators BETA
-
-![](https://github.com/tensorflow/fairness-indicators/workflows/jupyter/badge.svg)
+# Fairness Indicators BETA 
 
 ![Fairness_Indicators](https://raw.githubusercontent.com/tensorflow/fairness-indicators/master/fairness_indicators/images/fairnessIndicators.png)
 
 Fairness Indicators is designed to support teams in evaluating, improving, and comparing models for fairness concerns in partnership with the broader Tensorflow toolkit.
 
-The tool is currently actively used internally by many of our products, and is now available in BETA for you to try for your own use cases. We would love to partner with you to understand where Fairness Indicators is most useful, and where added functionality would be valuable. Please reach out at tfx@tensorflow.org. You can provide any feedback on your experience, and feature requests, here. 
+The tool is currently actively used internally by many of our products, and is now available in BETA for you to try for your own use cases. We would love to partner with you to understand where Fairness Indicators is most useful, and where added functionality would be valuable. Please reach out at tfx@tensorflow.org. You can provide any feedback on your experience, and feature requests, here.
 
 ## Key links
 * [Introductory Video](https://www.youtube.com/watch?v=pHT-ImFXPQo)
@@ -17,7 +15,7 @@ The tool is currently actively used internally by many of our products, and is n
 ## What is Fairness Indicators?
 Fairness Indicators enables easy computation of commonly-identified fairness metrics for **binary** and **multiclass** classifiers.
 
-Many existing tools for evaluating fairness concerns don’t work well on large scale datasets and models. At Google, it is important for us to have tools that can work on billion-user systems. Fairness Indicators will allow you to evaluate across any size of use case.
+Many existing tools for evaluating fairness concerns don’t work well on large-scale datasets and models. At Google, it is important for us to have tools that can work on billion-user systems. Fairness Indicators will allow you to evaluate fairenss metrics across any size of use case.
 
 In particular, Fairness Indicators includes the ability to:
 
@@ -26,7 +24,7 @@ In particular, Fairness Indicators includes the ability to:
   * Feel confident about your results with confidence intervals and evals at multiple thresholds
 * Dive deep into individual slices to explore root causes and opportunities for improvement
 
-This [case study](https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body), complete with [videos](https://www.youtube.com/watch?v=pHT-ImFXPQo) and programming exercises, of how Fairness Indicators can be used on one of our own products to evaluate fairness concerns over time.
+This [case study](https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body), complete with [videos](https://www.youtube.com/watch?v=pHT-ImFXPQo) and programming exercises, demonstrates how Fairness Indicators can be used on one of your own products to evaluate fairness concerns over time.
 
 [![](http://img.youtube.com/vi/pHT-ImFXPQo/0.jpg)](http://www.youtube.com/watch?v=pHT-ImFXPQo "")
 
@@ -63,4 +61,4 @@ demonstrates how to visualize Fairness Indicators in TensorBoard.
 ## More questions?
 For more information on how to think about fairness evaluation in the context of your use case, see [this link](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/guidance.md).
 
-If you have found a bug in Fairness Indicators, please file a GitHub issue with as much supporting information as you can provide. 
+If you have found a bug in Fairness Indicators, please file a GitHub issue with as much supporting information as you can provide.
