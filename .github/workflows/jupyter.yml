@@ -1,8 +1,6 @@
 name: jupyter
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
   schedule:
@@ -47,4 +45,4 @@ jobs:
         jupyter nbextension enable --py tensorflow_model_analysis --sys-prefix
 
     - name: Test Jupyter Notebooks
-      run: python jupyter_test.py
+      run: python fairness_indicators/jupyter_test.py
