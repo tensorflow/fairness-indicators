@@ -31,6 +31,8 @@ jobs:
         pip install tensorflow_data_validation
         pip install tensorflow_hub
         pip install tensorflow-model-analysis
+        pip install fairness-indicators
+        pip install ml-metadata
 
     - name: Install test dependencies
       run: |
