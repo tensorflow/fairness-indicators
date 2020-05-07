@@ -48,9 +48,7 @@ setup(
     author_email='packages@tensorflow.org',
     packages=find_packages(exclude=['tensorboard_plugin']),
     package_data={
-        'fairness_indicators': [
-            'examples/*.ipynb', 'examples/*.md', 'documentation/*'
-        ],
+        'fairness_indicators': ['documentation/*'],
     },
     # Disallow python 3.0 and 3.1 which lack a 'futures' module (see above).
     python_requires='>= 2.7, != 3.0.*, != 3.1.*',
