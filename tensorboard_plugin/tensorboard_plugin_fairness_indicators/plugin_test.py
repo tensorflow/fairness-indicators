@@ -104,6 +104,9 @@ class PluginTest(tf.test.TestCase):
   def testRoutes(self):
     self.assertIsInstance(self._routes["/get_evaluation_result"],
                           collections.Callable)
+    self.assertIsInstance(
+        self._routes["/get_evaluation_result_from_remote_path"],
+        collections.Callable)
     self.assertIsInstance(self._routes["/index.js"], collections.Callable)
     self.assertIsInstance(self._routes["/vulcanized_tfma.js"],
                           collections.Callable)
@@ -155,6 +158,29 @@ class PluginTest(tf.test.TestCase):
 
     response = self._server.get(
         "/data/plugin/fairness_indicators/get_evaluation_result?run=.")
+    self.assertEqual(200, response.status_code)
+
+  def testGetEvalResultsFromURLRoute(self):
+    model_location = self._exportEvalSavedModel(
+        linear_classifier.simple_linear_classifier)
+    examples = [
+        self._makeExample(age=3.0, language="english", label=1.0),
+        self._makeExample(age=3.0, language="chinese", label=0.0),
+        self._makeExample(age=4.0, language="english", label=1.0),
+        self._makeExample(age=5.0, language="chinese", label=1.0),
+        self._makeExample(age=5.0, language="hindi", label=1.0)
+    ]
+    data_location = self._writeTFExamplesToTFRecords(examples)
+    _ = tfma.run_model_analysis(
+        eval_shared_model=tfma.default_eval_shared_model(
+            eval_saved_model_path=model_location, example_weight_key="age"),
+        data_location=data_location,
+        output_path=self._eval_result_output_dir)
+
+    response = self._server.get(
+        "/data/plugin/fairness_indicators/" +
+        "get_evaluation_result_from_remote_path?evaluation_output_path=" +
+        os.path.join(self._eval_result_output_dir, tfma.METRICS_KEY))
     self.assertEqual(200, response.status_code)
 
 

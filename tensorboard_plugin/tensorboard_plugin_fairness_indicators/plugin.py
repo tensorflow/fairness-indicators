@@ -26,6 +26,7 @@ from tensorboard_plugin_fairness_indicators import metadata
 import six
 import tensorflow_model_analysis as tfma
 from tensorflow_model_analysis.addons.fairness.view import widget_view
+from tensorflow_model_analysis.writers import metrics_and_plots_serialization
 from werkzeug import wrappers
 from google.protobuf import json_format
 from tensorboard.backend import http_util
@@ -60,9 +61,14 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
       A dictionary mapping URL path to route that handles it.
     """
     return {
-        '/get_evaluation_result': self._get_evaluation_result,
-        '/index.js': self._serve_js,
-        '/vulcanized_tfma.js': self._serve_vulcanized_js,
+        '/get_evaluation_result':
+            self._get_evaluation_result,
+        '/get_evaluation_result_from_remote_path':
+            self._get_evaluation_result_from_remote_path,
+        '/index.js':
+            self._serve_js,
+        '/vulcanized_tfma.js':
+            self._serve_vulcanized_js,
     }
 
   def frontend_metadata(self):
@@ -108,14 +114,33 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
       run = six.ensure_text(run)
     except (UnicodeDecodeError, AttributeError):
       pass
+
+    data = []
     try:
       eval_result_output_dir = six.ensure_text(
           self._multiplexer.Tensors(run, FairnessIndicatorsPlugin.plugin_name)
-          [0].tensor_proto.string_val[0], 'utf-8')
+          [0].tensor_proto.string_val[0])
       eval_result = tfma.load_eval_result(output_path=eval_result_output_dir)
       # TODO(b/141283811): Allow users to choose different model output names
       # and class keys in case of multi-output and multi-class model.
-      data = widget_view.convert_eval_result_to_ui_input(eval_result)
+      data = widget_view.convert_slicing_metrics_to_ui_input(
+          eval_result.slicing_metrics)
+    except (KeyError, json_format.ParseError) as error:
+      logging.info('Error while fetching evaluation data, %s', error)
+    return http_util.Respond(request, data, content_type='application/json')
+
+  @wrappers.Request.application
+  def _get_evaluation_result_from_remote_path(self, request):
+    evaluation_output_path = request.args.get('evaluation_output_path')
+    try:
+      evaluation_output_path = six.ensure_text(evaluation_output_path)
+    except (UnicodeDecodeError, AttributeError):
+      pass
+    try:
+      metrics = (
+          metrics_and_plots_serialization.load_and_deserialize_metrics(
+              path=evaluation_output_path))
+      data = widget_view.convert_slicing_metrics_to_ui_input(metrics)
     except (KeyError, json_format.ParseError) as error:
       logging.info('Error while fetching evaluation data, %s', error)
       data = []
