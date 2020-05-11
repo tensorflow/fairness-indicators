@@ -27,7 +27,7 @@ sociolinguists, and cultural anthropologists, as well as with members of the
 populations on which technology will be deployed.
 
 A single model, for example, the toxicity model that we leverage in our
-[example colab](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/examples/Fairness_Indicators_Example_Colab.ipynb),
+[example colab](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_Example_Colab.ipynb),
 can be used in many different contexts. A toxicity model deployed on a website
 to filter offensive comments, for example, is a very different use case than the
 model being deployed in an example web UI where users can type in a sentence and
