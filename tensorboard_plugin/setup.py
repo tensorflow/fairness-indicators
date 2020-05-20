@@ -24,6 +24,9 @@ from setuptools import setup
 REQUIRED_PACKAGES = [
     'protobuf >= 3.6.0',
     'setuptools >= 40.2.0',
+    'tensorboard >= 2.1.0, < 3',
+    'tensorflow >= 2.1.0, < 3',
+    'tensorflow-model-analysis >= 0.21.2, < 1',
     # python3 specifically requires wheel 0.26
     'wheel; python_version < "3"',
     'wheel >= 0.26; python_version >= "3"',
@@ -34,7 +37,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 
 setup(
     name='tensorboard_plugin_fairness_indicators',
-    version='0.0.3',
+    version='0.0.5',
     description='Fairness Indicators TensorBoard Plugin',
     long_description=long_description,
     long_description_content_type='text/markdown',
