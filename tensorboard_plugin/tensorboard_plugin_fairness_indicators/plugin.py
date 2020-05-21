@@ -34,7 +34,8 @@ from tensorboard.plugins import base_plugin
 
 _TEMPLATE_LOCATION = os.path.normpath(
     os.path.join(
-        __file__, '../static/vulcanized_tfma.js'))
+        __file__, '../../'
+        'tensorflow_model_analysis/static/vulcanized_tfma.js'))
 
 
 class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
