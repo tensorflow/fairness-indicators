@@ -26,7 +26,6 @@ from tensorboard_plugin_fairness_indicators import metadata
 import six
 import tensorflow_model_analysis as tfma
 from tensorflow_model_analysis.addons.fairness.view import widget_view
-from tensorflow_model_analysis.writers import metrics_and_plots_serialization
 from werkzeug import wrappers
 from google.protobuf import json_format
 from tensorboard.backend import http_util
@@ -138,9 +137,18 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
     except (UnicodeDecodeError, AttributeError):
       pass
     try:
-      metrics = (
-          metrics_and_plots_serialization.load_and_deserialize_metrics(
-              path=evaluation_output_path))
+      # TODO(b/156853139): Original code was not using public APIs from TFMA,
+      #   remove after a few releases.
+      if (hasattr(tfma.writers, 'metrics_and_plots_serialization') and
+          hasattr(tfma.writers.metrics_and_plots_serialization,
+                  'load_and_deserialize_metrics')):
+        metrics = (
+            tfma.writers.metrics_and_plots_serialization
+            .load_and_deserialize_metrics(path=evaluation_output_path))
+      else:
+        eval_result = tfma.load_eval_result(
+            os.path.dirname(evaluation_output_path))
+        metrics = eval_result.slicing_metrics
       data = widget_view.convert_slicing_metrics_to_ui_input(metrics)
     except (KeyError, json_format.ParseError) as error:
       logging.info('Error while fetching evaluation data, %s', error)
