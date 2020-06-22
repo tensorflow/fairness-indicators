@@ -183,6 +183,11 @@ class PluginTest(tf.test.TestCase):
         os.path.join(self._eval_result_output_dir, tfma.METRICS_KEY))
     self.assertEqual(200, response.status_code)
 
+  def testGetOutputFileFormat(self):
+    self.assertEqual("", self._plugin._get_output_file_format("abc_path"))
+    self.assertEqual("tfrecord",
+                     self._plugin._get_output_file_format("abc_path.tfrecord"))
+
 
 if __name__ == "__main__":
   tf.test.main()

@@ -129,6 +129,13 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
       logging.info('Error while fetching evaluation data, %s', error)
     return http_util.Respond(request, data, content_type='application/json')
 
+  def _get_output_file_format(self, evaluation_output_path):
+    file_format = os.path.splitext(evaluation_output_path)[1]
+    if file_format:
+      return file_format[1:]
+
+    return ''
+
   @wrappers.Request.application
   def _get_evaluation_result_from_remote_path(self, request):
     evaluation_output_path = request.args.get('evaluation_output_path')
@@ -137,19 +144,12 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
     except (UnicodeDecodeError, AttributeError):
       pass
     try:
-      # TODO(b/156853139): Original code was not using public APIs from TFMA,
-      #   remove after a few releases.
-      if (hasattr(tfma.writers, 'metrics_and_plots_serialization') and
-          hasattr(tfma.writers.metrics_and_plots_serialization,
-                  'load_and_deserialize_metrics')):
-        metrics = (
-            tfma.writers.metrics_and_plots_serialization
-            .load_and_deserialize_metrics(path=evaluation_output_path))
-      else:
-        eval_result = tfma.load_eval_result(
-            os.path.dirname(evaluation_output_path))
-        metrics = eval_result.slicing_metrics
-      data = widget_view.convert_slicing_metrics_to_ui_input(metrics)
+      eval_result = tfma.load_eval_result(
+          os.path.dirname(evaluation_output_path),
+          output_file_format=self._get_output_file_format(
+              evaluation_output_path))
+      data = widget_view.convert_slicing_metrics_to_ui_input(
+          eval_result.slicing_metrics)
     except (KeyError, json_format.ParseError) as error:
       logging.info('Error while fetching evaluation data, %s', error)
       data = []
