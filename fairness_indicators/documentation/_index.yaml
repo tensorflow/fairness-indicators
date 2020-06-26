@@ -86,14 +86,15 @@ landing_page:
     items:
     - description: >
         <h3>Resources</h3>
+
   - classname: devsite-landing-row-cards
     items:
     - heading: "ML Practicum: Fairness in Perspective API using Fairness Indicators"
       image_path: ./images/mlpracticum.png
-      path: https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body
+      path: "https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body"
       buttons:
       - label: "Try the Case Study"
-        path: https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body
+        path: "https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body"
 
     - heading: "Fairness Indicators on the TensorFlow blog"
       image_path: /resources/images/tf-logo-card-16x9.png
@@ -129,6 +130,7 @@ landing_page:
     items:
     - description: >
         <h3>Notebook tutorials</h3>
+
   - classname: devsite-landing-row-cards
     items:
     - heading: "Tutorial: Introduction to Fairness Indicators"
@@ -137,23 +139,27 @@ landing_page:
       buttons:
       - label: "Open in Colab"
         path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_Example_Colab.ipynb
+    - heading: "Pandas DataFrame to Fairness Indicators Case Study"
+      image_path: /resources/images/tf-logo-card-16x9.png
+      path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_Pandas_Case_Study.ipynb
+      buttons:
+      - label: "Open in Colab"
+        path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_Pandas_Case_Study.ipynb
 
+  - classname: devsite-landing-row-cards
+    items:
     - heading: "Use Fairness Indicators with TensorBoard"
       image_path: ./images/tensorboard.png
       path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb
       buttons:
       - label: "Open in Colab"
         path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb
-
     - heading: "Use Fairness Indicators with TFHub to evaluate downstream fairness effects of text embedding choice"
       image_path: ./images/tfhub.png
       path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_on_TF_Hub_Text_Embeddings.ipynb
       buttons:
       - label: "Open in Colab"
         path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_on_TF_Hub_Text_Embeddings.ipynb
-
-  - classname: devsite-landing-row-cards
-    items:
     - heading: "Use Fairness Indicators and ML Metadata to pinpoint sources of bias in the COMPAS dataset"
       image_path: /resources/images/tf-logo-card-16x9.png
       path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_Lineage_Case_Study.ipynb
@@ -161,22 +167,20 @@ landing_page:
       - label: "Open in Colab"
         path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_Lineage_Case_Study.ipynb
 
+  - classname: devsite-landing-row-cards
+    items:
     - heading: "Build a Model Card for your face detection model with Fairness Indicators"
       image_path: ./images/facedetection.png
       path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Facessd_Fairness_Indicators_Example_Colab.ipynb
       buttons:
       - label: "Open in Colab"
         path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Facessd_Fairness_Indicators_Example_Colab.ipynb
-
-  - classname: devsite-landing-row-cards
-    items:
     - heading: "Use Fairness Indicators with TF Constrained Optimization to improve fairness metrics for a smile detection model"
       image_path: /resources/images/tf-logo-card-16x9.png
       path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb
       buttons:
       - label: "Open in Colab"
         path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb
-
     - heading: "Use Fairness Indicators with TF Constrained Optimization to improve fairness metrics for a comment toxicity detection model"
       image_path: ./images/toxicity_detection.png
       path: https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TFCO_Wiki_Case_Study.ipynb
