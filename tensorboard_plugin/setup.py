@@ -39,6 +39,7 @@ __version__ = globals_dict['__version__']
 
 setup(
     name='tensorboard_plugin_fairness_indicators',
+    version=__version__,
     description='Fairness Indicators TensorBoard Plugin',
     long_description=long_description,
     long_description_content_type='text/markdown',
