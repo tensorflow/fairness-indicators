@@ -6,6 +6,8 @@
 
 ## Bug fixes and other changes
 
+* Restore rendering in Jupyter.
+
 ## Breaking changes
 
 ## Deprecations
