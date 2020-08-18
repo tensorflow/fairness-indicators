@@ -14,4 +14,4 @@
 """Contains the version string of Fairness Indicators."""
 
 # Note that setup.py uses this version.
-__version__ = '0.1.1.dev'
+__version__ = '0.24.0.dev'

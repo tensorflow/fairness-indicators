@@ -22,10 +22,10 @@ from setuptools import find_packages
 from setuptools import setup
 
 REQUIRED_PACKAGES = [
-    'protobuf >= 3.6.0',
-    'tensorboard >= 2.1.0, < 3',
-    'tensorflow >= 2.1.0, < 3',
-    'tensorflow-model-analysis >= 0.21.2, < 1',
+    'protobuf>=3.6.0,<4',
+    'tensorboard>=2.3.0,<3',
+    'tensorflow>=2.3.0,<3',
+    'tensorflow-model-analysis>=0.23,<0.24',
 ]
 
 with open('README.md', 'r', encoding='utf-8') as fh:

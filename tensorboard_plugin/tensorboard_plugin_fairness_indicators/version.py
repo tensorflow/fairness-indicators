@@ -15,4 +15,4 @@
 """Contains the version string of Fairness Indicators Tensorboard Plugin."""
 
 # Note that setup.py uses this version.
-__version__ = '0.0.6.dev'
+__version__ = '0.24.0.dev'

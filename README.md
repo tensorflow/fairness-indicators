@@ -62,3 +62,14 @@ demonstrates how to visualize Fairness Indicators in TensorBoard.
 For more information on how to think about fairness evaluation in the context of your use case, see [this link](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/guidance.md).
 
 If you have found a bug in Fairness Indicators, please file a GitHub issue with as much supporting information as you can provide.
+
+## Compatible versions
+
+The following table shows the  package versions that are
+compatible with each other. This is determined by our testing framework, but
+other *untested* combinations may also work.
+
+|fairness-indicators                                                                        | tensorflow         | tensorflow-data-validation | tensorflow-model-analysis |
+|-------------------------------------------------------------------------------------------|--------------------|----------------------------|---------------------------|
+|[GitHub master](https://github.com/tensorflow/fairness-indicators/blob/master/RELEASE.md)  | nightly (1.x/2.x)  | 0.23.0                     | 0.23.0                    |
+|[v0.23.0](https://github.com/tensorflow/fairness-indicators/blob/v0.23.0/RELEASE.md)       | 1.15.2 / 2.3       | 0.23.0                     | 0.23.0                    |

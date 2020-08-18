@@ -18,10 +18,10 @@ from setuptools import find_packages
 from setuptools import setup
 
 REQUIRED_PACKAGES = [
-    'tensorflow >= 1.15, < 3',
-    'tensorflow-data-validation >= 0.15.0, < 1',
-    'tensorflow-model-analysis >= 0.21.0, < 1',
-    'witwidget >= 1.4.4, < 2',
+    'tensorflow>=1.15.2,!=2.0.*,!=2.1.*,!=2.2.*,<3',
+    'tensorflow-data-validation>=0.23,<0.24',
+    'tensorflow-model-analysis>=0.23,<0.24',
+    'witwidget>=1.4.4,<2',
 ]
 
 # Get version from version module.
