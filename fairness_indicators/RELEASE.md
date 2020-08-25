@@ -1,4 +1,4 @@
-# Version 0.23.0
+# Version 0.23.1
 
 ## Major Features and Improvements
 
@@ -6,9 +6,7 @@
 
 ## Bug fixes and other changes
 
-*  Depends on `tensorflow>=1.15.2,!=2.0.*,!=2.1.*,!=2.2.*,<3`.
-*  Depends on `tensorflow-data-validation>=0.23,<0.24`.
-*  Depends on `tensorflow-model-analysis>=0.23,<0.24`.
+* Fix broken import path in Fairness_Indicators_Example_Colab amd Fairness_Indicators_on_TF_Hub_Text_Embeddings.
 
 ## Breaking changes
 
@@ -16,5 +14,4 @@
 
 ## Deprecations
 
-*  Deprecating Py2 support.
-*  Note: We plan to drop py3.5 support in the next release.
+* N/A
