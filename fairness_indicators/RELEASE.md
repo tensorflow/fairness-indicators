@@ -4,6 +4,8 @@
 
 ## Major Features and Improvements
 
+*   Made the Fairness Indicators UI thresholds drop down list sorted.
+
 ## Bug fixes and other changes
 
 ## Breaking changes
