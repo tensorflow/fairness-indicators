@@ -5,6 +5,7 @@
 ## Major Features and Improvements
 
 *   Made the Fairness Indicators UI thresholds drop down list sorted.
+*   Fix the bug that Sort menu is not hidden when there is no model comparison.
 
 ## Bug fixes and other changes
 
