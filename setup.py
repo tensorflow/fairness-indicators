@@ -14,13 +14,30 @@
 # ==============================================================================
 """Setup to install Fairness Indicators."""
 
+import os
+
 from setuptools import find_packages
 from setuptools import setup
 
+
+def select_constraint(default, git_master=None):
+  """Select dependency constraint based on TFX_DEPENDENCY_SELECTOR env var."""
+  selector = os.environ.get('TFX_DEPENDENCY_SELECTOR')
+  if selector == 'UNCONSTRAINED':
+    return ''
+  elif selector == 'GIT_MASTER' and git_master is not None:
+    return git_master
+  else:
+    return default
+
 REQUIRED_PACKAGES = [
     'tensorflow>=1.15.2,!=2.0.*,!=2.1.*,!=2.2.*,<3',
-    'tensorflow-data-validation>=0.23,<0.24',
-    'tensorflow-model-analysis>=0.23,<0.24',
+    'tensorflow-data-validation' + select_constraint(
+        default='>=0.23,<0.24',
+        git_master='@git+https://github.com/tensorflow/data-validation@master'),
+    'tensorflow-model-analysis' + select_constraint(
+        default='>=0.23,<0.24',
+        git_master='@git+https://github.com/tensorflow/model-analysis@master'),
     'witwidget>=1.4.4,<2',
 ]
 
