@@ -24,6 +24,8 @@
 ## Bug fixes and other changes
 
 *  Fix broken import path in Fairness_Indicators_Example_Colab and Fairness_Indicators_on_TF_Hub_Text_Embeddings.
+*  Fix confusing error message while rendering evaluation results in TensorBoard
+   plugin from evaluation output path provided in the URL.
 
 ## Breaking changes
 
