@@ -7,6 +7,7 @@
 ## Bug fixes and other changes
 
 *  Update table colors.
+*  When two evals have different slices, highlight empty slices in the table.
 
 ## Breaking changes
 
