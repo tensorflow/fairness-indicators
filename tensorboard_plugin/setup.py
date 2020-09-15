@@ -39,7 +39,7 @@ REQUIRED_PACKAGES = [
     'tensorboard>=2.3.0,<3',
     'tensorflow>=2.3.0,<3',
     'tensorflow-model-analysis' + select_constraint(
-        default='>=0.23,<0.24',
+        default='>=0.24,<0.25',
         git_master='@git+https://github.com/tensorflow/model-analysis@master'),
 ]
 
@@ -70,7 +70,7 @@ setup(
             'fairness_indicators = tensorboard_plugin_fairness_indicators.plugin:FairnessIndicatorsPlugin',
         ],
     },
-    python_requires='>=3.5,<4',
+    python_requires='>=3.6,<4',
     install_requires=REQUIRED_PACKAGES,
     tests_require=REQUIRED_PACKAGES,
     classifiers=[

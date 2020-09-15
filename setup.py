@@ -33,10 +33,10 @@ def select_constraint(default, git_master=None):
 REQUIRED_PACKAGES = [
     'tensorflow>=1.15.2,!=2.0.*,!=2.1.*,!=2.2.*,<3',
     'tensorflow-data-validation' + select_constraint(
-        default='>=0.23,<0.24',
+        default='>=0.24,<0.25',
         git_master='@git+https://github.com/tensorflow/data-validation@master'),
     'tensorflow-model-analysis' + select_constraint(
-        default='>=0.23,<0.24',
+        default='>=0.24,<0.25',
         git_master='@git+https://github.com/tensorflow/model-analysis@master'),
     'witwidget>=1.4.4,<2',
 ]
@@ -63,7 +63,7 @@ setup(
     package_data={
         'fairness_indicators': ['documentation/*'],
     },
-    python_requires='>=3.5,<4',
+    python_requires='>=3.6,<4',
     install_requires=REQUIRED_PACKAGES,
     tests_require=REQUIRED_PACKAGES,
     # PyPI package information.

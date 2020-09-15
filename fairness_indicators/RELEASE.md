@@ -4,12 +4,26 @@
 
 ## Major Features and Improvements
 
+## Breaking changes
+
+## Deprecations
+
+# Version 0.24.0
+
+## Major Features and Improvements
+
 *   Made the Fairness Indicators UI thresholds drop down list sorted.
-*   Fix the bug that Sort menu is not hidden when there is no model comparison.
 
 ## Bug fixes and other changes
 
+*   Fix in the issue where the Sort menu is not hidden when there is no model
+    comparison.
+*   Depends on `tensorflow-data-validation>=0.24,<0.25`.
+*   Depends on `tensorflow-model-analysis>=0.24,<0.25`.
+
 ## Breaking changes
+
+* N/A
 
 ## Deprecations
 
@@ -24,8 +38,6 @@
 ## Bug fixes and other changes
 
 *  Fix broken import path in Fairness_Indicators_Example_Colab and Fairness_Indicators_on_TF_Hub_Text_Embeddings.
-*  Fix confusing error message while rendering evaluation results in TensorBoard
-   plugin from evaluation output path provided in the URL.
 
 ## Breaking changes
 
