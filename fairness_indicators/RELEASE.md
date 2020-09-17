@@ -4,6 +4,10 @@
 
 ## Major Features and Improvements
 
+## Bug fixes and other changes
+
+*  Update table colors.
+
 ## Breaking changes
 
 ## Deprecations
