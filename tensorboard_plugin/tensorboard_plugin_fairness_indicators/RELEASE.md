@@ -41,6 +41,7 @@
 *   Depends on `tensorboard>=2.3.0,<3`.
 *   Depends on `tensorflow>=2.3.0,<3`.
 *   Depends on `tensorflow-model-analysis>=0.23,<0.24`.
+*   Adding model comparison support in TensorBoard Plugin.
 
 ## Breaking changes
 
