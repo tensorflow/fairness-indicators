@@ -22,6 +22,7 @@
 
 *   Fix in the issue where the Sort menu is not hidden when there is no model
     comparison.
+*   Modify privacy note in Fairness Indicators UI.
 *   Depends on `tensorflow-data-validation>=0.24,<0.25`.
 *   Depends on `tensorflow-model-analysis>=0.24,<0.25`.
 
