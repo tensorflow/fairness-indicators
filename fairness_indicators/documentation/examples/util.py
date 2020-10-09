@@ -15,7 +15,10 @@
 """Util methods for the example colabs."""
 
 import os
+import os.path
 import tempfile
+
+import pandas as pd
 import tensorflow.compat.v1 as tf
 
 TEXT_FEATURE = 'comment_text'
@@ -62,14 +65,33 @@ def convert_comments_data(input_filename, output_filename=None):
   homosexual_gay_or_lesbian] }.
 
   Args:
-    input_filename: The path to the raw civil comments data.
+    input_filename: The path to the raw civil comments data, with extension
+      'tfrecord' or 'csv'.
     output_filename: The path to write the processed civil comments data.
 
   Returns:
     The file path to the converted dataset.
+
+  Raises:
+    ValueError: If the input_filename does not have a supported extension.
   """
+  extension = os.path.splitext(input_filename)[1][1:]
+
   if not output_filename:
-    output_filename = os.path.join(tempfile.mkdtemp(), 'output')
+    output_filename = os.path.join(tempfile.mkdtemp(), 'output.' + extension)
+
+  if extension == 'tfrecord':
+    return _convert_comments_data_tfrecord(input_filename, output_filename)
+  elif extension == 'csv':
+    return _convert_comments_data_csv(input_filename, output_filename)
+
+  raise ValueError(
+      'input_filename must have supported file extension csv or tfrecord, '
+      'given: {}'.format(input_filename))
+
+
+def _convert_comments_data_tfrecord(input_filename, output_filename=None):
+  """Convert the public civil comments data, for tfrecord data."""
   with tf.io.TFRecordWriter(output_filename) as writer:
     for serialized in tf.data.TFRecordDataset(filenames=[input_filename]):
       example = tf.train.Example()
@@ -94,4 +116,39 @@ def convert_comments_data(input_filename, output_filename=None):
         new_example.features.feature[identity_category].bytes_list.value.extend(
             grouped_identity)
       writer.write(new_example.SerializeToString())
+
+  return output_filename
+
+
+def _convert_comments_data_csv(input_filename, output_filename=None):
+  """Convert the public civil comments data, for csv data."""
+  df = pd.read_csv(input_filename)
+
+  # Filter out rows with empty comment text values.
+  df = df[df[TEXT_FEATURE].ne('')]
+  df = df[df[TEXT_FEATURE].notnull()]
+
+  new_df = pd.DataFrame()
+  new_df[TEXT_FEATURE] = df[TEXT_FEATURE]
+
+  # Reduce the label to value 0 or 1.
+  new_df[LABEL] = df[LABEL].ge(_THRESHOLD).astype(int)
+
+  # Extract the list of all identity terms that exceed the threshold.
+  def identity_conditions(df, identity_list):
+    group = []
+    for identity in identity_list:
+      if df[identity] >= _THRESHOLD:
+        group.append(identity)
+    return group
+
+  for identity_category, identity_list in IDENTITY_COLUMNS.items():
+    new_df[identity_category] = df.apply(
+        identity_conditions, args=((identity_list),), axis=1)
+
+  new_df.to_csv(
+      output_filename,
+      header=[TEXT_FEATURE, LABEL, *IDENTITY_COLUMNS.keys()],
+      index=False)
+
   return output_filename

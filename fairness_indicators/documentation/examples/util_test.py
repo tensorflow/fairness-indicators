@@ -18,10 +18,12 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import csv
 import os
 import tempfile
 
 from fairness_indicators.examples import util
+import pandas as pd
 import tensorflow.compat.v1 as tf
 
 from google.protobuf import text_format
@@ -29,7 +31,7 @@ from google.protobuf import text_format
 
 class UtilTest(tf.test.TestCase):
 
-  def _create_example(self):
+  def _create_example_tfrecord(self):
     example = text_format.Parse(
         """
         features {
@@ -96,14 +98,14 @@ class UtilTest(tf.test.TestCase):
     return [example, empty_comment_example]
 
   def _write_tf_records(self, examples):
-    filename = os.path.join(tempfile.mkdtemp(), 'input')
+    filename = os.path.join(tempfile.mkdtemp(), 'input.tfrecord')
     with tf.io.TFRecordWriter(filename) as writer:
       for e in examples:
         writer.write(e.SerializeToString())
     return filename
 
-  def test_convert_data(self):
-    input_file = self._write_tf_records(self._create_example())
+  def test_convert_data_tfrecord(self):
+    input_file = self._write_tf_records(self._create_example_tfrecord())
     output_file = util.convert_comments_data(input_file)
     output_example_list = []
     for serialized in tf.data.TFRecordDataset(filenames=[output_file]):
@@ -142,6 +144,149 @@ class UtilTest(tf.test.TestCase):
                   }
         }
         """, tf.train.Example()))
+
+  def _create_example_csv(self,):
+    header = [
+        'comment_text',
+        'toxicity',
+        'heterosexual',
+        'homosexual_gay_or_lesbian',
+        'bisexual',
+        'other_sexual_orientation',
+        'male',
+        'female',
+        'transgender',
+        'other_gender',
+        'christian',
+        'jewish',
+        'muslim',
+        'hindu',
+        'buddhist',
+        'atheist',
+        'other_religion',
+        'black',
+        'white',
+        'asian',
+        'latino',
+        'other_race_or_ethnicity',
+        'physical_disability',
+        'intellectual_or_learning_disability',
+        'psychiatric_or_mental_illness',
+        'other_disability',
+    ]
+    example = [
+        'comment 1',
+        0.1,
+        # sexual orientation
+        0.1,
+        0.1,
+        0.5,
+        0.1,
+        # gender
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        # religion
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        # race or ethnicity
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        # disability
+        0.6,
+        0.7,
+        0.8,
+        1.0,
+    ]
+    empty_comment_example = [
+        '',
+        0.1,
+        0.1,
+        0.1,
+        0.5,
+        0.1,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        1.0,
+    ]
+    return [header, example, empty_comment_example]
+
+  def _write_csv(self, examples):
+    filename = os.path.join(tempfile.mkdtemp(), 'input.csv')
+    with open(filename, 'w', newline='') as csvfile:
+      csvwriter = csv.writer(csvfile, delimiter=',')
+      for example in examples:
+        csvwriter.writerow(example)
+
+    return filename
+
+  def test_convert_data_csv(self):
+    input_file = self._write_csv(self._create_example_csv())
+    output_file = util.convert_comments_data(input_file)
+
+    # Remove the quotes around identity terms list that read_csv injects.
+    df = pd.read_csv(output_file).replace("'", '', regex=True)
+
+    expected_df = pd.DataFrame()
+    expected_df = expected_df.append(
+        {
+            'comment_text':
+                'comment 1',
+            'toxicity':
+                0.0,
+            'gender': [],
+            'sexual_orientation': ['bisexual'],
+            'race': ['other_race_or_ethnicity'],
+            'religion': ['atheist', 'other_religion'],
+            'disability': [
+                'physical_disability', 'intellectual_or_learning_disability',
+                'psychiatric_or_mental_illness', 'other_disability'
+            ]
+        },
+        ignore_index=True)
+
+    self.assertEqual(
+        df.reset_index(drop=True, inplace=True),
+        expected_df.reset_index(drop=True, inplace=True))
+
+  def test_convert_data_csv_invalid_input_filename(self):
+    filename_no_extension = os.path.join(tempfile.mkdtemp(), 'no_extension')
+    filename_unsupported_extension = os.path.join(tempfile.mkdtemp(),
+                                                  'unsupported_extension.mp4')
+
+    with self.assertRaisesRegex(ValueError,
+                                '.*must.*supported.*file.*extension'):
+      _ = util.convert_comments_data(filename_no_extension)
+
+    with self.assertRaisesRegex(ValueError,
+                                '.*must.*supported.*file.*extension'):
+      _ = util.convert_comments_data(filename_unsupported_extension)
 
 
 if __name__ == '__main__':
