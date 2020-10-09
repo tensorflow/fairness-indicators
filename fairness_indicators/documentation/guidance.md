@@ -39,7 +39,7 @@ concerns.
 The questions above are the foundation of what ethical considerations, including
 fairness, you may want to take into account when designing and developing your
 ML-based product. These questions also motivate _which_ metrics and _which_
-groups of users you should the tool to evaluate.
+groups of users you should use the tool to evaluate.
 
 Before diving in further, here are three resources we recommend as you get
 started:
@@ -74,7 +74,7 @@ engaging with your product, and how they might be affected. Consider,
 especially, slices related to sensitive characteristics such as race, ethnicity,
 gender, nationality, income, sexual orientation, and disability status.
 
-**What if I don’t have data labelled for the slices I want to investigate?**
+**What if I don’t have data labeled for the slices I want to investigate?**
 
 Good question. We know that many datasets don’t have ground-truth labels for
 individual identity attributes.
@@ -201,8 +201,8 @@ out further._
 
 *   _<span style="text-decoration:underline;">Definition:</span>_ The percentage
     of positive data points (as labeled in the ground truth) that are
-    _correctly_ labeled positive, or the percentage of positive data points that
-    are _incorrectly_ labeled negative
+    _correctly_ classified as positive, or the percentage of positive data
+    points that are _incorrectly_ classified as negative
 *   _<span style="text-decoration:underline;">Relates to:</span>_ Equality of
     Opportunity (for the positive class), when equal across subgroups
 *   _<span style="text-decoration:underline;">When to use this metric:</span>_
@@ -215,8 +215,8 @@ out further._
 
 *   _<span style="text-decoration:underline;">Definition:</span>_ The percentage
     of negative data points (as labeled in the ground truth) that are correctly
-    labeled positive, or the percentage of negative data points that are
-    incorrectly labeled positive
+    classified as positive, or the percentage of negative data points that are
+    incorrectly classified as positive
 *   _<span style="text-decoration:underline;">Relates to:</span>_ Equality of
     Opportunity (for the negative class), when equal across subgroups
 *   _<span style="text-decoration:underline;">When to use this metric:</span>_
@@ -241,6 +241,37 @@ false positive) or accidentally excludes a car (a false negative).
 *   _<span style="text-decoration:underline;">When to use these metrics:</span>_
     Cases where precision of the task is most critical (not necessarily in a
     given direction), such as face identification or face clustering
+
+**False Discovery Rate**
+
+*   _<span style="text-decoration:underline;">Definition:</span>_ The percentage
+    of negative data points (as labeled in the ground truth) that are
+    incorrectly classified as positive out of all data points classified as
+    positive. This is also the inverse of PPV
+*   _<span style="text-decoration:underline;">Relates to:</span>_ Predictive
+    Parity (also known as Calibration), when equal across subgroups
+*   _<span style="text-decoration:underline;">When to use this metric:</span>_
+    Cases where the fraction of correct positive predictions should be equal
+    across subgroups
+
+**False Omission Rate**
+
+*   _<span style="text-decoration:underline;">Definition:</span>_ The percentage
+    of positive data points (as labeled in the ground truth) that are
+    incorrectly classified as negative out of all data points classified as
+    negative. This is also the inverse of NPV
+*   _<span style="text-decoration:underline;">Relates to:</span>_ Predictive
+    Parity (also known as Calibration), when equal across subgroups
+*   _<span style="text-decoration:underline;">When to use this metric:</span>_
+    Cases where the fraction of correct negative predictions should be equal
+    across subgroups
+
+**Note**: When used together, False Discovery Rate and False Omission Rate
+relate to Conditional Use Accuracy Equality, when FDR and FOR are both equal
+across subgroups. FDR and FOR are also similar to FPR and FNR, where FDR/FOR
+compare FP/FN to predicted negative/positive data points, and FPR/FNR compare
+FP/FN to ground truth negative/positive data points. FDR/FOR can be used instead
+of FPR/FNR when predictive parity is more critical than equality of opportunity.
 
 **Examples of which metrics to select**
 
