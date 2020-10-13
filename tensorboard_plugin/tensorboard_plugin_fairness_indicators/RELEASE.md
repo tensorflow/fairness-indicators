@@ -20,6 +20,7 @@
 
 *   Fix in the error message while rendering evaluation results in
     TensorBoard plugin from evaluation output path provided in the URL.
+*   Adding support for model comparison using dynamic URL in TensorBoard plugin.
 *   Depends on `tensorflow-model-analysis>=0.24,<0.25`.
 
 ## Breaking changes
