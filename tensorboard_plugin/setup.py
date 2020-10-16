@@ -24,11 +24,13 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-def select_constraint(default, git_master=None):
+def select_constraint(default, nightly=None, git_master=None):
   """Select dependency constraint based on TFX_DEPENDENCY_SELECTOR env var."""
   selector = os.environ.get('TFX_DEPENDENCY_SELECTOR')
   if selector == 'UNCONSTRAINED':
     return ''
+  elif selector == 'NIGHTLY' and nightly is not None:
+    return nightly
   elif selector == 'GIT_MASTER' and git_master is not None:
     return git_master
   else:
@@ -40,6 +42,7 @@ REQUIRED_PACKAGES = [
     'tensorflow>=2.3.0,<3',
     'tensorflow-model-analysis' + select_constraint(
         default='>=0.24,<0.25',
+        nightly='>=0.25.0.dev',
         git_master='@git+https://github.com/tensorflow/model-analysis@master'),
 ]
 
