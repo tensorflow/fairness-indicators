@@ -17,6 +17,7 @@
 ## Major Features and Improvements
 
 *   Made the Fairness Indicators UI thresholds drop down list sorted.
+*   Add metric definitions as tooltips in the metric selector UI
 
 ## Bug fixes and other changes
 
