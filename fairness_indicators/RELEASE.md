@@ -18,6 +18,7 @@
 
 *   Made the Fairness Indicators UI thresholds drop down list sorted.
 *   Add metric definitions as tooltips in the metric selector UI
+*   Removing prefix from metric names in graph titles in UI.
 
 ## Bug fixes and other changes
 
