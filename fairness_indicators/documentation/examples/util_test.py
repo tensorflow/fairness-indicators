@@ -21,11 +21,11 @@ from __future__ import print_function
 import csv
 import os
 import tempfile
+import unittest.mock as mock
 
 from fairness_indicators.examples import util
 import pandas as pd
 import tensorflow.compat.v1 as tf
-
 from google.protobuf import text_format
 
 
@@ -145,7 +145,7 @@ class UtilTest(tf.test.TestCase):
         }
         """, tf.train.Example()))
 
-  def _create_example_csv(self,):
+  def _create_example_csv(self, use_fake_embedding=False):
     header = [
         'comment_text',
         'toxicity',
@@ -175,7 +175,7 @@ class UtilTest(tf.test.TestCase):
         'other_disability',
     ]
     example = [
-        'comment 1',
+        'comment 1' if not use_fake_embedding else 0.35,
         0.1,
         # sexual orientation
         0.1,
@@ -208,7 +208,7 @@ class UtilTest(tf.test.TestCase):
         1.0,
     ]
     empty_comment_example = [
-        '',
+        '' if not use_fake_embedding else 0.35,
         0.1,
         0.1,
         0.1,
@@ -275,18 +275,42 @@ class UtilTest(tf.test.TestCase):
         df.reset_index(drop=True, inplace=True),
         expected_df.reset_index(drop=True, inplace=True))
 
-  def test_convert_data_csv_invalid_input_filename(self):
-    filename_no_extension = os.path.join(tempfile.mkdtemp(), 'no_extension')
-    filename_unsupported_extension = os.path.join(tempfile.mkdtemp(),
-                                                  'unsupported_extension.mp4')
+  @mock.patch(
+      'fairness_indicators.examples.util._create_embedding_layer',
+      autospec=True)
+  @mock.patch('tensorflow.compat.v1.keras.utils.get_file', autospec=True)
+  def test_download_and_process_civil_comments_data_and_create_model(
+      self, mock_get_file, mock__create_embedding_layer):
 
-    with self.assertRaisesRegex(ValueError,
-                                '.*must.*supported.*file.*extension'):
-      _ = util.convert_comments_data(filename_no_extension)
+    # First test download_and_process_civil_comments_data.  Mock out the
+    # download.
+    filename = self._write_csv(
+        self._create_example_csv(use_fake_embedding=True))
+    mock_get_file.return_value = filename
+    data_train, _, _, labels_train, _ = util.download_and_process_civil_comments_data(
+    )
 
-    with self.assertRaisesRegex(ValueError,
-                                '.*must.*supported.*file.*extension'):
-      _ = util.convert_comments_data(filename_unsupported_extension)
+    self.assertEqual(mock_get_file.call_count, 3)
+
+    # Undo the string interpretation of the text_feature, since we are mocking
+    # out the embedding layer in the following model testing.
+    data_train[util.TEXT_FEATURE] = data_train[util.TEXT_FEATURE].astype(float)
+
+    # Now use that data to test create_keras_sequential_model.
+    mock__create_embedding_layer.return_value = tf.keras.layers.Dense(units=128)
+
+    model = util.create_keras_sequential_model(hub_url='')
+
+    # Sanity check that you have a valid model by training it and predicting.
+    optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
+    loss = tf.keras.losses.BinaryCrossentropy(from_logits=True)
+    metrics = ['accuracy']
+    model.compile(optimizer=optimizer, loss=loss, metrics=metrics)
+
+    model.fit(
+        x=data_train['comment_text'], y=labels_train, batch_size=1, epochs=1)
+    result = model.predict([0.1])
+    self.assertTrue(result[0][0] < 1 and result[0][0] > 0)
 
 
 if __name__ == '__main__':
