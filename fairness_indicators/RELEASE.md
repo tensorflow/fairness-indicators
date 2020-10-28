@@ -4,6 +4,9 @@
 
 ## Major Features and Improvements
 
+*  Add workflow buttons to Fairness Indicators UI, providing tutorial on how to
+   configure metrics and parameters, and how to interpret the results.
+
 ## Bug fixes and other changes
 
 *  Update table colors.
