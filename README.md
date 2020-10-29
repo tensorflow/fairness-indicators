@@ -40,6 +40,20 @@ The pip package includes:
   * **Fairness Indicators** - an addition to TFMA that adds fairness metrics and easy performance comparison across slices
 * **The What-If Tool (WIT)**](https://github.com/PAIR-code/what-if-tool - an interactive visual interface designed to probe your models better
 
+### Nightly Packages
+
+Fairness Indicators also hosts nightly packages at
+https://pypi-nightly.tensorflow.org on Google Cloud. To install the latest
+nightly package, please use the following command:
+
+```bash
+pip install -i https://pypi-nightly.tensorflow.org/simple fairness-indicators
+```
+
+This will install the nightly packages for the major dependencies of Fairness
+Indicators such as TensorFlow Data Validation (TFDV), TensorFlow Model Analysis
+(TFMA).
+
 ## How can I use Fairness Indicators?
 Tensorflow Models
 

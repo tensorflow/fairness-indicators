@@ -29,6 +29,18 @@ pip install --upgrade pip
 pip install fairness_indicators
 pip install tensorboard-plugin-fairness-indicators
 ```
+### Nightly Packages
+
+Tensorboard Plugin also hosts nightly packages at
+https://pypi-nightly.tensorflow.org on Google Cloud. To install the latest
+nightly package, please use the following command:
+
+```bash
+pip install -i https://pypi-nightly.tensorflow.org/simple tensorboard-plugin-fairness-indicators
+```
+
+This will install the nightly packages for the major dependencies of TFDV such
+as TensorFlow Model Analysis (TFMA).
 
 ## Demo Colab
 
