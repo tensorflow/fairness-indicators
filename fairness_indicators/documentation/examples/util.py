@@ -49,8 +49,35 @@ IDENTITY_COLUMNS = {
     'race': RACE_COLUMNS,
     'disability': DISABILITY_COLUMNS
 }
+FEATURE_MAP = {
+    # Label:
+    LABEL: tf.io.FixedLenFeature([], tf.float32),
+    # Text:
+    TEXT_FEATURE: tf.io.FixedLenFeature([], tf.string),
+
+    # Identities:
+    'sexual_orientation': tf.io.VarLenFeature(tf.string),
+    'gender': tf.io.VarLenFeature(tf.string),
+    'religion': tf.io.VarLenFeature(tf.string),
+    'race': tf.io.VarLenFeature(tf.string),
+    'disability': tf.io.VarLenFeature(tf.string),
+}
 
 _THRESHOLD = 0.5
+
+# Dictionary Keys
+_WEIGHT = 'weight'
+_EXAMPLES = 'examples'
+
+# Activation functions
+_RELU = 'relu'
+_SIGMOID = 'sigmoid'
+
+# Civil Comments Dataset paths
+_TOXICITY_DATA_UTIL = 'https://storage.googleapis.com/civil_comments_dataset/'
+_TRAIN_CSV = 'train_df_processed.csv'
+_VALIDATE_CSV = 'validate_df_processed.csv'
+_VALIDATE_TFRECORD = 'validate_tf_processed.tfrecord'
 
 
 def convert_comments_data(input_filename, output_filename=None):
@@ -161,17 +188,16 @@ def download_and_process_civil_comments_data():
   """Download and process the civil comments dataset into a pandas DataFrame."""
 
   # Download data.
-  toxicity_data_url = 'https://storage.googleapis.com/civil_comments_dataset/'
   train_csv_file = tf.keras.utils.get_file(
-      'train_df_processed.csv', toxicity_data_url + 'train_df_processed.csv')
+      _TRAIN_CSV, _TOXICITY_DATA_UTIL + _TRAIN_CSV)
   validate_csv_file = tf.keras.utils.get_file(
-      'validate_df_processed.csv',
-      toxicity_data_url + 'validate_df_processed.csv')
+      _VALIDATE_CSV,
+      _TOXICITY_DATA_UTIL + _VALIDATE_CSV)
 
   # Get validation data as tfrecords.
   validate_tfrecord_file = tf.keras.utils.get_file(
-      'validate_tf_processed.tfrecord',
-      toxicity_data_url + 'validate_tf_processed.tfrecord')
+      _VALIDATE_TFRECORD,
+      toxicity_data_url + _VALIDATE_TFRECORD)
 
   # Read data into pandas DataFrame.
   data_train = pd.read_csv(train_csv_file)
@@ -215,13 +241,13 @@ def create_keras_sequential_model(
                                                  cnn_pooling_sizes):
     model.add(
         tf.keras.layers.Conv1D(
-            filter_size, kernel_size, activation='relu', padding='same'))
+            filter_size, kernel_size, activation=_RELU, padding='same'))
     model.add(tf.keras.layers.MaxPooling1D(pool_size, padding='same'))
 
   # Flatten, fully connected, and output layers.
   model.add(tf.keras.layers.Flatten())
-  model.add(tf.keras.layers.Dense(128, activation='relu'))
-  model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
+  model.add(tf.keras.layers.Dense(128, activation=_RELU))
+  model.add(tf.keras.layers.Dense(1, activation=_SIGMOID))
 
   return model
 
@@ -276,3 +302,19 @@ def get_eval_results(model_location,
       eval_config=eval_config,
       output_path=tfma_eval_result_path,
       extractors=None)
+
+
+def eval_input_receiver_fn() -> tfma.export.EvalInputReceiver:
+  """EvalInputReceiver for Fairness_Indicators_Example_Colab."""
+  serialized_tf_example_placeholder = tf.compat.v1.placeholder(
+      dtype=tf.string, shape=[None], name='input_example_placeholder')
+
+  receiver_tensors = {_EXAMPLES: serialized_tf_example_placeholder}
+
+  features = tf.io.parse_example(serialized_tf_example_placeholder, FEATURE_MAP)
+  features[_WEIGHT] = tf.ones_like(features[LABEL])
+
+  return tfma.export.EvalInputReceiver(
+      features=features,
+      receiver_tensors=receiver_tensors,
+      labels=features[LABEL])

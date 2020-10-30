@@ -316,6 +316,18 @@ class UtilTest(tf.test.TestCase):
     # TODO(b/172260507): Add testing.
     pass
 
+  def test_eval_input_receiver_fn(self):
+    input_receiver = util.eval_input_receiver_fn()
+    with self.subTest('input_receiver.features'):
+      self.assertSameElements(
+          input_receiver.features, {
+              'gender', 'sexual_orientation', 'religion', 'race', 'disability',
+              'comment_text', 'toxicity', 'weight'
+          })
+    with self.subTest('input_receiver.labels'):
+      self.assertEqual(input_receiver.labels.shape.as_list(), [None])
+      self.assertEqual(input_receiver.labels.dtype, tf.float32)
+
 
 if __name__ == '__main__':
   tf.test.main()
