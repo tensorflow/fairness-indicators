@@ -21,6 +21,8 @@ import tempfile
 import pandas as pd
 import tensorflow.compat.v1 as tf
 import tensorflow_hub as hub
+import tensorflow_model_analysis as tfma
+from google.protobuf import text_format
 
 TEXT_FEATURE = 'comment_text'
 LABEL = 'toxicity'
@@ -222,3 +224,55 @@ def create_keras_sequential_model(
   model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
 
   return model
+
+
+def get_eval_results(model_location,
+                     base_dir,
+                     eval_subdir,
+                     validate_tfrecord_file,
+                     slice_selection='religion',
+                     compute_confidence_intervals=True):
+  """Get Fairness Indicators eval results."""
+  tfma_eval_result_path = os.path.join(base_dir, 'tfma_eval_result')
+
+  # Define slices that you want the evaluation to run on.
+  eval_config = text_format.Parse(
+      """
+    model_specs {
+     label_key: '%s'
+   }
+   metrics_specs {
+     metrics {class_name: "AUC"}
+     metrics {class_name: "ExampleCount"}
+     metrics {class_name: "Accuracy"}
+     metrics {
+        class_name: "FairnessIndicators"
+        config: '{"thresholds": [0.35, 0.375, 0.4, 0.425, 0.45, 0.475, 0.5, 0.525, 0.55]}'
+     }
+   }
+   slicing_specs {
+     feature_keys: '%s'
+   }
+   slicing_specs {}
+   options {
+       compute_confidence_intervals { value: %s }
+       disabled_outputs{values: "analysis"}
+   }
+   """ % (LABEL,
+          slice_selection, 'true' if compute_confidence_intervals else 'false'),
+      tfma.EvalConfig())
+
+  base_dir = tempfile.mkdtemp(prefix='saved_eval_results')
+  tfma_eval_result_path = os.path.join(base_dir, eval_subdir)
+
+  eval_shared_model = tfma.default_eval_shared_model(
+      eval_saved_model_path=model_location, tags=[tf.saved_model.SERVING])
+
+  # Run the fairness evaluation.
+  return tfma.run_model_analysis(
+      eval_shared_model=eval_shared_model,
+      data_location=validate_tfrecord_file,
+      file_format='tfrecords',
+      eval_config=eval_config,
+      output_path=tfma_eval_result_path,
+      extractors=None)
