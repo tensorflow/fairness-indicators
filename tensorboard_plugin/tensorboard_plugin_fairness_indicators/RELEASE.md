@@ -4,6 +4,16 @@
 
 ## Major Features and Improvements
 
+## Bug fixes and other changes
+
+## Breaking changes
+
+## Deprecations
+
+# Version 0.25.0
+
+## Major Features and Improvements
+
 *   From this release Tensorboard Plugin will also be hosting nightly packages
     on https://pypi-nightly.tensorflow.org. To install the nightly package use
     the following command:
@@ -20,9 +30,16 @@
 
 ## Bug fixes and other changes
 
+*   Adding support for model comparison using dynamic URL in TensorBoard plugin.
+*   Depends on `tensorflow-model-analysis>=0.25,<0.26`.
+
 ## Breaking changes
 
+* N/A
+
 ## Deprecations
+
+* N/A
 
 # Version 0.24.0
 
@@ -34,12 +51,11 @@
 
 *   Fix in the error message while rendering evaluation results in
     TensorBoard plugin from evaluation output path provided in the URL.
-*   Adding support for model comparison using dynamic URL in TensorBoard plugin.
 *   Depends on `tensorflow-model-analysis>=0.24,<0.25`.
 
 ## Breaking changes
 
-*   Depends on `tensorflow-model-analysis>=0.23,<0.24`.
+* N/A
 
 ## Deprecations
 
