@@ -19,7 +19,7 @@ import os.path
 import tempfile
 
 import pandas as pd
-import tensorflow.compat.v1 as tf
+import tensorflow as tf
 import tensorflow_hub as hub
 import tensorflow_model_analysis as tfma
 from google.protobuf import text_format

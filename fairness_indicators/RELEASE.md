@@ -6,6 +6,8 @@
 
 ## Bug fixes and other changes
 
+*   Update fairness_indicators.documentation.examples.util to TensorFlow 2.0.
+
 ## Breaking changes
 
 ## Deprecations
