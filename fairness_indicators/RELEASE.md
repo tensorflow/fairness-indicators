@@ -7,6 +7,7 @@
 ## Bug fixes and other changes
 
 *   Update fairness_indicators.documentation.examples.util to TensorFlow 2.0.
+*   Table now displays 3 decimal places instead of 2.
 
 ## Breaking changes
 
