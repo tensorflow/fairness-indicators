@@ -21,7 +21,6 @@ from __future__ import print_function
 import csv
 import os
 import tempfile
-import unittest.mock as mock
 
 from fairness_indicators.examples import util
 import pandas as pd
@@ -274,47 +273,6 @@ class UtilTest(tf.test.TestCase):
     self.assertEqual(
         df.reset_index(drop=True, inplace=True),
         expected_df.reset_index(drop=True, inplace=True))
-
-  @mock.patch(
-      'fairness_indicators.examples.util._create_embedding_layer',
-      autospec=True)
-  @mock.patch('tensorflow.keras.utils.get_file', autospec=True)
-  def test_download_and_process_civil_comments_data_and_create_model(
-      self, mock_get_file, mock__create_embedding_layer):
-
-    # First test download_and_process_civil_comments_data.  Mock out the
-    # download.
-    filename = self._write_csv(
-        self._create_example_csv(use_fake_embedding=True))
-    mock_get_file.return_value = filename
-    data_train, _, _, labels_train, _ = util.download_and_process_civil_comments_data(
-    )
-
-    self.assertEqual(mock_get_file.call_count, 3)
-
-    # Undo the string interpretation of the text_feature, since we are mocking
-    # out the embedding layer in the following model testing.
-    data_train[util.TEXT_FEATURE] = data_train[util.TEXT_FEATURE].astype(float)
-
-    # Now use that data to test create_keras_sequential_model.
-    mock__create_embedding_layer.return_value = tf.keras.layers.Dense(units=128)
-
-    model = util.create_keras_sequential_model(hub_url='')
-
-    # Sanity check that you have a valid model by training it and predicting.
-    optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
-    loss = tf.keras.losses.BinaryCrossentropy(from_logits=True)
-    metrics = ['accuracy']
-    model.compile(optimizer=optimizer, loss=loss, metrics=metrics)
-
-    model.fit(
-        x=data_train['comment_text'], y=labels_train, batch_size=1, epochs=1)
-    result = model.predict([0.1])
-    self.assertTrue(result[0][0] < 1 and result[0][0] > 0)
-
-  def test_get_eval_results(self):
-    # TODO(b/172260507): Add testing.
-    pass
 
 
 if __name__ == '__main__':
