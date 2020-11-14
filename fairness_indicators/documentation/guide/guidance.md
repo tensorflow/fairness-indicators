@@ -1,7 +1,5 @@
 ## Fairness Indicators: Thinking about Fairness Evaluation
 
-*Written by*: Ben Hutchinson, Meg Mitchell, Catherina Xu, Tulsee Doshi
-
 ### Interested in leveraging the Fairness Indicators Beta?
 
 Before you do, we ask that you read through the following guidance.
