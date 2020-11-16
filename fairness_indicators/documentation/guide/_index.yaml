@@ -46,11 +46,11 @@ landing_page:
               TensorBoard plugin</a>
           </li>
           <li>
-              <a href="https://www.tensorflow.org/tfx/guide/fairness_indicators">TensorFlow Model
+              <a href="https://www.tensorflow.org/responsible_ai/fairness_indicators/fairness_indicators">TensorFlow Model
               Analysis library</a>
           </li>
           <li>
-              <a href="https://www.tensorflow.org/tfx/guide/fairness_indicators#using_fairness_indicators_with_non-tensorflow_models">Model
+              <a href="https://www.tensorflow.org/responsible_ai/fairness_indicators/fairness_indicators#model_agnostic_evaluation">Model
               Agnostic TFMA library</a>
           </li>
 
