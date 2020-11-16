@@ -91,7 +91,7 @@ landing_page:
   - classname: devsite-landing-row-cards
     items:
     - heading: "ML Practicum: Fairness in Perspective API using Fairness Indicators"
-      image_path: images/mlpracticum.png
+      image_path: /responsible_ai/fairness_indicators/images/mlpracticum.png
       path: "https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body"
       buttons:
       - label: "Try the Case Study"
@@ -114,7 +114,7 @@ landing_page:
   - classname: devsite-landing-row-cards
     items:
     - heading: "Fairness Indicators on the Google AI Blog"
-      image_path: images/googleai.png
+      image_path: /responsible_ai/fairness_indicators/images/googleai.png
       path: https://ai.googleblog.com/2019/12/fairness-indicators-scalable.html
       buttons:
       - label: "Read on Google AI blog"
