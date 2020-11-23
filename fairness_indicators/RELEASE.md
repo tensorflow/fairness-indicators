@@ -9,6 +9,7 @@
 *   Update fairness_indicators.documentation.examples.util to TensorFlow 2.0.
 *   Table now displays 3 decimal places instead of 2.
 *   Fix the bug that metric list won't refresh if the input eval result changed.
+*   Remove d3-tip dependency.
 
 ## Breaking changes
 
