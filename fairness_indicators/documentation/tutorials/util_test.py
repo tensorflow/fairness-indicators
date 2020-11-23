@@ -30,7 +30,8 @@ from google.protobuf import text_format
 
 class UtilTest(tf.test.TestCase):
 
-  def _create_example_tfrecord(self):
+  @staticmethod
+  def _create_example_tfrecord():
     example = text_format.Parse(
         """
         features {
@@ -96,7 +97,8 @@ class UtilTest(tf.test.TestCase):
         """, tf.train.Example())
     return [example, empty_comment_example]
 
-  def _write_tf_records(self, examples):
+  @staticmethod
+  def _write_tf_records(examples):
     filename = os.path.join(tempfile.mkdtemp(), 'input.tfrecord')
     with tf.io.TFRecordWriter(filename) as writer:
       for e in examples:
@@ -144,7 +146,8 @@ class UtilTest(tf.test.TestCase):
         }
         """, tf.train.Example()))
 
-  def _create_example_csv(self, use_fake_embedding=False):
+  @staticmethod
+  def _create_example_csv(use_fake_embedding=False):
     header = [
         'comment_text',
         'toxicity',
@@ -236,7 +239,8 @@ class UtilTest(tf.test.TestCase):
     ]
     return [header, example, empty_comment_example]
 
-  def _write_csv(self, examples):
+  @staticmethod
+  def _write_csv(examples):
     filename = os.path.join(tempfile.mkdtemp(), 'input.csv')
     with open(filename, 'w', newline='') as csvfile:
       csvwriter = csv.writer(csvfile, delimiter=',')

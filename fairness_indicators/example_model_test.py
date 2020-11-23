@@ -49,7 +49,8 @@ class ExampleModelTest(tf.test.TestCase):
         self._base_dir, 'train',
         datetime.datetime.now().strftime('%Y%m%d-%H%M%S'))
 
-  def _create_example(self, comment_text, label, slice_value):
+  @staticmethod
+  def _create_example(comment_text, label, slice_value):
     example = tf.train.Example()
     example.features.feature[TEXT_FEATURE].bytes_list.value[:] = [
         six.ensure_binary(comment_text, 'utf8')

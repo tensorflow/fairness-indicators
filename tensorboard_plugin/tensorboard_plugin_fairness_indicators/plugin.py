@@ -71,7 +71,8 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
             self._serve_vulcanized_js,
     }
 
-  def frontend_metadata(self):
+  @staticmethod
+  def frontend_metadata():
     return base_plugin.FrontendMetadata(
         es_module_path='/index.js',
         disable_reload=False,
@@ -93,7 +94,8 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
             FairnessIndicatorsPlugin.plugin_name))
 
   @wrappers.Request.application
-  def _serve_js(self, request):
+  @staticmethod
+  def _serve_js(request):
     filepath = os.path.join(os.path.dirname(__file__), 'static', 'index.js')
     with open(filepath) as infile:
       contents = infile.read()
@@ -101,7 +103,8 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
         request, contents, content_type='application/javascript')
 
   @wrappers.Request.application
-  def _serve_vulcanized_js(self, request):
+  @staticmethod
+  def _serve_vulcanized_js(request):
     with open(_TEMPLATE_LOCATION) as infile:
       contents = infile.read()
     return http_util.Respond(
@@ -129,7 +132,8 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
       logging.info('Error while fetching evaluation data, %s', error)
     return http_util.Respond(request, data, content_type='application/json')
 
-  def _get_output_file_format(self, evaluation_output_path):
+  @staticmethod
+  def _get_output_file_format(evaluation_output_path):
     file_format = os.path.splitext(evaluation_output_path)[1]
     if file_format:
       return file_format[1:]

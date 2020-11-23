@@ -17,7 +17,8 @@ EvalResult = collections.namedtuple('EvalResult', ['slicing_metrics'])
 
 class WeightUtilsTest(tf.test.TestCase):
 
-  def create_eval_result(self):
+  @staticmethod
+  def create_eval_result():
     return EvalResult(slicing_metrics=[
         ((), {
             '': {
@@ -58,7 +59,8 @@ class WeightUtilsTest(tf.test.TestCase):
           }),
     ])
 
-  def create_bounded_result(self):
+  @staticmethod
+  def create_bounded_result():
     return EvalResult(slicing_metrics=[
         ((), {
             '': {

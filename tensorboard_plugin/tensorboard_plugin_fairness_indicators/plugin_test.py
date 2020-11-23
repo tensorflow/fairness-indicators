@@ -92,7 +92,8 @@ class PluginTest(tf.test.TestCase):
         writer.write(example.SerializeToString())
     return data_location
 
-  def _makeExample(self, age, language, label):
+  @staticmethod
+  def _makeExample(age, language, label):
     example = tf.train.Example()
     example.features.feature["age"].float_list.value[:] = [age]
     example.features.feature["language"].bytes_list.value[:] = [
