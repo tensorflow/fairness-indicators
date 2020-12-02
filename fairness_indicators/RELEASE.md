@@ -4,6 +4,9 @@
 
 ## Major Features and Improvements
 
+*   Sorting fairness metrics table rows to keep slices in order with slice drop
+    down in the UI.
+
 ## Bug fixes and other changes
 
 *   Update fairness_indicators.documentation.examples.util to TensorFlow 2.0.
@@ -36,8 +39,6 @@
     involved for the wheels to be available on the PyPI cloud service. You can
     always use the stable version of Fairness Indicators available on PyPI by
     running the command `pip install fairness-indicators` .
-*   Sorting fairness metrics table rows to keep slices in order with slice drop
-    down in the UI.
 
 ## Bug fixes and other changes
 
