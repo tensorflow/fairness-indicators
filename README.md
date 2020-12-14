@@ -11,7 +11,7 @@ The tool is currently actively used internally by many of our products. We would
 * [Fairness Indicators Case Study](https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body)
 * [Fairness Indicators Example Colab](https://colab.sandbox.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_Example_Colab.ipynb)
 * [Pandas DataFrame to Fairness Indicators Case Study](https://colab.sandbox.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_Pandas_Case_Study.ipynb)
-* [Fairness Indicators: Thinking about Fairness Evaluation](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/guide/guidance.md)
+* [Fairness Indicators: Thinking about Fairness Evaluation](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/guidance.md)
 
 ## What is Fairness Indicators?
 Fairness Indicators enables easy computation of commonly-identified fairness metrics for **binary** and **multiclass** classifiers.
@@ -73,7 +73,7 @@ Not using existing Tensorflow tools? No worries!
 demonstrates how to visualize Fairness Indicators in TensorBoard.
 
 ## More questions?
-For more information on how to think about fairness evaluation in the context of your use case, see [this link](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/guide/guidance.md).
+For more information on how to think about fairness evaluation in the context of your use case, see [this link](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/guidance.md).
 
 If you have found a bug in Fairness Indicators, please file a [GitHub issue](https://github.com/tensorflow/fairness-indicators/issues/new/choose) with as much supporting information as you can provide.
 

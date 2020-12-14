@@ -3,3 +3,5 @@ toc:
   path: /responsible_ai/fairness_indicators/tutorials/Fairness_Indicators_Example_Colab
 - title: Use Fairness Indicators with TF-Hub
   path: /responsible_ai/fairness_indicators/tutorials/Fairness_Indicators_on_TF_Hub_Text_Embeddings
+- title: Fairness Indicators with TensorBoard Plugin
+  path: /responsible_ai/fairness_indicators/tutorials/Fairness_indicators_TensorBoard_Plugin_Example_Colab
