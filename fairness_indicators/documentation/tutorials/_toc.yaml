@@ -4,4 +4,12 @@ toc:
 - title: Use Fairness Indicators with TF-Hub
   path: /responsible_ai/fairness_indicators/tutorials/Fairness_Indicators_on_TF_Hub_Text_Embeddings
 - title: Fairness Indicators with TensorBoard Plugin
-  path: /responsible_ai/fairness_indicators/tutorials/Fairness_indicators_TensorBoard_Plugin_Example_Colab
+  path: /responsible_ai/fairness_indicators/tutorials/Fairness_Indicators_TensorBoard_Plugin_Example_Colab
+- title: Wiki Talk Comments Toxicity Prediction with Fairness Indicators
+  path: /responsible_ai/fairness_indicators/tutorials/Fairness_Indicators_TFCO_Wiki_Case_Study
+- title: TensorFlow Constrained Optimization Example Using CelebA Dataset
+  path: /responsible_ai/fairness_indicators/tutorials/Fairness_Indicators_TFCO_CelebA_Case_Study
+- title: Pandas DataFrame to Fairness Indicators Case Study
+  path: /responsible_ai/fairness_indicators/tutorials/Fairness_Indicators_Pandas_Case_Study
+- title: FaceSSD Fairness Indicators Example Colab
+  path: /responsible_ai/fairness_indicators/tutorials/Facessd_Fairness_Indicators_Example_Colab
