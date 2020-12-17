@@ -29,7 +29,11 @@
 
 ## Breaking changes
 
+*   N/A
+
 ## Deprecations
+
+*   N/A
 
 # Version 0.25.0
 
