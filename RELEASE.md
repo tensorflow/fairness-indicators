@@ -4,6 +4,8 @@
 
 ## Major Features and Improvements
 
+*   Add Flip Count metrics for Counterfactual Fairness evaluation.
+
 ## Bug fixes and other changes
 
 ## Breaking changes
@@ -13,8 +15,6 @@
 # Version 0.27.0
 
 ## Major Features and Improvements
-
-*   N/A
 
 ## Bug fixes and other changes
 
