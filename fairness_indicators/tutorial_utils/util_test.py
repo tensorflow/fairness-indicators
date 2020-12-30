@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Tests for fairness_indicators.examples.util."""
+"""Tests for fairness_indicators.tutorial_utils.util."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -22,7 +22,7 @@ import csv
 import os
 import tempfile
 
-from fairness_indicators.examples import util
+from fairness_indicators.tutorial_utils import util
 import pandas as pd
 import tensorflow as tf
 from google.protobuf import text_format

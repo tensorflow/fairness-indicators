@@ -6,6 +6,9 @@
 
 ## Bug fixes and other changes
 
+*   Added test cases for DLVM testing.
+*   Move the util files to a seperate folder.
+
 ## Breaking changes
 
 ## Deprecations
@@ -16,7 +19,6 @@
 
 *   Sorting fairness metrics table rows to keep slices in order with slice drop
     down in the UI.
-*   Added test cases for DLVM testing.
 
 ## Bug fixes and other changes
 
