@@ -6,10 +6,21 @@
 
 ## Bug fixes and other changes
 
+## Breaking changes
+
+## Deprecations
+
+# Version 0.26.1
+
+## Major Features and Improvements
+
+## Bug fixes and other changes
+
 *   Added test cases for DLVM testing.
-*   Move the util files to a seperate folder.
 
 ## Breaking changes
+
+*   Moved the colab util files to a seperate folder.
 
 ## Deprecations
 
