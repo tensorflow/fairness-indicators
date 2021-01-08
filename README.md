@@ -9,8 +9,8 @@ The tool is currently actively used internally by many of our products. We would
 ## Key links
 * [Introductory Video](https://www.youtube.com/watch?v=pHT-ImFXPQo)
 * [Fairness Indicators Case Study](https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body)
-* [Fairness Indicators Example Colab](https://colab.sandbox.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_Example_Colab.ipynb)
-* [Pandas DataFrame to Fairness Indicators Case Study](https://colab.sandbox.google.com/github/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_Pandas_Case_Study.ipynb)
+* [Fairness Indicators Example Colab](https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/g3doc/tutorials/Fairness_Indicators_Example_Colab.ipynb)
+* [Pandas DataFrame to Fairness Indicators Case Study](https://colab.research.google.com/github/tensorflow/fairness-indicators/blob/master/g3doc/tutorials/Fairness_Indicators_Pandas_Case_Study.ipynb)
 * [Fairness Indicators: Thinking about Fairness Evaluation](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/guide/guidance.md)
 
 ## What is Fairness Indicators?
@@ -65,11 +65,11 @@ Not using existing Tensorflow tools? No worries!
 * Download the Fairness Indicators pip package, and use Tensorflow Model Analysis as a standalone tool \[[docs](https://www.tensorflow.org/tfx/guide/fairness_indicators)]
 * Model Agnostic TFMA enables you to compute Fairness Indicators based on the output of any model \[[docs](https://www.tensorflow.org/tfx/guide/fairness_indicators)]
 
-## [Examples](https://github.com/tensorflow/fairness-indicators/tree/master/fairness_indicators/documentation/examples) directory contains several examples.
+## [Examples](https://github.com/tensorflow/fairness-indicators/tree/master/g3doc/tutorials) directory contains several examples.
 
-* [Fairness_Indicators_Example_Colab.ipynb](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_Example_Colab.ipynb) gives an overview of Fairness Indicators in [TensorFlow Model Analysis](https://www.tensorflow.org/tfx/guide/tfma) and how to use it with a real dataset. This notebook also goes over [TensorFlow Data Validation](https://www.tensorflow.org/tfx/data_validation/get_started) and [What-If Tool](https://pair-code.github.io/what-if-tool/), two tools for analyzing TensorFlow models that are packaged with Fairness Indicators.
-* [Fairness_Indicators_on_TF_Hub.ipynb](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_on_TF_Hub_Text_Embeddings.ipynb) demonstrates how to use Fairness Indicators to compare models trained on different [text embeddings](https://en.wikipedia.org/wiki/Word_embedding). This notebook uses text embeddings from [TensorFlow Hub](https://www.tensorflow.org/hub), TensorFlow's library to publish, discover, and reuse model components.
-* [Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb)
+* [Fairness_Indicators_Example_Colab.ipynb](https://github.com/tensorflow/fairness-indicators/blob/master/g3doc/tutorials/Fairness_Indicators_Example_Colab.ipynb) gives an overview of Fairness Indicators in [TensorFlow Model Analysis](https://www.tensorflow.org/tfx/guide/tfma) and how to use it with a real dataset. This notebook also goes over [TensorFlow Data Validation](https://www.tensorflow.org/tfx/data_validation/get_started) and [What-If Tool](https://pair-code.github.io/what-if-tool/), two tools for analyzing TensorFlow models that are packaged with Fairness Indicators.
+* [Fairness_Indicators_on_TF_Hub.ipynb](https://github.com/tensorflow/fairness-indicators/blob/master/g3doc/tutorials/Fairness_Indicators_on_TF_Hub_Text_Embeddings.ipynb) demonstrates how to use Fairness Indicators to compare models trained on different [text embeddings](https://en.wikipedia.org/wiki/Word_embedding). This notebook uses text embeddings from [TensorFlow Hub](https://www.tensorflow.org/hub), TensorFlow's library to publish, discover, and reuse model components.
+* [Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb](https://github.com/tensorflow/fairness-indicators/blob/master/g3doc/tutorials/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb)
 demonstrates how to visualize Fairness Indicators in TensorBoard.
 
 ## More questions?
