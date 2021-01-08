@@ -16,7 +16,7 @@ Many existing tools for evaluating fairness concerns don’t work well on large
 scale datasets and models. At Google, it is important for us to have tools that
 can work on billion-user systems. Fairness Indicators will allow you to evaluate
 across any size of use case, in the TensorBoard environment or in
-[Colab](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/).
+[Colab](https://github.com/tensorflow/fairness-indicators/blob/master/g3doc/tutorials/).
 
 ## Requirements
 
@@ -44,7 +44,7 @@ as TensorFlow Model Analysis (TFMA).
 
 ## Demo Colab
 
-[Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb)
+[Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb](https://github.com/tensorflow/fairness-indicators/blob/master/g3doc/tutorials/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb)
 contains an end-to-end demo to train and evaluate a model and visualize fairness evaluation
 results in TensorBoard.
 
