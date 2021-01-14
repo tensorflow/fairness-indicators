@@ -38,8 +38,8 @@ def select_constraint(default, nightly=None, git_master=None):
 
 REQUIRED_PACKAGES = [
     'protobuf>=3.6.0,<4',
-    'tensorboard>=2.3.0,!=2.4.*,<3',
-    'tensorflow>=2.3.0,!=2.4.*,<3',
+    'tensorboard>=2.4.0,<3',
+    'tensorflow>=2.4.0,<3',
     'tensorflow-model-analysis' + select_constraint(
         default='>=0.26,<0.27',
         nightly='>=0.27.0.dev',
