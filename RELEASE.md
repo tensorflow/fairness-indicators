@@ -9,6 +9,8 @@
 *   Added test cases for DLVM testing.
 *   Move the util files to a seperate folder.
 *   Depends on `tensorflow>=1.15.2,!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.*,<3`.
+*   Add `tensorflow-hub` as a dependency because it's used inside the
+    example_model.py.
 
 ## Breaking changes
 
