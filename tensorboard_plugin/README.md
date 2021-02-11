@@ -39,8 +39,8 @@ nightly package, please use the following command:
 pip install -i https://pypi-nightly.tensorflow.org/simple tensorboard-plugin-fairness-indicators
 ```
 
-This will install the nightly packages for the major dependencies of TFDV such
-as TensorFlow Model Analysis (TFMA).
+This will install the nightly packages for the major dependencies of Tensorboard
+Plugin such as TensorFlow Model Analysis (TFMA).
 
 ## Demo Colab
 
