@@ -20,6 +20,8 @@ import tempfile
 
 import pandas as pd
 import tensorflow as tf
+import tensorflow_model_analysis as tfma
+from google.protobuf import text_format
 
 TEXT_FEATURE = 'comment_text'
 LABEL = 'toxicity'
@@ -152,3 +154,53 @@ def _convert_comments_data_csv(input_filename, output_filename=None):
       index=False)
 
   return output_filename
+
+
+def get_eval_results(model_location,
+                     eval_result_path,
+                     validate_tfrecord_file,
+                     slice_selection='religion',
+                     thresholds=None,
+                     compute_confidence_intervals=True):
+  """Get Fairness Indicators eval results."""
+  if thresholds is None:
+    thresholds = [0.4, 0.4125, 0.425, 0.4375, 0.45, 0.4675, 0.475, 0.4875, 0.5]
+
+  # Define slices that you want the evaluation to run on.
+  eval_config = text_format.Parse(
+      """
+    model_specs {
+     label_key: '%s'
+   }
+   metrics_specs {
+     metrics {class_name: "AUC"}
+     metrics {class_name: "ExampleCount"}
+     metrics {class_name: "Accuracy"}
+     metrics {
+        class_name: "FairnessIndicators"
+        config: '{"thresholds": %s}'
+     }
+   }
+   slicing_specs {
+     feature_keys: '%s'
+   }
+   slicing_specs {}
+   options {
+       compute_confidence_intervals { value: %s }
+       disabled_outputs{values: "analysis"}
+   }
+   """ % (LABEL, thresholds,
+          slice_selection, 'true' if compute_confidence_intervals else 'false'),
+      tfma.EvalConfig())
+
+  eval_shared_model = tfma.default_eval_shared_model(
+      eval_saved_model_path=model_location, tags=[tf.saved_model.SERVING])
+
+  # Run the fairness evaluation.
+  return tfma.run_model_analysis(
+      eval_shared_model=eval_shared_model,
+      data_location=validate_tfrecord_file,
+      file_format='tfrecords',
+      eval_config=eval_config,
+      output_path=eval_result_path,
+      extractors=None)

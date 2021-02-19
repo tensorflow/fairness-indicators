@@ -23,8 +23,10 @@ import os
 import tempfile
 
 from fairness_indicators.tutorial_utils import util
+import mock
 import pandas as pd
 import tensorflow as tf
+import tensorflow_model_analysis as tfma
 from google.protobuf import text_format
 
 
@@ -274,6 +276,54 @@ class UtilTest(tf.test.TestCase):
         df.reset_index(drop=True, inplace=True),
         expected_df.reset_index(drop=True, inplace=True))
 
+  # TODO(b/172260507): we should also look into testing the e2e call with tfma.
+  @mock.patch(
+      'tensorflow_model_analysis.default_eval_shared_model', autospec=True)
+  @mock.patch('tensorflow_model_analysis.run_model_analysis', autospec=True)
+  def test_get_eval_results_called_correclty(self, mock_run_model_analysis,
+                                             mock_shared_model):
+    mock_model = 'model'
+    mock_shared_model.return_value = mock_model
+
+    model_location = 'saved_model'
+    eval_results_path = 'eval_results'
+    data_file = 'data'
+    util.get_eval_results(model_location, eval_results_path, data_file)
+
+    mock_shared_model.assert_called_once_with(
+        eval_saved_model_path=model_location, tags=[tf.saved_model.SERVING])
+
+    expected_eval_config = text_format.Parse(
+        """
+     model_specs {
+       label_key: 'toxicity'
+     }
+     metrics_specs {
+       metrics {class_name: "AUC"}
+       metrics {class_name: "ExampleCount"}
+       metrics {class_name: "Accuracy"}
+       metrics {
+          class_name: "FairnessIndicators"
+          config: '{"thresholds": [0.4, 0.4125, 0.425, 0.4375, 0.45, 0.4675, 0.475, 0.4875, 0.5]}'
+       }
+     }
+     slicing_specs {
+       feature_keys: 'religion'
+     }
+     slicing_specs {}
+     options {
+         compute_confidence_intervals { value: true }
+         disabled_outputs{values: "analysis"}
+     }
+     """, tfma.EvalConfig())
+
+    mock_run_model_analysis.assert_called_once_with(
+        eval_shared_model=mock_model,
+        data_location=data_file,
+        file_format='tfrecords',
+        eval_config=expected_eval_config,
+        output_path=eval_results_path,
+        extractors=None)
 
 if __name__ == '__main__':
   tf.test.main()

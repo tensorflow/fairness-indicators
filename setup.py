@@ -44,6 +44,7 @@ REQUIRED_PACKAGES = [
         nightly='>=0.28.0.dev',
         git_master='@git+https://github.com/tensorflow/model-analysis@master'),
     'witwidget>=1.4.4,<2',
+    'protobuf>=3.9.2,<4',
 ]
 
 # Get version from version module.
