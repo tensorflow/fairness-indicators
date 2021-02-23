@@ -4,6 +4,9 @@
 
 ## Major Features and Improvements
 
+*   Adding two new metrics - Flip Count and Flip Rate to evaluate Counterfactual
+    Fairness.
+
 ## Bug fixes and other changes
 
 ## Breaking changes
