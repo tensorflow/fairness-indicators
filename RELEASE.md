@@ -7,6 +7,7 @@
 *   Adding two new metrics - Flip Count and Flip Rate to evaluate Counterfactual
     Fairness.
 *   Add Lift metrics under addons/fairness.
+*   Porting Lift metrics into FI UI.
 
 ## Bug fixes and other changes
 
