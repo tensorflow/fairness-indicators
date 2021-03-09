@@ -4,16 +4,33 @@
 
 ## Major Features and Improvements
 
+## Bug Fixes and Other Changes
+
+## Breaking Changes
+
+## Deprecations
+
+# Version 0.28.0
+
+## Major Features and Improvements
+
 *   Adding two new metrics - Flip Count and Flip Rate to evaluate Counterfactual
     Fairness.
 *   Add Lift metrics under addons/fairness.
 *   Porting Lift metrics into FI UI.
 
-## Bug fixes and other changes
+## Bug Fixes and Other Changes
 
-## Breaking changes
+*   Depends on `tensorflow-data-validation>=0.28,<0.29`.
+*   Depends on `tensorflow-model-analysis>=0.28,<0.29`.
+
+## Breaking Changes
+
+*   N/A
 
 ## Deprecations
+
+*   N/A
 
 # Version 0.27.0
 
