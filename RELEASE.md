@@ -14,6 +14,7 @@
 
 ## Major Features and Improvements
 
+*   For lift, support negative values in bar chart.
 *   Adding two new metrics - Flip Count and Flip Rate to evaluate Counterfactual
     Fairness.
 *   Add Lift metrics under addons/fairness.
