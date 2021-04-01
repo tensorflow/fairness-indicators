@@ -14,6 +14,7 @@
 
 ## Major Features and Improvements
 
+*   In Fairness Indicators UI, sort metrics list to show common metrics first
 *   For lift, support negative values in bar chart.
 *   Adding two new metrics - Flip Count and Flip Rate to evaluate Counterfactual
     Fairness.
