@@ -21,8 +21,10 @@ from __future__ import print_function
 import collections
 import os
 import shutil
+from unittest import mock
 
 # Standard imports
+
 from tensorboard_plugin_fairness_indicators import plugin
 from tensorboard_plugin_fairness_indicators import summary_v2
 import six
@@ -32,15 +34,10 @@ import tensorflow_model_analysis as tfma
 from tensorflow_model_analysis.eval_saved_model.example_trainers import linear_classifier
 from werkzeug import test as werkzeug_test
 from werkzeug import wrappers
+
 from tensorboard.backend import application
 from tensorboard.backend.event_processing import plugin_event_multiplexer as event_multiplexer
 from tensorboard.plugins import base_plugin
-
-try:
-  # python version >= 3.3
-  from unittest import mock  # pylint: disable=g-import-not-at-top,g-importing-member
-except ImportError:
-  import mock  # pylint: disable=g-import-not-at-top,unused-import
 
 tf.enable_eager_execution()
 tf = tf2
