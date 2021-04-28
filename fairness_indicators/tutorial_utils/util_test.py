@@ -21,9 +21,9 @@ from __future__ import print_function
 import csv
 import os
 import tempfile
+from unittest import mock
 
 from fairness_indicators.tutorial_utils import util
-import mock
 import pandas as pd
 import tensorflow as tf
 import tensorflow_model_analysis as tfma
