@@ -5,6 +5,7 @@
 ## Major Features and Improvements
 
 ## Bug Fixes and Other Changes
+*  Improve rendering of HTML stubs for Fairness Indicators UI
 
 ## Breaking Changes
 
