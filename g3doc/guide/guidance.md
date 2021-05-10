@@ -213,7 +213,7 @@ out further._
 
 *   _<span style="text-decoration:underline;">Definition:</span>_ The percentage
     of negative data points (as labeled in the ground truth) that are correctly
-    classified as positive, or the percentage of negative data points that are
+    classified as negative, or the percentage of negative data points that are
     incorrectly classified as positive
 *   _<span style="text-decoration:underline;">Relates to:</span>_ Equality of
     Opportunity (for the negative class), when equal across subgroups
