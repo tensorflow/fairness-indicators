@@ -6,6 +6,9 @@
 
 ## Bug Fixes and Other Changes
 
+*   Depends on `tensorboard>=2.5.0,<3`.
+*   Depends on `tensorflow>=2.5.0,<3`.
+
 ## Breaking Changes
 
 ## Deprecations
