@@ -3,6 +3,7 @@
 # Current Version (Still in Development)
 
 ## Major Features and Improvements
+*   Porting Counterfactual Fairness metrics into FI UI.
 
 ## Bug Fixes and Other Changes
 
