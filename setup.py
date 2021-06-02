@@ -15,9 +15,14 @@
 """Setup to install Fairness Indicators."""
 
 import os
+import sys
 
 from setuptools import find_packages
 from setuptools import setup
+
+
+if sys.version_info >= (3, 9):
+  sys.exit('Sorry, Python >= 3.9 is not supported')
 
 
 def select_constraint(default, nightly=None, git_master=None):
@@ -69,7 +74,7 @@ setup(
     package_data={
         'fairness_indicators': ['documentation/*'],
     },
-    python_requires='>=3.6,<4',
+    python_requires='>=3.6,<3.9',
     install_requires=REQUIRED_PACKAGES,
     tests_require=REQUIRED_PACKAGES,
     # PyPI package information.
