@@ -8,6 +8,7 @@
 
 *   Depends on `tensorboard>=2.5.0,<3`.
 *   Depends on `tensorflow>=2.5.0,<3`.
+*   Depends on `protobuf>=3.13,<4`.
 
 ## Breaking Changes
 
