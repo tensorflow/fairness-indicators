@@ -6,6 +6,7 @@
 *   Porting Counterfactual Fairness metrics into FI UI.
 
 ## Bug Fixes and Other Changes
+*  Improve rendering of HTML stubs for Fairness Indicators UI
 
 *   Depends on `tensorflow>=1.15.2,!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.*,!=2.4.*,<3`.
 *   Depends on `protobuf>=3.13,<4`.
