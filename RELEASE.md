@@ -9,8 +9,6 @@
 ## Breaking Changes
 
 ## Deprecations
-*   Dropped python 3.6 support.
-
 
 *   Deprecating python 3.6 support.
 
