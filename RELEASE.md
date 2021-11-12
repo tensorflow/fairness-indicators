@@ -43,7 +43,7 @@
 
 ## Breaking Changes
 
-*   N/A
+*   Drop Py2 support.
 
 ## Deprecations
 
