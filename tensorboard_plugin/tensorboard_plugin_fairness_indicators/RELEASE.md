@@ -10,6 +10,26 @@
 
 ## Deprecations
 
+# Version 0.36.0
+
+## Major Features and Improvements
+
+*   N/A
+
+## Bug Fixes and Other Changes
+
+*   Depends on `tensorflow>=2.7.0,<3`.
+*   Depends on `tensorboard>=2.7.0,<3`.
+*   Depends on `tensorflow-model-analysis>=0.36,<0.37`.
+
+## Breaking Changes
+
+*   N/A
+
+## Deprecations
+
+*   N/A
+
 # Version 0.35.0
 
 ## Major Features and Improvements
