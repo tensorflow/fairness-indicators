@@ -6,6 +6,8 @@
 
 ## Bug Fixes and Other Changes
 
+*  Fix Fairness Indicators UI bug with overlapping charts when comparing EvalResults
+
 ## Breaking Changes
 
 ## Deprecations
