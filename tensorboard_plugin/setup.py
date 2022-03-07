@@ -43,11 +43,11 @@ def select_constraint(default, nightly=None, git_master=None):
 
 REQUIRED_PACKAGES = [
     'protobuf>=3.13,<4',
-    'tensorboard>=2.7.0,<3',
-    'tensorflow>=2.7.0,<3',
+    'tensorboard>=2.8.0,<3',
+    'tensorflow>=2.8.0,<3',
     'tensorflow-model-analysis' + select_constraint(
-        default='>=0.37,<0.38',
-        nightly='>=0.38.0.dev',
+        default='>=0.38,<0.39',
+        nightly='>=0.39.0.dev',
         git_master='@git+https://github.com/tensorflow/model-analysis@master'),
 ]
 
