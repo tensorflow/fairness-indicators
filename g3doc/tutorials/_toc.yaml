@@ -13,5 +13,4 @@ toc:
   path: /responsible_ai/fairness_indicators/tutorials/Fairness_Indicators_Pandas_Case_Study
 - title: FaceSSD example Colab
   path: /responsible_ai/fairness_indicators/tutorials/Facessd_Fairness_Indicators_Example_Colab
-- title: Lineage case study
-  path: /responsible_ai/fairness_indicators/tutorials/Fairness_Indicators_Lineage_Case_Study
+
