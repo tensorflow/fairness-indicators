@@ -10,6 +10,24 @@
 
 ## Deprecations
 
+# Version 0.38.1
+
+## Major Features and Improvements
+
+*   N/A
+
+## Bug Fixes and Other Changes
+
+*   Depends on `Werkzeug<2`.
+
+## Breaking Changes
+
+*   N/A
+
+## Deprecations
+
+*   N/A
+
 # Version 0.38.0
 
 ## Major Features and Improvements

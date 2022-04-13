@@ -49,6 +49,7 @@ REQUIRED_PACKAGES = [
         default='>=0.38,<0.39',
         nightly='>=0.39.0.dev',
         git_master='@git+https://github.com/tensorflow/model-analysis@master'),
+    'werkzeug<2'
 ]
 
 with open('README.md', 'r', encoding='utf-8') as fh:
