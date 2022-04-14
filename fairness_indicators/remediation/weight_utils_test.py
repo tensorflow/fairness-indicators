@@ -1,4 +1,3 @@
-# Lint as: python3
 """Tests for fairness_indicators.remediation.weight_utils."""
 
 from __future__ import absolute_import

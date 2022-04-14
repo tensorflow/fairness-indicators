@@ -1,4 +1,3 @@
-# Lint as: python2, python3
 """Utilities to suggest weights based on model analysis results."""
 
 from __future__ import absolute_import
