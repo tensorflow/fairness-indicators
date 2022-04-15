@@ -1,6 +1,6 @@
-## Fairness Indicators: Thinking about Fairness Evaluation
+# Fairness Indicators: Thinking about Fairness Evaluation
 
-### Interested in leveraging the Fairness Indicators Beta?
+## Interested in leveraging the Fairness Indicators Beta?
 
 Before you do, we ask that you read through the following guidance.
 
@@ -63,7 +63,7 @@ and harm for users.
 
 The below sections will walk through some of the aspects to consider.
 
-#### Which groups should I slice by?
+### Which groups should I slice by?
 
 In general, a good practice is to slice by as many groups as may be affected by
 your product, since you never know when performance might differ for one of the
@@ -140,7 +140,7 @@ have different experiences? What does that mean for slices you should evaluate?
 Collecting feedback from diverse users may also highlight potential slices to
 prioritize.
 
-#### Which metrics should I choose?
+### Which metrics should I choose?
 
 When selecting which metrics to evaluate for your system, consider who will be
 experiencing your model, how it will be experienced, and the effects of that
@@ -161,7 +161,7 @@ then consider reporting (for each subgroup) the rate at which that label is
 predicted. For example, a “good” label would be a label whose prediction grants
 a person access to some resource, or enables them to perform some action.
 
-#### Critical fairness metrics for classification
+### Critical fairness metrics for classification
 
 When thinking about a classification model, think about the effects of _errors_
 (the differences between the actual “ground truth” label, and the label from the
@@ -176,13 +176,13 @@ when different metrics might be most appropriate.**
 
 **Metrics available today in Fairness Indicators**
 
-_Note: There are many valuable fairness metrics that are not currently supported
+Note: There are many valuable fairness metrics that are not currently supported
 in the Fairness Indicators beta. As we continue to add more metrics, we will
 continue to add guidance for these metrics, here. Below, you can access
 instructions to add your own metrics to Fairness Indicators. Additionally,
 please reach out to [tfx@tensorflow.org](mailto:tfx@tensorflow.org) if there are
 metrics that you would like to see. We hope to partner with you to build this
-out further._
+out further.
 
 **Positive Rate / Negative Rate**
 
@@ -224,7 +224,7 @@ out further._
     These are also important for Facial Analysis Technologies such as face
     detection or face attributes
 
-**Note:** When both “positive” and “negative” mistakes are equally important,
+Note: When both “positive” and “negative” mistakes are equally important,
 the metric is called “equality of
 <span style="text-decoration:underline;">odds</span>”. This can be measured by
 evaluating and aiming for equality across both the TNR & FNR, or both the TPR &
@@ -264,12 +264,36 @@ false positive) or accidentally excludes a car (a false negative).
     Cases where the fraction of correct negative predictions should be equal
     across subgroups
 
-**Note**: When used together, False Discovery Rate and False Omission Rate
+Note: When used together, False Discovery Rate and False Omission Rate
 relate to Conditional Use Accuracy Equality, when FDR and FOR are both equal
 across subgroups. FDR and FOR are also similar to FPR and FNR, where FDR/FOR
 compare FP/FN to predicted negative/positive data points, and FPR/FNR compare
 FP/FN to ground truth negative/positive data points. FDR/FOR can be used instead
 of FPR/FNR when predictive parity is more critical than equality of opportunity.
+
+**Overall Flip Rate / Positive to Negative Prediction Flip Rate / Negative to Positive Prediction Flip Rate**
+*   _<span style="text-decoration:underline;">Definition:</span>_ The
+    probability that the classifier gives a different prediction if
+    the identity term in a given feature were changed.
+*   _<span style="text-decoration:underline;">Relates to:</span>_ Counterfactual
+    fairness
+*   _<span style="text-decoration:underline;">When to use this metric:</span>_
+    When determining whether the model’s prediction changes when the sensitive
+    attributes referenced in the example is removed or replaced. If it does,
+    consider using the Counterfactual technique within the Tensorflow
+    Model Remediation library.
+
+**Flip Count / Positive to Negative Prediction Flip Count / Negative to Positive Prediction Flip Count**
+*   _<span style="text-decoration:underline;">Definition:</span>_ The number of
+    times the classifier gives a different prediction if
+    the identity term in a given example were changed.
+*   _<span style="text-decoration:underline;">Relates to:</span>_ Counterfactual
+    fairness
+*   _<span style="text-decoration:underline;">When to use this metric:</span>_
+    When determining whether the model’s prediction changes when the sensitive
+    attributes referenced in the example is removed or
+    replaced. If it does, consider using the Counterfactual technique within the
+    Tensorflow Model Remediation library.
 
 **Examples of which metrics to select**
 
@@ -294,7 +318,7 @@ Follow the documentation
 [here](https://github.com/tensorflow/model-analysis/blob/master/g3doc/post_export_metrics.md)
 to add you own custom metric.
 
-#### Final notes
+### Final notes
 
 **A gap in metric between two groups can be a sign that your model may have
 unfair skews**. You should interpret your results according to your use case.
