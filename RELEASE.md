@@ -4,6 +4,9 @@
 
 ## Major Features and Improvements
 
+*   Allow counterfactual metrics to be calculated from predictions instead of
+    only features.
+
 ## Bug Fixes and Other Changes
 
 ## Breaking Changes
