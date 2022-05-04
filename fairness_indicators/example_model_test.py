@@ -25,7 +25,6 @@ from fairness_indicators import example_model
 import six
 import tensorflow.compat.v1 as tf
 import tensorflow_model_analysis as tfma
-from tensorflow_model_analysis.slicer import slicer_lib as slicer
 
 tf.compat.v1.enable_eager_execution()
 
@@ -96,7 +95,7 @@ class ExampleModelTest(tf.test.TestCase):
                                  FEATURE_MAP)
 
     expected_slice_keys = [
-        'Overall', 'slice:slice3', 'slice:slice1', 'slice:slice2'
+        'Overall', 'slice: slice3', 'slice: slice1', 'slice: slice2'
     ]
     evaluation_results = tfma.load_eval_result(tfma_eval_result_path)
 
@@ -105,7 +104,7 @@ class ExampleModelTest(tf.test.TestCase):
     # Verify if false_positive_rate metrics are computed for all values of
     # slice.
     for (slice_key, metric_value) in evaluation_results.slicing_metrics:
-      slice_key = slicer.stringify_slice_key(slice_key)
+      slice_key = tfma.slicer.stringify_slice_key(slice_key)
       self.assertIn(slice_key, expected_slice_keys)
       self.assertGreaterEqual(
           1.0, metric_value['']['']

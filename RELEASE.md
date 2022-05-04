@@ -11,6 +11,8 @@
 ## Bug Fixes and Other Changes
 
 ## Breaking Changes
+*   Changes how cross-slice is stringified for easier read: "FeatureA:ValueA__XX__FeatureB:ValueB" to "FeautreA=ValueA Vs.
+    FeatureB=ValueB".
 
 ## Deprecations
 
