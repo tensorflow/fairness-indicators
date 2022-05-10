@@ -6,6 +6,7 @@
 
 *   Allow counterfactual metrics to be calculated from predictions instead of
     only features.
+*   Add precision and recall to the set of fairness indicators metrics.
 
 ## Bug Fixes and Other Changes
 
