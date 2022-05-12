@@ -261,7 +261,7 @@
     the following command:
 
     ```
-    pip install -i https://pypi-nightly.tensorflow.org/simple fairness-indicators
+    pip install --extra-index-url https://pypi-nightly.tensorflow.org/simple fairness-indicators
     ```
 
     Note: These nightly packages are unstable and breakages are likely to

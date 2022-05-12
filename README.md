@@ -47,7 +47,7 @@ https://pypi-nightly.tensorflow.org on Google Cloud. To install the latest
 nightly package, please use the following command:
 
 ```bash
-pip install -i https://pypi-nightly.tensorflow.org/simple fairness-indicators
+pip install --extra-index-url https://pypi-nightly.tensorflow.org/simple fairness-indicators
 ```
 
 This will install the nightly packages for the major dependencies of Fairness
