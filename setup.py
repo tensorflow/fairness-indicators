@@ -21,8 +21,8 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-if sys.version_info >= (3, 9):
-  sys.exit('Sorry, Python >= 3.9 is not supported')
+if sys.version_info >= (3, 10):
+  sys.exit('Sorry, Python >= 3.10 is not supported')
 
 
 def select_constraint(default, nightly=None, git_master=None):
@@ -74,7 +74,7 @@ setup(
     package_data={
         'fairness_indicators': ['documentation/*'],
     },
-    python_requires='>=3.7,<3.9',
+    python_requires='>=3.7,<3.10',
     install_requires=REQUIRED_PACKAGES,
     tests_require=REQUIRED_PACKAGES,
     # PyPI package information.
@@ -88,6 +88,7 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3 :: Only',
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Mathematics',
