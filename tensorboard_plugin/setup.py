@@ -24,6 +24,7 @@ import sys
 from setuptools import find_packages
 from setuptools import setup
 
+t = 1
 
 if sys.version_info >= (3, 10):
   sys.exit('Sorry, Python >= 3.10 is not supported')
