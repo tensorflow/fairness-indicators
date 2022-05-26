@@ -4,15 +4,31 @@
 
 ## Major Features and Improvements
 
+## Bug Fixes and Other Changes
+
+## Breaking Changes
+
+## Deprecations
+
+# Version 0.39.0
+
+## Major Features and Improvements
+
 *   Allow counterfactual metrics to be calculated from predictions instead of
     only features.
 *   Add precision and recall to the set of fairness indicators metrics.
 
 ## Bug Fixes and Other Changes
 
+*   N/A
+
 ## Breaking Changes
 
+*   N/A
+
 ## Deprecations
+
+*   N/A
 
 # Version 0.38.0
 
