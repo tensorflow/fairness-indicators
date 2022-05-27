@@ -9,7 +9,7 @@
 *   Depends on `Werkzeug<2`.
 *   Depends on `tensorflow>=2.8.0,<3`.
 *   Depends on `tensorboard>=2.8.0,<3`.
-*   Depends on `tensorflow-model-analysis>=0.38,<0.39`.
+*   Depends on `tensorflow-model-analysis>=0.39,<0.40`.
 
 ## Breaking Changes
 
