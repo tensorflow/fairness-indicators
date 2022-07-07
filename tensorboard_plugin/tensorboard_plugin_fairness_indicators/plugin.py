@@ -92,7 +92,7 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
             FairnessIndicatorsPlugin.plugin_name))
 
   @wrappers.Request.application
-  def _serve_js(self, request):
+  def _serve_js(self, request):  # pytype: disable=wrong-arg-types
     filepath = os.path.join(os.path.dirname(__file__), 'static', 'index.js')
     with open(filepath) as infile:
       contents = infile.read()
@@ -100,14 +100,14 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
         request, contents, content_type='application/javascript')
 
   @wrappers.Request.application
-  def _serve_vulcanized_js(self, request):
+  def _serve_vulcanized_js(self, request):  # pytype: disable=wrong-arg-types
     with open(_TEMPLATE_LOCATION) as infile:
       contents = infile.read()
     return http_util.Respond(
         request, contents, content_type='application/javascript')
 
   @wrappers.Request.application
-  def _get_evaluation_result(self, request):
+  def _get_evaluation_result(self, request):  # pytype: disable=wrong-arg-types
     run = request.args.get('run')
     try:
       run = six.ensure_text(run)
@@ -136,7 +136,7 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
     return ''
 
   @wrappers.Request.application
-  def _get_evaluation_result_from_remote_path(self, request):
+  def _get_evaluation_result_from_remote_path(self, request):  # pytype: disable=wrong-arg-types
     evaluation_output_path = request.args.get('evaluation_output_path')
     try:
       evaluation_output_path = six.ensure_text(evaluation_output_path)
