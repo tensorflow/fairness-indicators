@@ -38,15 +38,15 @@ def select_constraint(default, nightly=None, git_master=None):
     return default
 
 REQUIRED_PACKAGES = [
-    'tensorflow>=1.15.5,!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,<3',
+    'tensorflow>=1.15.5,!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,<3',
     'tensorflow-hub>=0.8.0,<1.0.0',
     'tensorflow-data-validation' + select_constraint(
-        default='>=1.8.0,<1.9.0',
-        nightly='>=1.9.0.dev',
+        default='>=1.9.0,<1.10.0',
+        nightly='>=1.10.0.dev',
         git_master='@git+https://github.com/tensorflow/data-validation@master'),
     'tensorflow-model-analysis' + select_constraint(
-        default='>=0.39,<0.40',
-        nightly='>=0.40.0.dev',
+        default='>=0.40,<0.41',
+        nightly='>=0.41.0.dev',
         git_master='@git+https://github.com/tensorflow/model-analysis@master'),
     'witwidget>=1.4.4,<2',
     'protobuf>=3.13,<4',

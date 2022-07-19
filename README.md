@@ -85,7 +85,8 @@ other *untested* combinations may also work.
 
 |fairness-indicators                                                                        | tensorflow         | tensorflow-data-validation | tensorflow-model-analysis |
 |-------------------------------------------------------------------------------------------|--------------------|----------------------------|---------------------------|
-|[GitHub master](https://github.com/tensorflow/fairness-indicators/blob/master/RELEASE.md)  | nightly (1.x/2.x)  | 1.8.0                      | 0.39.0                    |
+|[GitHub master](https://github.com/tensorflow/fairness-indicators/blob/master/RELEASE.md)  | nightly (1.x/2.x)  | 1.9.0                      | 0.40.0                    |
+|[v0.40.0](https://github.com/tensorflow/fairness-indicators/blob/v0.40.0/RELEASE.md)       | 1.15.5 / 2.9       | 1.9.0                      | 0.40.0                    |
 |[v0.39.0](https://github.com/tensorflow/fairness-indicators/blob/v0.39.0/RELEASE.md)       | 1.15.5 / 2.8       | 1.8.0                      | 0.39.0                    |
 |[v0.38.0](https://github.com/tensorflow/fairness-indicators/blob/v0.38.0/RELEASE.md)       | 1.15.5 / 2.8       | 1.7.0                      | 0.38.0                    |
 |[v0.37.0](https://github.com/tensorflow/fairness-indicators/blob/v0.37.0/RELEASE.md)       | 1.15.5 / 2.7       | 1.6.0                      | 0.37.0                    |
