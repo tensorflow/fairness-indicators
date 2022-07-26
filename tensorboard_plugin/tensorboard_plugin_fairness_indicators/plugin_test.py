@@ -69,7 +69,7 @@ class PluginTest(tf.test.TestCase):
     self._plugin = plugin.FairnessIndicatorsPlugin(self._context)
     self._multiplexer.Reload()
     wsgi_app = application.TensorBoardWSGI([self._plugin])
-    self._server = werkzeug_test.Client(wsgi_app, wrappers.BaseResponse)
+    self._server = werkzeug_test.Client(wsgi_app, wrappers.Response)
     self._routes = self._plugin.get_plugin_apps()
 
   def tearDown(self):
