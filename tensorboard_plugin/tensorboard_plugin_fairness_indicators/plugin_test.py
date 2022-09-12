@@ -17,7 +17,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import collections
+from collections import abc
 import os
 import shutil
 from unittest import mock
@@ -99,13 +99,13 @@ class PluginTest(tf.test.TestCase):
 
   def testRoutes(self):
     self.assertIsInstance(self._routes["/get_evaluation_result"],
-                          collections.Callable)
+                          abc.Callable)
     self.assertIsInstance(
         self._routes["/get_evaluation_result_from_remote_path"],
-        collections.Callable)
-    self.assertIsInstance(self._routes["/index.js"], collections.Callable)
+        abc.Callable)
+    self.assertIsInstance(self._routes["/index.js"], abc.Callable)
     self.assertIsInstance(self._routes["/vulcanized_tfma.js"],
-                          collections.Callable)
+                          abc.Callable)
 
   @mock.patch.object(
       event_multiplexer.EventMultiplexer,
