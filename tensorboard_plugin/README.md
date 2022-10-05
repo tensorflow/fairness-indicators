@@ -101,7 +101,8 @@ other *untested* combinations may also work.
 
 |tensorboard-pluginn                                                                                          | tensorflow    | tensorflow-model-analysis |
 |-------------------------------------------------------------------------------------------------------------|---------------|---------------------------|
-|[GitHub master](https://github.com/tensorflow/fairness-indicators/blob/master/tensorboard_plugin/README.md)  | nightly (2.x) | 0.40.0                    |
+|[GitHub master](https://github.com/tensorflow/fairness-indicators/blob/master/tensorboard_plugin/README.md)  | nightly (2.x) | 0.41.0                    |
+|[v0.41.0](https://github.com/tensorflow/fairness-indicators/blob/v0.41.0/tensorboard_plugin/README.md)       | 2.9.0         | 0.41.0                    |
 |[v0.40.0](https://github.com/tensorflow/fairness-indicators/blob/v0.40.0/tensorboard_plugin/README.md)       | 2.9.0         | 0.40.0                    |
 |[v0.39.0](https://github.com/tensorflow/fairness-indicators/blob/v0.39.0/tensorboard_plugin/README.md)       | 2.8.0         | 0.39.0                    |
 |[v0.38.0](https://github.com/tensorflow/fairness-indicators/blob/v0.38.0/tensorboard_plugin/README.md)       | 2.8.0         | 0.38.0                    |
