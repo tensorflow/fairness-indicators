@@ -41,12 +41,12 @@ REQUIRED_PACKAGES = [
     'tensorflow>=2.11.0,<2.12',
     'tensorflow-hub>=0.8.0,<1.0.0',
     'tensorflow-data-validation' + select_constraint(
-        default='>=1.11.0,<1.12.0',
-        nightly='>=1.12.0.dev',
+        default='>=1.12.0,<1.13.0',
+        nightly='>=1.13.0.dev',
         git_master='@git+https://github.com/tensorflow/data-validation@master'),
     'tensorflow-model-analysis' + select_constraint(
-        default='>=0.42,<0.43',
-        nightly='>=0.43.0.dev',
+        default='>=0.43,<0.44',
+        nightly='>=0.44.0.dev',
         git_master='@git+https://github.com/tensorflow/model-analysis@master'),
     'witwidget>=1.4.4,<2',
     'protobuf>=3.13,<4',
