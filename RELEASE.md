@@ -10,6 +10,8 @@
 
 ## Deprecations
 
+*   Deprecating python3.7 support.
+
 # Version 0.43.0
 
 ## Major Features and Improvements
