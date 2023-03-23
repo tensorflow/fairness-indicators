@@ -74,7 +74,7 @@ setup(
     package_data={
         'fairness_indicators': ['documentation/*'],
     },
-    python_requires='>=3.7,<3.10',
+    python_requires='>=3.8,<3.10',
     install_requires=REQUIRED_PACKAGES,
     tests_require=REQUIRED_PACKAGES,
     # PyPI package information.
