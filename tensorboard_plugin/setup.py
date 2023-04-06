@@ -25,8 +25,8 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-if sys.version_info >= (3, 10):
-  sys.exit('Sorry, Python >= 3.10 is not supported')
+if sys.version_info >= (3, 11):
+  sys.exit('Sorry, Python >= 3.11 is not supported')
 
 
 def select_constraint(default, nightly=None, git_master=None):
@@ -42,9 +42,9 @@ def select_constraint(default, nightly=None, git_master=None):
     return default
 
 REQUIRED_PACKAGES = [
-    'protobuf>=3.13,<4',
+    'protobuf>=3.20.3,<5',
     'tensorboard>=2.8.0,<3',
-    'tensorflow>=2.11,<3',
+    'tensorflow>=2.12,<3',
     'tensorflow-model-analysis' + select_constraint(
         default='>=0.43,<0.44',
         nightly='>=0.44.0.dev',
