@@ -74,7 +74,7 @@ setup(
     package_data={
         'fairness_indicators': ['documentation/*'],
     },
-    python_requires='>=3.8,<3.10',
+    python_requires='>=3.8,<3.11',
     install_requires=REQUIRED_PACKAGES,
     tests_require=REQUIRED_PACKAGES,
     # PyPI package information.
@@ -88,6 +88,7 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3 :: Only',
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Mathematics',
