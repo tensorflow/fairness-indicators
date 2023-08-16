@@ -254,8 +254,7 @@ class UtilTest(tf.test.TestCase):
     df = pd.read_csv(output_file).replace("'", '', regex=True)
 
     expected_df = pd.DataFrame()
-    expected_df = expected_df.append(
-        {
+    expected_df = pd.concat([expected_df, pd.DataFrame([{
             'comment_text':
                 'comment 1',
             'toxicity':
@@ -268,7 +267,7 @@ class UtilTest(tf.test.TestCase):
                 'physical_disability', 'intellectual_or_learning_disability',
                 'psychiatric_or_mental_illness', 'other_disability'
             ]
-        },
+        }])],
         ignore_index=True)
 
     self.assertEqual(
