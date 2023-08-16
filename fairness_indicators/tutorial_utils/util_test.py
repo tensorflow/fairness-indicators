@@ -254,21 +254,21 @@ class UtilTest(tf.test.TestCase):
     df = pd.read_csv(output_file).replace("'", '', regex=True)
 
     expected_df = pd.DataFrame()
-    expected_df = expected_df.append(
+    expected_df = pd.concat([expected_df, pd.DataFrame.from_dict(
         {
             'comment_text':
-                'comment 1',
+                ['comment 1'],
             'toxicity':
-                0.0,
-            'gender': [],
-            'sexual_orientation': ['bisexual'],
-            'race': ['other_race_or_ethnicity'],
-            'religion': ['atheist', 'other_religion'],
-            'disability': [
+                [0.0],
+            'gender': [[]],
+            'sexual_orientation': [['bisexual']],
+            'race': [['other_race_or_ethnicity']],
+            'religion': [['atheist', 'other_religion']],
+            'disability': [[
                 'physical_disability', 'intellectual_or_learning_disability',
                 'psychiatric_or_mental_illness', 'other_disability'
-            ]
-        },
+            ]]
+        })],
         ignore_index=True)
 
     self.assertEqual(
