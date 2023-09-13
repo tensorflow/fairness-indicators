@@ -14,7 +14,7 @@
 
 ## Major Features and Improvements
 
-*   N/A
+*   Refactor using the Decimal based arithmetic from TFMA confusion matrix.
 
 ## Bug Fixes and Other Changes
 
