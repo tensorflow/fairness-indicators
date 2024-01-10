@@ -91,8 +91,9 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
         self._multiplexer.PluginRunToTagToContent(
             FairnessIndicatorsPlugin.plugin_name))
 
+  # pytype: disable=wrong-arg-types
   @wrappers.Request.application
-  def _serve_js(self, request):  # pytype: disable=wrong-arg-types
+  def _serve_js(self, request):
     filepath = os.path.join(os.path.dirname(__file__), 'static', 'index.js')
     with open(filepath) as infile:
       contents = infile.read()
@@ -100,14 +101,14 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
         request, contents, content_type='application/javascript')
 
   @wrappers.Request.application
-  def _serve_vulcanized_js(self, request):  # pytype: disable=wrong-arg-types
+  def _serve_vulcanized_js(self, request):
     with open(_TEMPLATE_LOCATION) as infile:
       contents = infile.read()
     return http_util.Respond(
         request, contents, content_type='application/javascript')
 
   @wrappers.Request.application
-  def _get_evaluation_result(self, request):  # pytype: disable=wrong-arg-types
+  def _get_evaluation_result(self, request):
     run = request.args.get('run')
     try:
       run = six.ensure_text(run)
@@ -136,7 +137,7 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
     return ''
 
   @wrappers.Request.application
-  def _get_evaluation_result_from_remote_path(self, request):  # pytype: disable=wrong-arg-types
+  def _get_evaluation_result_from_remote_path(self, request):
     evaluation_output_path = request.args.get('evaluation_output_path')
     try:
       evaluation_output_path = six.ensure_text(evaluation_output_path)
@@ -153,3 +154,4 @@ class FairnessIndicatorsPlugin(base_plugin.TBPlugin):
       logging.info('Error while fetching evaluation data, %s', error)
       data = []
     return http_util.Respond(request, data, content_type='application/json')
+  # pytype: enable=wrong-arg-types
