@@ -6,6 +6,8 @@
 
 ## Bug Fixes and Other Changes
 
+*  Deprecated python 3.8 support
+
 ## Breaking Changes
 
 ## Deprecations
