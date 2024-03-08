@@ -47,7 +47,7 @@ REQUIRED_PACKAGES = [
     'tensorflow>=2.15,<3',
     'tensorflow-model-analysis'
     + select_constraint(
-        default='>=0.45,<0.46',
+        default='>=0.45,<=0.46',
         nightly='>=0.46.0.dev',
         git_master='@git+https://github.com/tensorflow/model-analysis@master',
     ),

@@ -39,7 +39,7 @@ def select_constraint(default, nightly=None, git_master=None):
 
 REQUIRED_PACKAGES = [
     'tensorflow>=2.15,<3',
-    'tensorflow-hub>=0.16.1,<1.0.0',
+    'tensorflow-hub>=0.8.0,<=0.12.0',
     'tensorflow-data-validation' + select_constraint(
         default='>=1.14.0,<1.15.0',
         nightly='>=1.15.0.dev',
