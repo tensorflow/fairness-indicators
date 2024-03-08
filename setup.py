@@ -45,7 +45,7 @@ REQUIRED_PACKAGES = [
         nightly='>=1.15.0.dev',
         git_master='@git+https://github.com/tensorflow/data-validation@master'),
     'tensorflow-model-analysis' + select_constraint(
-        default='>=0.45,<=0.46',
+        default='>=0.45,<0.46',
         nightly='>=0.46.0.dev',
         git_master='@git+https://github.com/tensorflow/model-analysis@master'),
     'witwidget>=1.4.4,<2',
