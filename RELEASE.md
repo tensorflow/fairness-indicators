@@ -108,6 +108,8 @@
 *   Depends on `tensorflow>=1.15.5,!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,<3`.
 
 ## Breaking Changes
+*   Changes how cross-slice is stringified for easier read: "FeatureA:ValueA__XX__FeatureB:ValueB" to "FeautreA=ValueA Vs.
+    FeatureB=ValueB".
 
 *   N/A
 
