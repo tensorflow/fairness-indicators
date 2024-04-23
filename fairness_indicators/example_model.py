@@ -14,132 +14,92 @@
 # ==============================================================================
 """Demo script to train and evaluate a model.
 
-This scripts contains boilerplate code to train a DNNClassifier
+This scripts contains boilerplate code to train a Keras Text Classifier
 and evaluate it using Tensorflow Model Analysis. Evaluation
 results can be visualized using tools like TensorBoard.
-
-Usage:
-
-1. Train model:
-  demo_script.train_model(...)
-
-2. Evaluate:
-  demo_script.evaluate_model(...)
 """
 
-import os
-import tempfile
+from tensorflow import keras
 import tensorflow.compat.v1 as tf
-from tensorflow.compat.v1 import estimator as tf_estimator
-import tensorflow_hub as hub
 import tensorflow_model_analysis as tfma
 from tensorflow_model_analysis.addons.fairness.post_export_metrics import fairness_indicators  # pylint: disable=unused-import
 
 
-def train_model(model_dir,
-                train_tf_file,
-                label,
-                text_feature,
-                feature_map,
-                module_spec='https://tfhub.dev/google/nnlm-en-dim128/1'):
-  """Train model using DNN Classifier.
+TEXT_FEATURE = 'comment_text'
+LABEL = 'toxicity'
+SLICE = 'slice'
+FEATURE_MAP = {
+    LABEL: tf.io.FixedLenFeature([], tf.float32),
+    TEXT_FEATURE: tf.io.FixedLenFeature([], tf.string),
+    SLICE: tf.io.VarLenFeature(tf.string),
+}
 
-  Args:
-    model_dir: Directory path to save trained model.
-    train_tf_file: File containing training TFRecordDataset.
-    label: Groundtruth label.
-    text_feature: Text feature to be evaluated.
-    feature_map: Dict of feature names to their data type.
-    module_spec: A module spec defining the module to instantiate or a path
-      where to load a module spec.
 
-  Returns:
-    Trained DNNClassifier.
-  """
+class ExampleParser(keras.layers.Layer):
+  """A Keras layer that parses the tf.Example."""
 
-  def train_input_fn():
-    """Train Input function."""
+  def __init__(self, input_feature_key):
+    self._input_feature_key = input_feature_key
+    super().__init__()
 
-    def parse_function(serialized):
+  def call(self, serialized_examples):
+    def get_feature(serialized_example):
       parsed_example = tf.io.parse_single_example(
-          serialized=serialized, features=feature_map)
-      # Adds a weight column to deal with unbalanced classes.
-      parsed_example['weight'] = tf.add(parsed_example[label], 0.1)
-      return (parsed_example, parsed_example[label])
+          serialized_example, features=FEATURE_MAP
+      )
+      return parsed_example[self._input_feature_key]
 
-    train_dataset = tf.data.TFRecordDataset(
-        filenames=[train_tf_file]).map(parse_function).batch(512)
-    return train_dataset
-
-  text_embedding_column = hub.text_embedding_column(
-      key=text_feature, module_spec=module_spec)
-
-  classifier = tf_estimator.DNNClassifier(
-      hidden_units=[500, 100],
-      weight_column='weight',
-      feature_columns=[text_embedding_column],
-      n_classes=2,
-      optimizer=tf.train.AdagradOptimizer(learning_rate=0.003),
-      model_dir=model_dir)
-
-  classifier.train(input_fn=train_input_fn, steps=1000)
-  return classifier
+    return tf.map_fn(get_feature, serialized_examples)
 
 
-def evaluate_model(classifier, validate_tf_file, tfma_eval_result_path,
-                   selected_slice, label, feature_map):
+class ExampleModel(keras.Model):
+  """A Example Keras NLP model."""
+
+  def __init__(self, input_feature_key):
+    super().__init__()
+    self.parser = ExampleParser(input_feature_key)
+    self.text_vectorization = keras.layers.TextVectorization(
+        max_tokens=32,
+        output_mode='int',
+        output_sequence_length=32,
+    )
+    self.text_vectorization.adapt(
+        ['nontoxic', 'toxic comment', 'test comment', 'abc', 'abcdef', 'random']
+    )
+    self.dense1 = keras.layers.Dense(32, activation='relu')
+    self.dense2 = keras.layers.Dense(1)
+
+  def call(self, inputs, training=True, mask=None):
+    parsed_example = self.parser(inputs)
+    text_vector = self.text_vectorization(parsed_example)
+    output1 = self.dense1(tf.cast(text_vector, tf.float32))
+    output2 = self.dense2(output1)
+    return output2
+
+
+def evaluate_model(
+    classifier_model_path,
+    validate_tf_file_path,
+    tfma_eval_result_path,
+    eval_config,
+):
   """Evaluate Model using Tensorflow Model Analysis.
 
   Args:
-    classifier: Trained classifier model to be evaluted.
-    validate_tf_file: File containing validation TFRecordDataset.
-    tfma_eval_result_path: Directory path where eval results will be written.
-    selected_slice: Feature for slicing the data.
-    label: Groundtruth label.
-    feature_map: Dict of feature names to their data type.
+    classifier_model_path: Trained classifier model to be evaluted.
+    validate_tf_file_path: File containing validation TFRecordDataset.
+    tfma_eval_result_path: Path to export tfma-related eval path.
+    eval_config: tfma eval_config.
   """
 
-  def eval_input_receiver_fn():
-    """Eval Input Receiver function."""
-    serialized_tf_example = tf.compat.v1.placeholder(
-        dtype=tf.string, shape=[None], name='input_example_placeholder')
-
-    receiver_tensors = {'examples': serialized_tf_example}
-
-    features = tf.io.parse_example(serialized_tf_example, feature_map)
-    features['weight'] = tf.ones_like(features[label])
-
-    return tfma.export.EvalInputReceiver(
-        features=features,
-        receiver_tensors=receiver_tensors,
-        labels=features[label])
-
-  tfma_export_dir = tfma.export.export_eval_savedmodel(
-      estimator=classifier,
-      export_dir_base=os.path.join(tempfile.gettempdir(), 'tfma_eval_model'),
-      eval_input_receiver_fn=eval_input_receiver_fn)
-
-  # Define slices that you want the evaluation to run on.
-  slice_spec = [
-      tfma.slicer.SingleSliceSpec(),  # Overall slice
-      tfma.slicer.SingleSliceSpec(columns=[selected_slice]),
-  ]
-
-  # Add the fairness metrics.
-  # pytype: disable=module-attr
-  add_metrics_callbacks = [
-      tfma.post_export_metrics.fairness_indicators(
-          thresholds=[0.1, 0.3, 0.5, 0.7, 0.9], labels_key=label)
-  ]
-  # pytype: enable=module-attr
-
   eval_shared_model = tfma.default_eval_shared_model(
-      eval_saved_model_path=tfma_export_dir,
-      add_metrics_callbacks=add_metrics_callbacks)
+      eval_saved_model_path=classifier_model_path, eval_config=eval_config
+  )
 
   # Run the fairness evaluation.
   tfma.run_model_analysis(
       eval_shared_model=eval_shared_model,
-      data_location=validate_tf_file,
+      data_location=validate_tf_file_path,
       output_path=tfma_eval_result_path,
-      slice_spec=slice_spec)
+      eval_config=eval_config,
+  )

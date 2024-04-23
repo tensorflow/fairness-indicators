@@ -3,7 +3,7 @@
 # Current Version (Still in Development)
 
 ## Major Features and Improvements
-
+Update example model to use Keras models instead of estimators.
 ## Bug Fixes and Other Changes
 
 *  Deprecated python 3.8 support

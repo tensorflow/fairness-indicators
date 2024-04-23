@@ -21,22 +21,17 @@ from __future__ import print_function
 import datetime
 import os
 import tempfile
+
 from fairness_indicators import example_model
+import numpy as np
 import six
+from tensorflow import keras
 import tensorflow.compat.v1 as tf
 import tensorflow_model_analysis as tfma
-from tensorflow_model_analysis.slicer import slicer_lib as slicer
+
+from google.protobuf import text_format
 
 tf.compat.v1.enable_eager_execution()
-
-TEXT_FEATURE = 'comment_text'
-LABEL = 'toxicity'
-SLICE = 'slice'
-FEATURE_MAP = {
-    LABEL: tf.io.FixedLenFeature([], tf.float32),
-    TEXT_FEATURE: tf.io.FixedLenFeature([], tf.string),
-    SLICE: tf.io.VarLenFeature(tf.string),
-}
 
 
 class ExampleModelTest(tf.test.TestCase):
@@ -51,13 +46,13 @@ class ExampleModelTest(tf.test.TestCase):
 
   def _create_example(self, comment_text, label, slice_value):
     example = tf.train.Example()
-    example.features.feature[TEXT_FEATURE].bytes_list.value[:] = [
+    example.features.feature[example_model.TEXT_FEATURE].bytes_list.value[:] = [
         six.ensure_binary(comment_text, 'utf8')
     ]
-    example.features.feature[SLICE].bytes_list.value[:] = [
+    example.features.feature[example_model.SLICE].bytes_list.value[:] = [
         six.ensure_binary(slice_value, 'utf8')
     ]
-    example.features.feature[LABEL].float_list.value[:] = [label]
+    example.features.feature[example_model.LABEL].float_list.value[:] = [label]
     return example
 
   def _create_data(self):
@@ -85,34 +80,86 @@ class ExampleModelTest(tf.test.TestCase):
     return data_location
 
   def test_example_model(self):
-    train_tf_file = self._write_tf_records(self._create_data())
-    classifier = example_model.train_model(self._model_dir, train_tf_file,
-                                           LABEL, TEXT_FEATURE, FEATURE_MAP)
+    data = self._create_data()
+    classifier = example_model.ExampleModel(example_model.TEXT_FEATURE)
+    classifier.compile(optimizer=keras.optimizers.Adam(), loss='mse')
+    print([e.SerializeToString() for e in data])
+    classifier.predict(tf.constant([e.SerializeToString() for e in data]))
+    classifier.fit(
+        tf.constant([e.SerializeToString() for e in data]),
+        np.array([
+            e.features.feature[example_model.LABEL].float_list.value[:][0]
+            for e in data
+        ]),
+    )
+    classifier.save(self._model_dir, save_format='tf')
 
-    validate_tf_file = self._write_tf_records(self._create_data())
+    eval_config = text_format.Parse(
+        """
+        model_specs {
+          signature_name: "serving_default"
+          prediction_key: "predictions" # placeholder
+          label_key: "toxicity" # placeholder
+        }
+        slicing_specs {}
+        slicing_specs {
+          feature_keys: ["slice"]
+        }
+        metrics_specs {
+          metrics {
+            class_name: "ExampleCount"
+          }
+          metrics {
+            class_name: "FairnessIndicators"
+          }
+        }
+  """,
+        tfma.EvalConfig(),
+    )
+
+    validate_tf_file_path = self._write_tf_records(data)
     tfma_eval_result_path = os.path.join(self._model_dir, 'tfma_eval_result')
-    example_model.evaluate_model(classifier, validate_tf_file,
-                                 tfma_eval_result_path, SLICE, LABEL,
-                                 FEATURE_MAP)
+    example_model.evaluate_model(
+        self._model_dir,
+        validate_tf_file_path,
+        tfma_eval_result_path,
+        eval_config,
+    )
 
-    expected_slice_keys = [
-        'Overall', 'slice:slice3', 'slice:slice1', 'slice:slice2'
-    ]
     evaluation_results = tfma.load_eval_result(tfma_eval_result_path)
 
-    self.assertLen(evaluation_results.slicing_metrics, 4)
+    expected_slice_keys = [
+        (),
+        (('slice', 'slice1'),),
+        (('slice', 'slice2'),),
+        (('slice', 'slice3'),),
+    ]
+    slice_keys = [
+        slice_key for slice_key, _ in evaluation_results.slicing_metrics
+    ]
+    self.assertEqual(set(expected_slice_keys), set(slice_keys))
+    # Verify part of the metrics of fairness indicators
+    metric_values = dict(evaluation_results.slicing_metrics)[(
+        ('slice', 'slice1'),
+    )]['']['']
+    self.assertEqual(metric_values['example_count'], {'doubleValue': 5.0})
 
-    # Verify if false_positive_rate metrics are computed for all values of
-    # slice.
-    for (slice_key, metric_value) in evaluation_results.slicing_metrics:
-      slice_key = slicer.stringify_slice_key(slice_key)
-      self.assertIn(slice_key, expected_slice_keys)
-      self.assertGreaterEqual(
-          1.0, metric_value['']['']
-          ['post_export_metrics/false_positive_rate@0.50']['doubleValue'])
-      self.assertLessEqual(
-          0.0, metric_value['']['']
-          ['post_export_metrics/false_positive_rate@0.50']['doubleValue'])
+    self.assertEqual(
+        metric_values['fairness_indicators_metrics/false_positive_rate@0.1'],
+        {'doubleValue': 0.0},
+    )
+    self.assertEqual(
+        metric_values['fairness_indicators_metrics/false_negative_rate@0.1'],
+        {'doubleValue': 1.0},
+    )
+    self.assertEqual(
+        metric_values['fairness_indicators_metrics/true_positive_rate@0.1'],
+        {'doubleValue': 0.0},
+    )
+    self.assertEqual(
+        metric_values['fairness_indicators_metrics/true_negative_rate@0.1'],
+        {'doubleValue': 1.0},
+    )
 
 
 if __name__ == '__main__':
