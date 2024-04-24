@@ -83,8 +83,6 @@ class ExampleModelTest(tf.test.TestCase):
     data = self._create_data()
     classifier = example_model.ExampleModel(example_model.TEXT_FEATURE)
     classifier.compile(optimizer=keras.optimizers.Adam(), loss='mse')
-    print([e.SerializeToString() for e in data])
-    classifier.predict(tf.constant([e.SerializeToString() for e in data]))
     classifier.fit(
         tf.constant([e.SerializeToString() for e in data]),
         np.array([
