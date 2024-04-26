@@ -41,7 +41,7 @@ REQUIRED_PACKAGES = [
     'tensorflow>=2.15,<2.16',
     'tensorflow-hub>=0.16.1,<1.0.0',
     'tensorflow-data-validation' + select_constraint(
-        default='>=1.15.0,<2.0.0',
+        default='>=1.15.1,<2.0.0',
         nightly='>=1.16.0.dev',
         git_master='@git+https://github.com/tensorflow/data-validation@master'),
     'tensorflow-model-analysis' + select_constraint(
