@@ -4,6 +4,8 @@
 
 ## Major Features and Improvements
 
+ * Add fairness indicator metrics in the third_party library.
+
 ## Bug Fixes and Other Changes
 
 ## Breaking Changes

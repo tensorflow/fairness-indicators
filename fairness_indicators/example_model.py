@@ -19,10 +19,10 @@ and evaluate it using Tensorflow Model Analysis. Evaluation
 results can be visualized using tools like TensorBoard.
 """
 
+from fairness_indicators import fairness_indicators_metrics  # pylint: disable=unused-import
 from tensorflow import keras
 import tensorflow.compat.v1 as tf
 import tensorflow_model_analysis as tfma
-from tensorflow_model_analysis.addons.fairness.post_export_metrics import fairness_indicators  # pylint: disable=unused-import
 
 
 TEXT_FEATURE = 'comment_text'
