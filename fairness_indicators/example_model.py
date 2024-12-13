@@ -19,6 +19,8 @@ and evaluate it using Tensorflow Model Analysis. Evaluation
 results can be visualized using tools like TensorBoard.
 """
 
+from typing import Any
+
 from fairness_indicators import fairness_indicators_metrics  # pylint: disable=unused-import
 from tensorflow import keras
 import tensorflow.compat.v1 as tf
@@ -40,7 +42,11 @@ class ExampleParser(keras.layers.Layer):
 
   def __init__(self, input_feature_key):
     self._input_feature_key = input_feature_key
+    self.input_spec = keras.layers.InputSpec(shape=(1,), dtype=tf.string)
     super().__init__()
+
+  def compute_output_shape(self, input_shape: Any):
+    return [1, 1]
 
   def call(self, serialized_examples):
     def get_feature(serialized_example):
@@ -48,33 +54,46 @@ class ExampleParser(keras.layers.Layer):
           serialized_example, features=FEATURE_MAP
       )
       return parsed_example[self._input_feature_key]
-
+    serialized_examples = tf.cast(serialized_examples, tf.string)
     return tf.map_fn(get_feature, serialized_examples)
 
 
-class ExampleModel(keras.Model):
-  """A Example Keras NLP model."""
+class Reshaper(keras.layers.Layer):
+  """A Keras layer that reshapes the input."""
 
-  def __init__(self, input_feature_key):
-    super().__init__()
-    self.parser = ExampleParser(input_feature_key)
-    self.text_vectorization = keras.layers.TextVectorization(
-        max_tokens=32,
-        output_mode='int',
-        output_sequence_length=32,
-    )
-    self.text_vectorization.adapt(
-        ['nontoxic', 'toxic comment', 'test comment', 'abc', 'abcdef', 'random']
-    )
-    self.dense1 = keras.layers.Dense(32, activation='relu')
-    self.dense2 = keras.layers.Dense(1)
+  def call(self, inputs):
+    return tf.reshape(inputs, (1, 32))
 
-  def call(self, inputs, training=True, mask=None):
-    parsed_example = self.parser(inputs)
-    text_vector = self.text_vectorization(parsed_example)
-    output1 = self.dense1(tf.cast(text_vector, tf.float32))
-    output2 = self.dense2(output1)
-    return output2
+
+class Caster(keras.layers.Layer):
+  """A Keras layer that reshapes the input."""
+
+  def call(self, inputs):
+    return tf.cast(inputs, tf.float32)
+
+
+def get_example_model(input_feature_key: str):
+  """Returns a Keras model for testing."""
+  parser = ExampleParser(input_feature_key)
+  text_vectorization = keras.layers.TextVectorization(
+      max_tokens=32,
+      output_mode='int',
+      output_sequence_length=32,
+  )
+  text_vectorization.adapt(
+      ['nontoxic', 'toxic comment', 'test comment', 'abc', 'abcdef', 'random']
+  )
+  dense1 = keras.layers.Dense(32, activation='relu')
+  dense2 = keras.layers.Dense(1)
+
+  inputs = tf.keras.Input(shape=(), dtype=tf.string)
+  parsed_example = parser(inputs)
+  text_vector = text_vectorization(parsed_example)
+  text_vector = Reshaper()(text_vector)
+  text_vector = Caster()(text_vector)
+  output1 = dense1(text_vector)
+  output2 = dense2(output1)
+  return tf.keras.Model(inputs=inputs, outputs=output2)
 
 
 def evaluate_model(

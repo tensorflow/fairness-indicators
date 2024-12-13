@@ -81,7 +81,7 @@ class ExampleModelTest(tf.test.TestCase):
 
   def test_example_model(self):
     data = self._create_data()
-    classifier = example_model.ExampleModel(example_model.TEXT_FEATURE)
+    classifier = example_model.get_example_model(example_model.TEXT_FEATURE)
     classifier.compile(optimizer=keras.optimizers.Adam(), loss='mse')
     classifier.fit(
         tf.constant([e.SerializeToString() for e in data]),
@@ -89,6 +89,7 @@ class ExampleModelTest(tf.test.TestCase):
             e.features.feature[example_model.LABEL].float_list.value[:][0]
             for e in data
         ]),
+        batch_size=1,
     )
     classifier.save(self._model_dir, save_format='tf')
 
