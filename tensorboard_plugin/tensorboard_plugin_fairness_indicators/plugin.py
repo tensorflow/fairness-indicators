@@ -19,7 +19,6 @@ from __future__ import print_function
 
 import os
 
-# Standard imports
 from absl import logging
 from tensorboard_plugin_fairness_indicators import metadata
 import six

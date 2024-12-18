@@ -20,7 +20,6 @@ from __future__ import print_function
 import glob
 import os
 
-# Standard imports
 from tensorboard_plugin_fairness_indicators import metadata
 from tensorboard_plugin_fairness_indicators import summary_v2
 import six

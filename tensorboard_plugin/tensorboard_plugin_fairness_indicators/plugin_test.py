@@ -22,8 +22,6 @@ import os
 import shutil
 from unittest import mock
 
-# Standard imports
-
 from tensorboard_plugin_fairness_indicators import plugin
 from tensorboard_plugin_fairness_indicators import summary_v2
 import six

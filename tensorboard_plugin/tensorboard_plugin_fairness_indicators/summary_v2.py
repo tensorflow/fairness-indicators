@@ -18,7 +18,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-# Standard imports
 from tensorboard_plugin_fairness_indicators import metadata
 from tensorboard.compat import tf2 as tf
 

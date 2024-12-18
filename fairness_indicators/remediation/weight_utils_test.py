@@ -6,7 +6,6 @@ from __future__ import print_function
 
 import collections
 
-# Standard imports
 from fairness_indicators.remediation import weight_utils
 import tensorflow.compat.v1 as tf
 
