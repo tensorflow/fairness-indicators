@@ -91,7 +91,7 @@ class ExampleModelTest(tf.test.TestCase):
         ]),
         batch_size=1,
     )
-    classifier.save(self._model_dir, save_format='tf')
+    tf.saved_model.save(classifier, self._model_dir)
 
     eval_config = text_format.Parse(
         """
