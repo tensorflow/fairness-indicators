@@ -28,7 +28,7 @@ import six
 import tensorflow.compat.v1 as tf
 import tensorflow.compat.v2 as tf2
 import tensorflow_model_analysis as tfma
-from tensorflow_model_analysis.eval_saved_model.example_trainers import linear_classifier
+from tensorflow_model_analysis.view import linear_classifier
 from werkzeug import test as werkzeug_test
 from werkzeug import wrappers
 
