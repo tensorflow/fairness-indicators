@@ -23,7 +23,8 @@ from absl import logging
 from tensorboard_plugin_fairness_indicators import metadata
 import six
 import tensorflow_model_analysis as tfma
-from tensorflow_model_analysis.addons.fairness.view import widget_view
+# from tensorflow_model_analysis.addons.fairness.view import widget_view
+from tensorflow_model_analysis.view import widget_view
 from werkzeug import wrappers
 from google.protobuf import json_format
 from tensorboard.backend import http_util
