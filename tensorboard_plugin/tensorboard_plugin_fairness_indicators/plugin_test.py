@@ -25,10 +25,9 @@ from unittest import mock
 from tensorboard_plugin_fairness_indicators import plugin
 from tensorboard_plugin_fairness_indicators import summary_v2
 import six
-import tensorflow.compat.v1 as tf
-import tensorflow.compat.v2 as tf2
+import tensorflow as tf2
+from tensorflow.keras import layers
 import tensorflow_model_analysis as tfma
-from tensorflow_model_analysis.eval_saved_model.example_trainers import linear_classifier
 from werkzeug import test as werkzeug_test
 from werkzeug import wrappers
 
@@ -36,8 +35,22 @@ from tensorboard.backend import application
 from tensorboard.backend.event_processing import plugin_event_multiplexer as event_multiplexer
 from tensorboard.plugins import base_plugin
 
-tf.enable_eager_execution()
 tf = tf2
+
+
+# Define keras based linear classifier.
+def create_linear_classifier(model_dir):
+
+  inputs = tf.keras.Input(shape=(2,))
+  outputs = layers.Dense(1, activation="sigmoid")(inputs)
+  model = tf.keras.Model(inputs=inputs, outputs=outputs)
+
+  model.compile(
+      optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"]
+  )
+
+  tf.saved_model.save(model, model_dir)
+  return model
 
 
 class PluginTest(tf.test.TestCase):
@@ -74,19 +87,19 @@ class PluginTest(tf.test.TestCase):
     super(PluginTest, self).tearDown()
     shutil.rmtree(self._log_dir, ignore_errors=True)
 
-  def _exportEvalSavedModel(self, classifier):
+  def _export_eval_saved_model(self):
+    """Export the evaluation saved model."""
     temp_eval_export_dir = os.path.join(self.get_temp_dir(), "eval_export_dir")
-    _, eval_export_dir = classifier(None, temp_eval_export_dir)
-    return eval_export_dir
+    return create_linear_classifier(temp_eval_export_dir)
 
-  def _writeTFExamplesToTFRecords(self, examples):
+  def _write_tf_examples_to_tfrecords(self, examples):
     data_location = os.path.join(self.get_temp_dir(), "input_data.rio")
     with tf.io.TFRecordWriter(data_location) as writer:
       for example in examples:
         writer.write(example.SerializeToString())
     return data_location
 
-  def _makeExample(self, age, language, label):
+  def _make_tf_example(self, age, language, label):
     example = tf.train.Example()
     example.features.feature["age"].float_list.value[:] = [age]
     example.features.feature["language"].bytes_list.value[:] = [
@@ -112,14 +125,14 @@ class PluginTest(tf.test.TestCase):
           "foo": "".encode("utf-8")
       }},
   )
-  def testIsActive(self, get_random_stub):
+  def testIsActive(self):
     self.assertTrue(self._plugin.is_active())
 
   @mock.patch.object(
       event_multiplexer.EventMultiplexer,
       "PluginRunToTagToContent",
       return_value={})
-  def testIsInactive(self, get_random_stub):
+  def testIsInactive(self):
     self.assertFalse(self._plugin.is_active())
 
   def testIndexJsRoute(self):
@@ -134,16 +147,15 @@ class PluginTest(tf.test.TestCase):
     self.assertEqual(200, response.status_code)
 
   def testGetEvalResultsRoute(self):
-    model_location = self._exportEvalSavedModel(
-        linear_classifier.simple_linear_classifier)
+    model_location = self._export_eval_saved_model()  # Call the method
     examples = [
-        self._makeExample(age=3.0, language="english", label=1.0),
-        self._makeExample(age=3.0, language="chinese", label=0.0),
-        self._makeExample(age=4.0, language="english", label=1.0),
-        self._makeExample(age=5.0, language="chinese", label=1.0),
-        self._makeExample(age=5.0, language="hindi", label=1.0)
+        self._make_tf_example(age=3.0, language="english", label=1.0),
+        self._make_tf_example(age=3.0, language="chinese", label=0.0),
+        self._make_tf_example(age=4.0, language="english", label=1.0),
+        self._make_tf_example(age=5.0, language="chinese", label=1.0),
+        self._make_tf_example(age=5.0, language="hindi", label=1.0),
     ]
-    data_location = self._writeTFExamplesToTFRecords(examples)
+    data_location = self._write_tf_examples_to_tfrecords(examples)
     _ = tfma.run_model_analysis(
         eval_shared_model=tfma.default_eval_shared_model(
             eval_saved_model_path=model_location, example_weight_key="age"),
@@ -155,16 +167,15 @@ class PluginTest(tf.test.TestCase):
     self.assertEqual(200, response.status_code)
 
   def testGetEvalResultsFromURLRoute(self):
-    model_location = self._exportEvalSavedModel(
-        linear_classifier.simple_linear_classifier)
+    model_location = self._export_eval_saved_model()  # Call the method
     examples = [
-        self._makeExample(age=3.0, language="english", label=1.0),
-        self._makeExample(age=3.0, language="chinese", label=0.0),
-        self._makeExample(age=4.0, language="english", label=1.0),
-        self._makeExample(age=5.0, language="chinese", label=1.0),
-        self._makeExample(age=5.0, language="hindi", label=1.0)
+        self._make_tf_example(age=3.0, language="english", label=1.0),
+        self._make_tf_example(age=3.0, language="chinese", label=0.0),
+        self._make_tf_example(age=4.0, language="english", label=1.0),
+        self._make_tf_example(age=5.0, language="chinese", label=1.0),
+        self._make_tf_example(age=5.0, language="hindi", label=1.0),
     ]
-    data_location = self._writeTFExamplesToTFRecords(examples)
+    data_location = self._write_tf_examples_to_tfrecords(examples)
     _ = tfma.run_model_analysis(
         eval_shared_model=tfma.default_eval_shared_model(
             eval_saved_model_path=model_location, example_weight_key="age"),
@@ -172,15 +183,20 @@ class PluginTest(tf.test.TestCase):
         output_path=self._eval_result_output_dir)
 
     response = self._server.get(
-        "/data/plugin/fairness_indicators/" +
-        "get_evaluation_result_from_remote_path?evaluation_output_path=" +
-        os.path.join(self._eval_result_output_dir, tfma.METRICS_KEY))
+        "/data/plugin/fairness_indicators/"
+        + "get_evaluation_result_from_remote_path?evaluation_output_path="
+        + self._eval_result_output_dir
+    )
     self.assertEqual(200, response.status_code)
 
-  def testGetOutputFileFormat(self):
-    self.assertEqual("", self._plugin._get_output_file_format("abc_path"))
-    self.assertEqual("tfrecord",
-                     self._plugin._get_output_file_format("abc_path.tfrecord"))
+  def test_get_output_file_format(self):
+    evaluation_output_path = os.path.join(
+        self._eval_result_output_dir, "eval_result.tfrecord"
+    )
+    self.assertEqual(
+        self._plugin._get_output_file_format(evaluation_output_path),
+        "tfrecord",
+    )
 
 
 if __name__ == "__main__":
