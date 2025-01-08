@@ -83,8 +83,20 @@ def get_example_model(input_feature_key: str):
   text_vectorization.adapt(
       ['nontoxic', 'toxic comment', 'test comment', 'abc', 'abcdef', 'random']
   )
-  dense1 = keras.layers.Dense(32, activation='relu')
-  dense2 = keras.layers.Dense(1)
+  dense1 = keras.layers.Dense(
+      32,
+      activation=None,
+      use_bias=True,
+      kernel_initializer='glorot_uniform',
+      bias_initializer='zeros',
+  )
+  dense2 = keras.layers.Dense(
+      1,
+      activation=None,
+      use_bias=False,
+      kernel_initializer='glorot_uniform',
+      bias_initializer='zeros',
+  )
 
   inputs = tf.keras.Input(shape=(), dtype=tf.string)
   parsed_example = parser(inputs)

@@ -17,8 +17,7 @@
 import os
 import sys
 
-from setuptools import find_packages
-from setuptools import setup
+import setuptools
 
 
 if sys.version_info >= (3, 11):
@@ -36,32 +35,32 @@ def select_constraint(default, nightly=None, git_master=None):
     return git_master
   else:
     return default
-
 REQUIRED_PACKAGES = [
-    'tensorflow>=2.15,<2.16',
+    'tensorflow>=2.16,<2.17',
     'tensorflow-hub>=0.16.1,<1.0.0',
-    'tensorflow-data-validation' + select_constraint(
-        default='>=1.15.1,<2.0.0',
-        nightly='>=1.16.0.dev',
-        git_master='@git+https://github.com/tensorflow/data-validation@master'),
-    'tensorflow-model-analysis' + select_constraint(
-        default='>=0.46,<0.47',
-        nightly='>=0.47.0.dev',
-        git_master='@git+https://github.com/tensorflow/model-analysis@master'),
+    'tensorflow-data-validation'
+    + select_constraint(
+        default='>=1.16.1,<2.0.0',
+        nightly='>=1.17.0.dev',
+        git_master='@git+https://github.com/tensorflow/data-validation@master',
+    ),
+    'tensorflow-model-analysis'
+    + select_constraint(
+        default='>=0.47.0,<0.48.0',
+        nightly='>=0.48.0.dev',
+        git_master='@git+https://github.com/tensorflow/model-analysis@master',
+    ),
     'witwidget>=1.4.4,<2',
     'protobuf>=3.20.3,<5',
 ]
-
 # Get version from version module.
 with open('fairness_indicators/version.py') as fp:
   globals_dict = {}
   exec(fp.read(), globals_dict)  # pylint: disable=exec-used
 __version__ = globals_dict['__version__']
-
 with open('README.md', 'r', encoding='utf-8') as fh:
   long_description = fh.read()
-
-setup(
+setuptools.setup(
     name='fairness_indicators',
     version=__version__,
     description='Fairness Indicators',
@@ -70,7 +69,7 @@ setup(
     url='https://github.com/tensorflow/fairness-indicators',
     author='Google LLC',
     author_email='packages@tensorflow.org',
-    packages=find_packages(exclude=['tensorboard_plugin']),
+    packages=setuptools.find_packages(exclude=['tensorboard_plugin']),
     package_data={
         'fairness_indicators': ['documentation/*'],
     },
@@ -96,6 +95,8 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     license='Apache 2.0',
-    keywords='tensorflow model analysis fairness indicators tensorboard machine'
-    ' learning',
+    keywords=(
+        'tensorflow model analysis fairness indicators tensorboard machine'
+        ' learning'
+    ),
 )
