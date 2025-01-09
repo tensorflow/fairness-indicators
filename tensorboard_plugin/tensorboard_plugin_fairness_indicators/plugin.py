@@ -19,7 +19,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-from typing import Any
+from typing import Any, Union
 
 from absl import logging
 from tensorboard_plugin_fairness_indicators import metadata
@@ -127,11 +127,11 @@ def convert_slicing_metrics_to_ui_input(
             tfma.view.view_types.MetricsByOutputName,
         ]
     ],
-    slicing_column: str | None = None,
-    slicing_spec: tfma.slicer.slicer_lib.SingleSliceSpec | None = None,
+    slicing_column: Union[str, None] = None,
+    slicing_spec: Union[tfma.slicer.slicer_lib.SingleSliceSpec, None] = None,
     output_name: str = '',
     multi_class_key: str = '',
-) -> list[dict[str, Any]] | None:
+) -> Union[list[dict[str, Any]], None]:
   """Renders the Fairness Indicator view.
 
   Args:
