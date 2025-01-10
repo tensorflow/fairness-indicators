@@ -45,12 +45,7 @@ REQUIRED_PACKAGES = [
     'protobuf>=3.20.3,<5',
     'tensorboard>=2.16.2,<2.17.0',
     'tensorflow>=2.16,<2.17',
-    'tensorflow-model-analysis'
-    + select_constraint(
-        default='>=0.47,<0.48',
-        nightly='>=0.48.0.dev',
-        git_master='@git+https://github.com/tensorflow/model-analysis@master',
-    ),
+    'tensorflow-model-analysis>=0.47,<0.48',
     'werkzeug<2',
 ]
 
