@@ -45,6 +45,7 @@ REQUIRED_PACKAGES = [
     'protobuf>=3.20.3,<5',
     'tensorboard>=2.16.2,<2.17.0',
     'tensorflow>=2.16,<2.17',
+    'tf-keras>=2.16,<2.17',
     'tensorflow-model-analysis>=0.47,<0.48',
     'werkzeug<2',
 ]
