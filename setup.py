@@ -39,7 +39,7 @@ REQUIRED_PACKAGES = [
     'tensorflow>=2.16,<2.17',
     'tensorflow-hub>=0.16.1,<1.0.0',
     'tensorflow-data-validation>=1.16.1,<2.0.0',
-    'tensorflow-model-analysis>=0.47.0,<0.48.0',
+    'tensorflow-model-analysis>=0.47.1,<0.48.0',
     'witwidget>=1.4.4,<2',
     'protobuf>=3.20.3,<5',
 ]
