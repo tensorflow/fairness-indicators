@@ -25,7 +25,7 @@ from tensorboard.compat import tf2 as tf
 def FairnessIndicators(eval_result_output_dir, step=None, description=None):
   """Write a Fairness Indicators summary.
 
-  Arguments:
+  Args:
     eval_result_output_dir: Directory output created by
       tfma.model_eval_lib.ExtractEvaluateAndWriteResults API, which contains
       'metrics' file having MetricsForSlice results.
