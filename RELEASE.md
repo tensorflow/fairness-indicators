@@ -501,3 +501,7 @@
 
 *  Deprecating Py2 support.
 *  Note: We plan to drop py3.5 support in the next release.
+
+## Bug fixes and other changes
+
+*   PLACEHOLDER
