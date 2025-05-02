@@ -45,6 +45,10 @@ REQUIRED_PACKAGES = [
     "witwidget>=1.4.4,<2",
     "protobuf>=3.20.3,<5",
 ]
+
+DOCS_PACKAGES = [
+    "mkdocs",
+]
 # Get version from version module.
 with open("fairness_indicators/version.py") as fp:
     globals_dict = {}
@@ -68,6 +72,9 @@ setuptools.setup(
     python_requires=">=3.9,<4",
     install_requires=REQUIRED_PACKAGES,
     tests_require=REQUIRED_PACKAGES,
+    extras_require={
+        "docs": DOCS_PACKAGES,
+    },
     # PyPI package information.
     classifiers=[
         "Development Status :: 4 - Beta",
