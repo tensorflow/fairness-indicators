@@ -15,6 +15,7 @@
 """Setup to install Fairness Indicators."""
 
 import os
+from pathlib import Path
 import sys
 
 import setuptools
@@ -46,11 +47,9 @@ REQUIRED_PACKAGES = [
     "protobuf>=3.20.3,<5",
 ]
 
-DOCS_PACKAGES = [
-    "mkdocs",
-    "mkdocs-material",
-    "mkdocs-jupyter",
-]
+with open(Path("./requirements-docs.txt").expanduser().absolute()) as f:
+    DOCS_PACKAGES = [req.replace("\n", "") for req in f.readlines()]
+
 # Get version from version module.
 with open("fairness_indicators/version.py") as fp:
     globals_dict = {}
