@@ -48,6 +48,7 @@ REQUIRED_PACKAGES = [
 
 DOCS_PACKAGES = [
     "mkdocs",
+    "mkdocs-material",
 ]
 # Get version from version module.
 with open("fairness_indicators/version.py") as fp:

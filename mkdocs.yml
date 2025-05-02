@@ -2,6 +2,41 @@ site_name: Fairness Indicators
 repo_name: "fairness-indicators"
 repo_url: https://github.com/tensorflow/fairness-indicators
 
+theme:
+  name: material
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      primary: custom
+      accent: custom
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      primary: custom
+      accent: custom
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  favicon: assets/tf_full_color_primary_icon.svg
+
+  features:
+    - content.code.copy
+    - content.code.select
+    - content.action.edit
+
 nav:
   - Overview: index.md
   - Thinking about Fairness Evaluation: guide/guidance.md
