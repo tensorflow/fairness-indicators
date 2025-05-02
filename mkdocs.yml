@@ -4,3 +4,4 @@ repo_url: https://github.com/tensorflow/fairness-indicators
 
 nav:
   - Overview: index.md
+  - Thinking about Fairness Evaluation: guide/guidance.md
