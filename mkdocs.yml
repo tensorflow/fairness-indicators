@@ -1,0 +1,6 @@
+site_name: Fairness Indicators
+repo_name: "fairness-indicators"
+repo_url: https://github.com/tensorflow/fairness-indicators
+
+nav:
+  - Overview: index.md
