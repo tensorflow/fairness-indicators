@@ -37,6 +37,9 @@ theme:
     - content.code.select
     - content.action.edit
 
+extra_css:
+  - stylesheets/extra.css
+
 plugins:
   - mkdocs-jupyter
 
