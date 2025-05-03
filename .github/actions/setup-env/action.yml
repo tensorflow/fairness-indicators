@@ -19,6 +19,7 @@ runs:
           ${{ inputs.package-root-dir }}/setup.py
 
     - name: Install dependencies
+      shell: bash
       run: |
         python -m pip install --upgrade pip
         pip install ${{ inputs.package-root-dir }}[test]
