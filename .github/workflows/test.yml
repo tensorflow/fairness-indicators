@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         python-version: ['3.9', '3.10']
-        package-root-dir: ['.', './tensorboard_plugin']
+        package-root-dir: ['./', './tensorboard_plugin']
 
     steps:
     - name: Checkout repo
