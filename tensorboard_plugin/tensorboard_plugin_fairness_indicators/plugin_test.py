@@ -222,7 +222,3 @@ class PluginTest(tf.test.TestCase):
     self.assertEqual(
         "tfrecord", self._plugin._get_output_file_format("abc_path.tfrecord")
     )
-
-
-if __name__ == "__main__":
-  tf.test.main()

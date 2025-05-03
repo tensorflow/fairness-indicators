@@ -34,7 +34,3 @@ class MetadataTest(tf.test.TestCase):
     summary_metadata = metadata.CreateSummaryMetadata()
     self.assertEqual(metadata.PLUGIN_NAME,
                      summary_metadata.plugin_data.plugin_name)
-
-
-if __name__ == '__main__':
-  tf.test.main()
