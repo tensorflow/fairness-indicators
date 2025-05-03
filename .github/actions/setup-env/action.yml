@@ -3,8 +3,10 @@ description: Set up environment and install package
 
 inputs:
   python-version:
+    default: "3.10"
     required: true
   package-root-dir:
+    default: "./"
     required: true
 
 runs:
