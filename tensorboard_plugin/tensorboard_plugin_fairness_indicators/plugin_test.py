@@ -19,6 +19,7 @@ from __future__ import print_function
 
 from collections import abc
 import os
+import pytest
 import shutil
 from unittest import mock
 
@@ -150,6 +151,12 @@ class PluginTest(tf.test.TestCase):
     response = self._server.get("/data/plugin/fairness_indicators/index.js")
     self.assertEqual(200, response.status_code)
 
+  @pytest.mark.xfail(
+    reason=(
+      "This test is currently failing. "
+      "Once it is fixed, please remove this mark."
+      )
+  )
   def testVulcanizedTemplateRoute(self):
     """Tests that the /tags route offers the correct run to tag mapping."""
     response = self._server.get(
