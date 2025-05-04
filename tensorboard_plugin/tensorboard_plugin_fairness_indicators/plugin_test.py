@@ -153,8 +153,8 @@ class PluginTest(tf.test.TestCase):
 
   @pytest.mark.xfail(
     reason=(
-      "This test is currently failing. "
-      "Once it is fixed, please remove this mark."
+      "Failing on `master` as of `942b672457e07ac2ac27de0bcc45a4c80276785c`. "
+      "Please remove once fixed."
       )
   )
   def testVulcanizedTemplateRoute(self):
