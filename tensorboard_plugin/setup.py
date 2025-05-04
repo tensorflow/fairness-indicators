@@ -51,7 +51,7 @@ REQUIRED_PACKAGES = [
 ]
 
 TEST_PACKAGES = [
-    'pytest',
+    'pytest>=8.3.0,<9',
 ]
 
 with open('README.md', 'r', encoding='utf-8') as fh:

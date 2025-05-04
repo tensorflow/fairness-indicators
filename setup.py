@@ -45,7 +45,7 @@ REQUIRED_PACKAGES = [
 ]
 
 TEST_PACKAGES = [
-    'pytest',
+    'pytest>=8.3.0,<9',
 ]
 # Get version from version module.
 with open('fairness_indicators/version.py') as fp:
