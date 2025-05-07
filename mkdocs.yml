@@ -48,7 +48,6 @@ extra_javascript:
 plugins:
   - mkdocs-jupyter:
       execute: false
-  - mkdocs-video
 
 markdown_extensions:
   - admonition
