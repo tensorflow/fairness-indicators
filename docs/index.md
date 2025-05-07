@@ -61,7 +61,7 @@ options {
 
     [Try the Case Study](https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body)
 
--   ![Fairness Indicators on the TensorFlow blog](../images/tf_full_color_primary_icon.svg)
+-   ![Fairness Indicators on the TensorFlow blog](images/tf_full_color_primary_icon.svg)
 
     ### [Fairness Indicators on the TensorFlow blog](https://blog.tensorflow.org/2019/12/fairness-indicators-fair-ML-systems.html)
     
