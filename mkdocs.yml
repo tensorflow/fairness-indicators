@@ -4,6 +4,7 @@ repo_url: https://github.com/tensorflow/fairness-indicators
 
 theme:
   name: material
+  logo: images/tf_full_color_primary_icon.svg
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
