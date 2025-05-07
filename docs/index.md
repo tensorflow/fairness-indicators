@@ -53,7 +53,7 @@ options {
 
 <div class="grid cards" markdown>
 
--   ![asdf](https://www.tensorflow.org/static/responsible_ai/fairness_indicators/images/mlpracticum_480.png)
+-   ![ML Practicum: Fairness in Perspective API using Fairness Indicators](https://www.tensorflow.org/static/responsible_ai/fairness_indicators/images/mlpracticum_480.png)
 
     ### [ML Practicum: Fairness in Perspective API using Fairness Indicators](https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body)
 
