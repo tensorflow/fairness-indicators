@@ -83,7 +83,7 @@ options {
 
     [Read on Google AI blog](https://ai.googleblog.com/2019/12/fairness-indicators-scalable.html)
 
--   ![type:video](https://www.youtube.com/watch?v=6CwzDoE8J4M)
+-   <iframe width="560" height="315" src="https://www.youtube.com/embed/6CwzDoE8J4M?si=gIL2KHdj96_SxdVH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
     ### [Fairness Indicators at Google I/O](https://www.youtube.com/watch?v=6CwzDoE8J4M)
 
