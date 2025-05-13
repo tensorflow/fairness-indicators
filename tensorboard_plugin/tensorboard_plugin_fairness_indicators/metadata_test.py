@@ -14,23 +14,17 @@
 # ==============================================================================
 """Tests for util function to create plugin metadata."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+import tensorflow.compat.v1 as tf
 
 from tensorboard_plugin_fairness_indicators import metadata
-import tensorflow.compat.v1 as tf
 
 
 class MetadataTest(tf.test.TestCase):
+    def testCreateSummaryMetadata(self):
+        summary_metadata = metadata.CreateSummaryMetadata("description")
+        self.assertEqual(metadata.PLUGIN_NAME, summary_metadata.plugin_data.plugin_name)
+        self.assertEqual("description", summary_metadata.summary_description)
 
-  def testCreateSummaryMetadata(self):
-    summary_metadata = metadata.CreateSummaryMetadata('description')
-    self.assertEqual(metadata.PLUGIN_NAME,
-                     summary_metadata.plugin_data.plugin_name)
-    self.assertEqual('description', summary_metadata.summary_description)
-
-  def testCreateSummaryMetadata_withoutDescription(self):
-    summary_metadata = metadata.CreateSummaryMetadata()
-    self.assertEqual(metadata.PLUGIN_NAME,
-                     summary_metadata.plugin_data.plugin_name)
+    def testCreateSummaryMetadata_withoutDescription(self):
+        summary_metadata = metadata.CreateSummaryMetadata()
+        self.assertEqual(metadata.PLUGIN_NAME, summary_metadata.plugin_data.plugin_name)

@@ -14,26 +14,23 @@
 # ==============================================================================
 """Tests for fairness_indicators.tutorial_utils.util."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import csv
 import os
 import tempfile
 from unittest import mock
-from fairness_indicators.tutorial_utils import util
+
 import pandas as pd
 import tensorflow as tf
 import tensorflow_model_analysis as tfma
 from google.protobuf import text_format
 
+from fairness_indicators.tutorial_utils import util
+
 
 class UtilTest(tf.test.TestCase):
-
-  def _create_example_tfrecord(self):
-    example = text_format.Parse(
-        """
+    def _create_example_tfrecord(self):
+        example = text_format.Parse(
+            """
         features {
           feature { key: "comment_text"
                     value { bytes_list { value: [ "comment 1" ] }}
@@ -85,39 +82,43 @@ class UtilTest(tf.test.TestCase):
                     value { float_list { value: [ 1.0 ] }}
                   }
         }
-        """, tf.train.Example())
-    empty_comment_example = text_format.Parse(
-        """
+        """,
+            tf.train.Example(),
+        )
+        empty_comment_example = text_format.Parse(
+            """
         features {
           feature { key: "comment_text"
                     value { bytes_list {} }
                   }
           feature { key: "toxicity" value { float_list { value: [ 0.1 ] }}}
         }
-        """, tf.train.Example())
-    return [example, empty_comment_example]
+        """,
+            tf.train.Example(),
+        )
+        return [example, empty_comment_example]
 
-  def _write_tf_records(self, examples):
-    filename = os.path.join(tempfile.mkdtemp(), 'input.tfrecord')
-    with tf.io.TFRecordWriter(filename) as writer:
-      for e in examples:
-        writer.write(e.SerializeToString())
-    return filename
+    def _write_tf_records(self, examples):
+        filename = os.path.join(tempfile.mkdtemp(), "input.tfrecord")
+        with tf.io.TFRecordWriter(filename) as writer:
+            for e in examples:
+                writer.write(e.SerializeToString())
+        return filename
 
-  def test_convert_data_tfrecord(self):
-    input_file = self._write_tf_records(self._create_example_tfrecord())
-    output_file = util.convert_comments_data(input_file)
-    output_example_list = []
-    for serialized in tf.data.TFRecordDataset(filenames=[output_file]):
-      output_example = tf.train.Example()
-      output_example.ParseFromString(serialized.numpy())
-      output_example_list.append(output_example)
+    def test_convert_data_tfrecord(self):
+        input_file = self._write_tf_records(self._create_example_tfrecord())
+        output_file = util.convert_comments_data(input_file)
+        output_example_list = []
+        for serialized in tf.data.TFRecordDataset(filenames=[output_file]):
+            output_example = tf.train.Example()
+            output_example.ParseFromString(serialized.numpy())
+            output_example_list.append(output_example)
 
-    self.assertEqual(len(output_example_list), 1)
-    self.assertEqual(
-        output_example_list[0],
-        text_format.Parse(
-            """
+        self.assertEqual(len(output_example_list), 1)
+        self.assertEqual(
+            output_example_list[0],
+            text_format.Parse(
+                """
         features {
           feature { key: "comment_text"
                     value { bytes_list {value: [ "comment 1" ] }}
@@ -143,157 +144,170 @@ class UtilTest(tf.test.TestCase):
                       "other_disability"] }}
                   }
         }
-        """, tf.train.Example()))
+        """,
+                tf.train.Example(),
+            ),
+        )
 
-  def _create_example_csv(self, use_fake_embedding=False):
-    header = [
-        'comment_text',
-        'toxicity',
-        'heterosexual',
-        'homosexual_gay_or_lesbian',
-        'bisexual',
-        'other_sexual_orientation',
-        'male',
-        'female',
-        'transgender',
-        'other_gender',
-        'christian',
-        'jewish',
-        'muslim',
-        'hindu',
-        'buddhist',
-        'atheist',
-        'other_religion',
-        'black',
-        'white',
-        'asian',
-        'latino',
-        'other_race_or_ethnicity',
-        'physical_disability',
-        'intellectual_or_learning_disability',
-        'psychiatric_or_mental_illness',
-        'other_disability',
-    ]
-    example = [
-        'comment 1' if not use_fake_embedding else 0.35,
-        0.1,
-        # sexual orientation
-        0.1,
-        0.1,
-        0.5,
-        0.1,
-        # gender
-        0.1,
-        0.2,
-        0.3,
-        0.4,
-        # religion
-        0.0,
-        0.1,
-        0.2,
-        0.3,
-        0.4,
-        0.5,
-        0.6,
-        # race or ethnicity
-        0.1,
-        0.2,
-        0.3,
-        0.4,
-        0.5,
-        # disability
-        0.6,
-        0.7,
-        0.8,
-        1.0,
-    ]
-    empty_comment_example = [
-        '' if not use_fake_embedding else 0.35,
-        0.1,
-        0.1,
-        0.1,
-        0.5,
-        0.1,
-        0.1,
-        0.2,
-        0.3,
-        0.4,
-        0.0,
-        0.1,
-        0.2,
-        0.3,
-        0.4,
-        0.5,
-        0.6,
-        0.1,
-        0.2,
-        0.3,
-        0.4,
-        0.5,
-        0.6,
-        0.7,
-        0.8,
-        1.0,
-    ]
-    return [header, example, empty_comment_example]
+    def _create_example_csv(self, use_fake_embedding=False):
+        header = [
+            "comment_text",
+            "toxicity",
+            "heterosexual",
+            "homosexual_gay_or_lesbian",
+            "bisexual",
+            "other_sexual_orientation",
+            "male",
+            "female",
+            "transgender",
+            "other_gender",
+            "christian",
+            "jewish",
+            "muslim",
+            "hindu",
+            "buddhist",
+            "atheist",
+            "other_religion",
+            "black",
+            "white",
+            "asian",
+            "latino",
+            "other_race_or_ethnicity",
+            "physical_disability",
+            "intellectual_or_learning_disability",
+            "psychiatric_or_mental_illness",
+            "other_disability",
+        ]
+        example = [
+            "comment 1" if not use_fake_embedding else 0.35,
+            0.1,
+            # sexual orientation
+            0.1,
+            0.1,
+            0.5,
+            0.1,
+            # gender
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            # religion
+            0.0,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            # race or ethnicity
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            # disability
+            0.6,
+            0.7,
+            0.8,
+            1.0,
+        ]
+        empty_comment_example = [
+            "" if not use_fake_embedding else 0.35,
+            0.1,
+            0.1,
+            0.1,
+            0.5,
+            0.1,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.0,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            1.0,
+        ]
+        return [header, example, empty_comment_example]
 
-  def _write_csv(self, examples):
-    filename = os.path.join(tempfile.mkdtemp(), 'input.csv')
-    with open(filename, 'w', newline='') as csvfile:
-      csvwriter = csv.writer(csvfile, delimiter=',')
-      for example in examples:
-        csvwriter.writerow(example)
+    def _write_csv(self, examples):
+        filename = os.path.join(tempfile.mkdtemp(), "input.csv")
+        with open(filename, "w", newline="") as csvfile:
+            csvwriter = csv.writer(csvfile, delimiter=",")
+            for example in examples:
+                csvwriter.writerow(example)
 
-    return filename
+        return filename
 
-  def test_convert_data_csv(self):
-    input_file = self._write_csv(self._create_example_csv())
-    output_file = util.convert_comments_data(input_file)
+    def test_convert_data_csv(self):
+        input_file = self._write_csv(self._create_example_csv())
+        output_file = util.convert_comments_data(input_file)
 
-    # Remove the quotes around identity terms list that read_csv injects.
-    df = pd.read_csv(output_file).replace("'", '', regex=True)
+        # Remove the quotes around identity terms list that read_csv injects.
+        df = pd.read_csv(output_file).replace("'", "", regex=True)
 
-    expected_df = pd.DataFrame()
-    expected_df = pd.concat([expected_df, pd.DataFrame.from_dict(
-        {
-            'comment_text':
-                ['comment 1'],
-            'toxicity':
-                [0.0],
-            'gender': [[]],
-            'sexual_orientation': [['bisexual']],
-            'race': [['other_race_or_ethnicity']],
-            'religion': [['atheist', 'other_religion']],
-            'disability': [[
-                'physical_disability', 'intellectual_or_learning_disability',
-                'psychiatric_or_mental_illness', 'other_disability'
-            ]]
-        })],
-        ignore_index=True)
+        expected_df = pd.DataFrame()
+        expected_df = pd.concat(
+            [
+                expected_df,
+                pd.DataFrame.from_dict(
+                    {
+                        "comment_text": ["comment 1"],
+                        "toxicity": [0.0],
+                        "gender": [[]],
+                        "sexual_orientation": [["bisexual"]],
+                        "race": [["other_race_or_ethnicity"]],
+                        "religion": [["atheist", "other_religion"]],
+                        "disability": [
+                            [
+                                "physical_disability",
+                                "intellectual_or_learning_disability",
+                                "psychiatric_or_mental_illness",
+                                "other_disability",
+                            ]
+                        ],
+                    }
+                ),
+            ],
+            ignore_index=True,
+        )
 
-    self.assertEqual(
-        df.reset_index(drop=True, inplace=True),
-        expected_df.reset_index(drop=True, inplace=True))
+        self.assertEqual(
+            df.reset_index(drop=True, inplace=True),
+            expected_df.reset_index(drop=True, inplace=True),
+        )
 
-  # TODO(b/172260507): we should also look into testing the e2e call with tfma.
-  @mock.patch(
-      'tensorflow_model_analysis.default_eval_shared_model', autospec=True)
-  @mock.patch('tensorflow_model_analysis.run_model_analysis', autospec=True)
-  def test_get_eval_results_called_correclty(self, mock_run_model_analysis,
-                                             mock_shared_model):
-    mock_model = 'model'
-    mock_shared_model.return_value = mock_model
+    # TODO(b/172260507): we should also look into testing the e2e call with tfma.
+    @mock.patch("tensorflow_model_analysis.default_eval_shared_model", autospec=True)
+    @mock.patch("tensorflow_model_analysis.run_model_analysis", autospec=True)
+    def test_get_eval_results_called_correclty(
+        self, mock_run_model_analysis, mock_shared_model
+    ):
+        mock_model = "model"
+        mock_shared_model.return_value = mock_model
 
-    model_location = 'saved_model'
-    eval_results_path = 'eval_results'
-    data_file = 'data'
-    util.get_eval_results(model_location, eval_results_path, data_file)
+        model_location = "saved_model"
+        eval_results_path = "eval_results"
+        data_file = "data"
+        util.get_eval_results(model_location, eval_results_path, data_file)
 
-    mock_shared_model.assert_called_once_with(
-        eval_saved_model_path=model_location, tags=[tf.saved_model.SERVING])
+        mock_shared_model.assert_called_once_with(
+            eval_saved_model_path=model_location, tags=[tf.saved_model.SERVING]
+        )
 
-    expected_eval_config = text_format.Parse(
-        """
+        expected_eval_config = text_format.Parse(
+            """
      model_specs {
        label_key: 'toxicity'
      }
@@ -314,12 +328,15 @@ class UtilTest(tf.test.TestCase):
          compute_confidence_intervals { value: true }
          disabled_outputs{values: "analysis"}
      }
-     """, tfma.EvalConfig())
+     """,
+            tfma.EvalConfig(),
+        )
 
-    mock_run_model_analysis.assert_called_once_with(
-        eval_shared_model=mock_model,
-        data_location=data_file,
-        file_format='tfrecords',
-        eval_config=expected_eval_config,
-        output_path=eval_results_path,
-        extractors=None)
+        mock_run_model_analysis.assert_called_once_with(
+            eval_shared_model=mock_model,
+            data_location=data_file,
+            file_format="tfrecords",
+            eval_config=expected_eval_config,
+            output_path=eval_results_path,
+            extractors=None,
+        )
