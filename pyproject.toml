@@ -78,8 +78,38 @@ ignore = [
     "D206",   # Docstrings should be indented with spaces; unnecessary when running ruff-format
     "E501",   # Line length too long; unnecessary when running ruff-format
     "W191",   # Indentation contains tabs; unnecessary when running ruff-format
+
+    # REMOVE THESE AS FIXED
+    "ANN001", # Missing type annotation for function argument
+    "ANN202", # Missing return type annotation for private function
+    "ANN401", # Dynamically typed expressions (typing.Any) are disallowed
+    "ARG001", # Unused function argument
+    "ARG002", # Unused method argument
+    "B018",   # Found useless expression
+    "D101",   # Missing docstring in public class
+    "D102",   # Missing docstring in public method
+    "D103",   # Missing docstring in public function
+    "D107",   # Missing docstring in `__init__`
+    "D401",   # First line of docstring should be in imperative mood
+    "ERA001", # Found commented-out code
+    "FIX002", # Line contains TODO
+    "N802",   # Function name should be lowercase
+    "PD002",  # `inplace=True` should be avoided
+    "PD004",  # `.notna` is preferred to `.notnull`
+    "PT009",  # Use a regular `assert` instead of unittest-style
+    "PT027",  # Use `pytest.raises` instead of unittest-style `assertRaises`
+    "RET505", # Unnecessary `elif` after `return` statement
+    "RET506", # Unnecessary `else` after `raise` statement
+    "SIM105", # Use `contextlib.suppress` instead of `try`-`except`-`pass`
+    "UP008",  # Use `super()` instead of `super(__class__, self)`
+    "UP031",  # Use format specifiers instead of percent format
 ]
 
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
+
+[tool.pytest.ini_options]
+addopts = "--import-mode=importlib"
+testpaths = ["fairness_indicators"]
+python_files = ["*_test.py"]
