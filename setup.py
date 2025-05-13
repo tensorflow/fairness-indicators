@@ -78,6 +78,7 @@ setuptools.setup(
     extras_require={
         "docs": DOCS_PACKAGES,
         "test": TEST_PACKAGES,
+        "dev": "pre-commit"
     },
     # PyPI package information.
     classifiers=[
