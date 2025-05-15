@@ -315,7 +315,7 @@ Prediction Flip Count** *
 **Don’t see the metrics you’re looking for?**
 
 Follow the documentation
-[here](https://github.com/tensorflow/model-analysis/blob/master/g3doc/post_export_metrics.md)
+[here](https://tensorflow.github.io/model-analysis/post_export_metrics/)
 to add you own custom metric.
 
 ## Final notes

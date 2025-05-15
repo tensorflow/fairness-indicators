@@ -12,8 +12,8 @@ Use Fairness Indicators via the:
 
 - [Evaluator component](https://tensorflow.github.io/tfx/guide/evaluator/) in a [TFX pipeline](https://tensorflow.github.io/tfx/)
 - [TensorBoard plugin](https://github.com/tensorflow/tensorboard/blob/master/docs/fairness-indicators.md)
-- [TensorFlow Model Analysis library](https://www.tensorflow.org/tfx/guide/fairness_indicators)
-- [Model Agnostic TFMA library](https://www.tensorflow.org/tfx/guide/fairness_indicators#using_fairness_indicators_with_non-tensorflow_models)
+- [TensorFlow Model Analysis library](https://tensorflow.github.io/tfx/guide/fairness_indicators/)
+- [Model Agnostic TFMA library](https://tensorflow.github.io/tfx/guide/fairness_indicators/#using-fairness-indicators-with-non-tensorflow-models)
 <!-- TODO: Change the TFMA link when the new docs are deployed -->
 ///
 
