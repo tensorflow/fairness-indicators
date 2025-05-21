@@ -10,7 +10,37 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build_sdist:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: install python dependencies
+      run: pip install build twine
+
+    - name: build sdist
+      run: |
+        python -m build --sdist -o wheelhouse
+
+    - name: List and check sdist
+      run: |
+        ls -lh wheelhouse/
+        twine check wheelhouse/*
+    - name: Upload sdist
+      uses: actions/upload-artifact@v4
+      with:
+        name: sdist
+        path: ./wheelhouse/*.tar.gz
+
+
+  build_wheels:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -20,20 +50,38 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Build fairness-indicators
-      id: build-fairness-indicators
-      uses: ./.github/reusable-build
+    - name: Set up python
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
-        upload-artifact: true
+
+    - name: Install python build dependencies
+      run: |
+          pip install wheel
+
+    - name: Build wheels
+      run: |
+        python -m build --wheel
+        mkdir wheelhouse
+        mv dist/*.whl wheelhouse/
+    - name: List and check wheels
+      run: |
+        pip install twine pkginfo>=1.11.0
+        ${{ matrix.ls || 'ls -lh' }} wheelhouse/
+        twine check wheelhouse/*
+    - name: Upload wheels
+      uses: actions/upload-artifact@v4
+      with:
+        name: wheels-${{ matrix.python-version }}
+        path: ./wheelhouse/*.whl
 
   upload_to_pypi:
     name: Upload to PyPI
     runs-on: ubuntu-latest
     if: (github.event_name == 'release' && startsWith(github.ref, 'refs/tags')) || (github.event_name == 'workflow_dispatch')
-    needs: [build]
+    needs: [build_wheels, build_sdist]
     environment:
-      name: pypi
+      name: testpypi
       url: https://test.pypi.org/p/ajf-test-fairness-indicators
     permissions:
       id-token: write
