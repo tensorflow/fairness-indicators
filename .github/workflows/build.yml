@@ -101,4 +101,4 @@ jobs:
         with:
           packages_dir: wheels/
           repository_url: https://test.pypi.org/legacy/
-          verify-metadata: false
+          verify_metadata: false
