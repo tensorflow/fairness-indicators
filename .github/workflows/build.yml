@@ -97,8 +97,9 @@ jobs:
           ls -lAs wheels/
 
       - name: Upload to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1.9
+        uses: pypa/gh-action-pypi-publish@release/v1.12
         with:
           packages_dir: wheels/
           repository_url: https://test.pypi.org/legacy/
           verify_metadata: false
+          verbose: true
