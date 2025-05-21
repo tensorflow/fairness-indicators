@@ -52,3 +52,4 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1.9
         with:
           packages_dir: wheels/
+          repository_url: https://test.pypi.org/legacy/
