@@ -61,7 +61,7 @@ __version__ = globals_dict["__version__"]
 with open("README.md", encoding="utf-8") as fh:
     long_description = fh.read()
 setuptools.setup(
-    name="ajf-test-fairness-indicators",
+    name="fairness-indicators",
     version=__version__,
     description="Fairness Indicators",
     long_description=long_description,
