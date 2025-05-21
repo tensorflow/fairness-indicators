@@ -57,7 +57,7 @@ jobs:
 
     - name: Install python build dependencies
       run: |
-          pip install wheel
+          pip install wheel build
 
     - name: Build wheels
       run: |
