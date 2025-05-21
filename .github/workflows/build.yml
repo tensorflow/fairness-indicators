@@ -34,7 +34,7 @@ jobs:
     needs: [build]
     environment:
       name: pypi
-      url: https://pypi.org/p/tensorflow-fairness-indicators/
+      url: https://test.pypi.org/p/ajf-test-fairness-indicators
     permissions:
       id-token: write
     steps:
