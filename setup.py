@@ -36,12 +36,12 @@ def select_constraint(default, nightly=None, git_master=None):
   else:
     return default
 REQUIRED_PACKAGES = [
-    'tensorflow>=2.16,<2.17',
+    'tensorflow>=2.17,<2.18',
     'tensorflow-hub>=0.16.1,<1.0.0',
-    'tensorflow-data-validation>=1.16.1,<2.0.0',
-    'tensorflow-model-analysis>=0.47.1,<0.48.0',
+    'tensorflow-data-validation>=1.17.0,<2.0.0',
+    'tensorflow-model-analysis>=0.48.0,<0.49.0',
     'witwidget>=1.4.4,<2',
-    'protobuf>=3.20.3,<5',
+    'protobuf>=4.21.6,<6.0.0',
 ]
 # Get version from version module.
 with open('fairness_indicators/version.py') as fp:

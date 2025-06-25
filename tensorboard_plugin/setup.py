@@ -42,11 +42,11 @@ def select_constraint(default, nightly=None, git_master=None):
     return default
 
 REQUIRED_PACKAGES = [
-    'protobuf>=3.20.3,<5',
-    'tensorboard>=2.16.2,<2.17.0',
-    'tensorflow>=2.16,<2.17',
-    'tf-keras>=2.16,<2.17',
-    'tensorflow-model-analysis>=0.47,<0.48',
+    'protobuf>=4.21.6,<6.0.0',
+    'tensorboard>=2.17.0,<2.18.0',
+    'tensorflow>=2.17,<2.18',
+    'tf-keras>=2.17,<2.18',
+    'tensorflow-model-analysis>=0.48,<0.49',
     'werkzeug<2',
 ]
 
