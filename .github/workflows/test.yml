@@ -1,0 +1,38 @@
+name: Tests
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  pull_request:
+    branches: [ master ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  workflow_dispatch:
+
+jobs:
+  tests:
+    if: github.actor != 'copybara-service[bot]'
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10']
+        package-root-dir: ['./', './tensorboard_plugin']
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Set up environment
+      uses: ./.github/actions/setup-env
+      with:
+        python-version: ${{ matrix.python-version }}
+        package-root-dir: ${{ matrix.package-root-dir }}
+
+    - name: Run tests
+      shell: bash
+      run: |
+        cd ${{ matrix.package-root-dir }}
+        pytest

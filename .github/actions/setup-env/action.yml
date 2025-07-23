@@ -1,0 +1,28 @@
+name: Set up environment
+description: Set up environment and install package
+
+inputs:
+  python-version:
+    default: "3.10"
+    required: true
+  package-root-dir:
+    default: "./"
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+        cache-dependency-path: |
+          ${{ inputs.package-root-dir }}/setup.py
+
+    - name: Install dependencies
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip
+        pip install ${{ inputs.package-root-dir }}[test]
+  

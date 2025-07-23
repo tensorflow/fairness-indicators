@@ -67,7 +67,3 @@ class SummaryV2Test(tf.test.TestCase):
         six.ensure_text(summary_value.tensor.string_val[0], 'utf-8'))
     self.assertEqual(metadata.PLUGIN_NAME,
                      summary_value.metadata.plugin_data.plugin_name)
-
-
-if __name__ == '__main__':
-  tf.test.main()

@@ -50,6 +50,10 @@ REQUIRED_PACKAGES = [
     'werkzeug<2',
 ]
 
+TEST_PACKAGES = [
+    'pytest>=8.3.0,<9',
+]
+
 with open('README.md', 'r', encoding='utf-8') as fh:
   long_description = fh.read()
 
@@ -80,6 +84,9 @@ setup(
     python_requires='>=3.9,<4',
     install_requires=REQUIRED_PACKAGES,
     tests_require=REQUIRED_PACKAGES,
+    extras_require={
+        'test': TEST_PACKAGES,
+    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',

@@ -43,6 +43,10 @@ REQUIRED_PACKAGES = [
     'witwidget>=1.4.4,<2',
     'protobuf>=4.21.6,<6.0.0',
 ]
+
+TEST_PACKAGES = [
+    'pytest>=8.3.0,<9',
+]
 # Get version from version module.
 with open('fairness_indicators/version.py') as fp:
   globals_dict = {}
@@ -66,6 +70,9 @@ setuptools.setup(
     python_requires='>=3.9,<4',
     install_requires=REQUIRED_PACKAGES,
     tests_require=REQUIRED_PACKAGES,
+    extras_require={
+        'test': TEST_PACKAGES,
+    },
     # PyPI package information.
     classifiers=[
         'Development Status :: 4 - Beta',
