@@ -21,7 +21,7 @@ sociolinguists, and cultural anthropologists, as well as with members of the
 populations on which technology will be deployed.
 
 A single model, for example, the toxicity model that we leverage in the
-[example colab](https://www.tensorflow.org/responsible_ai/fairness_indicators/tutorials/Fairness_Indicators_Example_Colab),
+[example colab](../../tutorials/Fairness_Indicators_Example_Colab),
 can be used in many different contexts. A toxicity model deployed on a website
 to filter offensive comments, for example, is a very different use case than the
 model being deployed in an example web UI where users can type in a sentence and
@@ -315,7 +315,7 @@ Prediction Flip Count** *
 **Don’t see the metrics you’re looking for?**
 
 Follow the documentation
-[here](https://github.com/tensorflow/model-analysis/blob/master/g3doc/post_export_metrics.md)
+[here](https://tensorflow.github.io/model-analysis/post_export_metrics/)
 to add you own custom metric.
 
 ## Final notes

@@ -1,0 +1,89 @@
+site_name: Fairness Indicators
+repo_name: "fairness-indicators"
+repo_url: https://github.com/tensorflow/fairness-indicators
+
+theme:
+  name: material
+  logo: images/tf_full_color_primary_icon.svg
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      primary: custom
+      accent: custom
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      primary: custom
+      accent: custom
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  favicon: images/tf_full_color_primary_icon.svg
+
+  features:
+    - content.code.copy
+    - content.code.select
+    - content.action.edit
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+plugins:
+  - mkdocs-jupyter:
+      execute: false
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      linenums: false
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.blocks.html
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - "Overview": index.md
+  - "Thinking about Fairness Evaluation": guide/guidance.md
+  - "Introduction to Fairness Indicators": tutorials/Fairness_Indicators_Example_Colab.ipynb
+  - "Evaluate fairness using TF-Hub models": tutorials/Fairness_Indicators_on_TF_Hub_Text_Embeddings.ipynb
+  - "Visualize with Tensor Board Plugin": tutorials/Fairness_Indicators_TensorBoard_Plugin_Example_Colab.ipynb
+  - "Evaluate toxicity in Wiki comments": tutorials/Fairness_Indicators_TFCO_Wiki_Case_Study.ipynb
+  - "Tensor Flow constrained optimization example": tutorials/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb
+  - "Pandas Data Frame case study": tutorials/Fairness_Indicators_Pandas_Case_Study.ipynb
+  - "Face SSD example Colab": tutorials/Facessd_Fairness_Indicators_Example_Colab.ipynb

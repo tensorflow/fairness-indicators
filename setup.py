@@ -15,6 +15,7 @@
 """Setup to install Fairness Indicators."""
 
 import os
+from pathlib import Path
 import sys
 
 import setuptools
@@ -45,8 +46,12 @@ REQUIRED_PACKAGES = [
 ]
 
 TEST_PACKAGES = [
-    'pytest>=8.3.0,<9',
+    "pytest>=8.3.0,<9",
 ]
+
+with open(Path("./requirements-docs.txt").expanduser().absolute()) as f:
+    DOCS_PACKAGES = [req.strip() for req in f.readlines()]
+
 # Get version from version module.
 with open('fairness_indicators/version.py') as fp:
   globals_dict = {}
@@ -71,7 +76,8 @@ setuptools.setup(
     install_requires=REQUIRED_PACKAGES,
     tests_require=REQUIRED_PACKAGES,
     extras_require={
-        'test': TEST_PACKAGES,
+        "docs": DOCS_PACKAGES,
+        "test": TEST_PACKAGES,
     },
     # PyPI package information.
     classifiers=[
