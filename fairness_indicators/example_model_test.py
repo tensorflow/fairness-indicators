@@ -163,7 +163,3 @@ class ExampleModelTest(tf.test.TestCase):
         metric_values['fairness_indicators_metrics/true_negative_rate@0.1'],
         {'doubleValue': 1.0},
     )
-
-
-if __name__ == '__main__':
-  tf.test.main()

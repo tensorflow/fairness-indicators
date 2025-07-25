@@ -215,7 +215,3 @@ class WeightUtilsTest(tf.test.TestCase):
     self.assertIn('gender', res)
     self.assertAlmostEqual(res['gender']['female'], 0.125)
     self.assertAlmostEqual(res[''][''], 0)
-
-
-if __name__ == '__main__':
-  tf.test.main()

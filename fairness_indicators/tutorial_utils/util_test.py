@@ -323,6 +323,3 @@ class UtilTest(tf.test.TestCase):
         eval_config=expected_eval_config,
         output_path=eval_results_path,
         extractors=None)
-
-if __name__ == '__main__':
-  tf.test.main()
