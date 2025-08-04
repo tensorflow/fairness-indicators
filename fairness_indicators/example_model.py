@@ -25,6 +25,8 @@ import tensorflow.compat.v1 as tf
 import tensorflow_model_analysis as tfma
 from tensorflow import keras
 
+from fairness_indicators import fairness_indicators_metrics  # noqa: F401
+
 TEXT_FEATURE = "comment_text"
 LABEL = "toxicity"
 SLICE = "slice"
