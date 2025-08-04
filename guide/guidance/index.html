@@ -1,0 +1,951 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../../tutorials/Fairness_Indicators_Example_Colab/">
+      
+      
+      <link rel="icon" href="../../images/tf_full_color_primary_icon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Thinking about Fairness Evaluation - Fairness Indicators</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fairness-indicators-thinking-about-fairness-evaluation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Fairness Indicators" class="md-header__button md-logo" aria-label="Fairness Indicators" data-md-component="logo">
+      
+  <img src="../../images/tf_full_color_primary_icon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Fairness Indicators
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Thinking about Fairness Evaluation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/tensorflow/fairness-indicators" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fairness-indicators
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Fairness Indicators" class="md-nav__button md-logo" aria-label="Fairness Indicators" data-md-component="logo">
+      
+  <img src="../../images/tf_full_color_primary_icon.svg" alt="logo">
+
+    </a>
+    Fairness Indicators
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/tensorflow/fairness-indicators" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fairness-indicators
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Thinking about Fairness Evaluation
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Thinking about Fairness Evaluation
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#which-groups-should-i-slice-by" class="md-nav__link">
+    <span class="md-ellipsis">
+      Which groups should I slice by?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#which-metrics-should-i-choose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Which metrics should I choose?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#critical-fairness-metrics-for-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Critical fairness metrics for classification
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Final notes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/Fairness_Indicators_Example_Colab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to Fairness Indicators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/Fairness_Indicators_on_TF_Hub_Text_Embeddings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fairness Indicators on TF-Hub Text Embeddings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/Fairness_Indicators_TensorBoard_Plugin_Example_Colab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fairness Indicators TensorBoard Plugin Example Colab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/Fairness_Indicators_TFCO_Wiki_Case_Study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Wiki Talk Comments Toxicity Prediction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/Fairness_Indicators_TFCO_CelebA_Case_Study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TensorFlow Constrained Optimization Example Using CelebA Dataset
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/Fairness_Indicators_Pandas_Case_Study/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pandas DataFrame to Fairness Indicators Case Study
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/Facessd_Fairness_Indicators_Example_Colab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FaceSSD Fairness Indicators Example Colab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#which-groups-should-i-slice-by" class="md-nav__link">
+    <span class="md-ellipsis">
+      Which groups should I slice by?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#which-metrics-should-i-choose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Which metrics should I choose?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#critical-fairness-metrics-for-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Critical fairness metrics for classification
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Final notes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/tensorflow/fairness-indicators/edit/master/docs/guide/guidance.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="fairness-indicators-thinking-about-fairness-evaluation">Fairness Indicators: Thinking about Fairness Evaluation<a class="headerlink" href="#fairness-indicators-thinking-about-fairness-evaluation" title="Permanent link">&para;</a></h1>
+<p>Fairness Indicators is a useful tool for evaluating <em>binary</em> and <em>multi-class</em>
+classifiers for fairness. Eventually, we hope to expand this tool, in
+partnership with all of you, to evaluate even more considerations.</p>
+<p>Keep in mind that quantitative evaluation is only one part of evaluating a
+broader user experience. Start by thinking about the different <em>contexts</em>
+through which a user may experience your product. Who are the different types of
+users your product is expected to serve? Who else may be affected by the
+experience?</p>
+<p>When considering AI's impact on people, it is important to always remember that
+human societies are extremely complex! Understanding people, and their social
+identities, social structures and cultural systems are each huge fields of open
+research in their own right. Throw in the complexities of cross-cultural
+differences around the globe, and getting even a foothold on understanding
+societal impact can be challenging. Whenever possible, it is recommended you
+consult with appropriate domain experts, which may include social scientists,
+sociolinguists, and cultural anthropologists, as well as with members of the
+populations on which technology will be deployed.</p>
+<p>A single model, for example, the toxicity model that we leverage in the
+<a href="../../tutorials/Fairness_Indicators_Example_Colab">example colab</a>,
+can be used in many different contexts. A toxicity model deployed on a website
+to filter offensive comments, for example, is a very different use case than the
+model being deployed in an example web UI where users can type in a sentence and
+see what score the model gives. Depending on the use case, and how users
+experience the model prediction, your product will have different risks,
+effects, and opportunities and you may want to evaluate for different fairness
+concerns.</p>
+<p>The questions above are the foundation of what ethical considerations, including
+fairness, you may want to take into account when designing and developing your
+ML-based product. These questions also motivate which metrics and which groups
+of users you should use the tool to evaluate.</p>
+<p>Before diving in further, here are three recommended resources for getting
+started:</p>
+<ul>
+<li><strong><a href="https://pair.withgoogle.com/">The People + AI Guidebook</a> for
+    Human-centered AI design:</strong> This guidebook is a great resource for the
+    questions and aspects to keep in mind when designing a machine-learning
+    based product. While we created this guidebook with designers in mind, many
+    of the principles will help answer questions like the one posed above.</li>
+<li><strong><a href="https://www.youtube.com/watch?v=6CwzDoE8J4M">Our Fairness Lessons Learned</a>:</strong>
+    This talk at Google I/O discusses lessons we have learned in our goal to
+    build and design inclusive products.</li>
+<li><strong><a href="https://developers.google.com/machine-learning/crash-course/fairness/video-lecture">ML Crash Course: Fairness</a>:</strong>
+    The ML Crash Course has a 70 minute section dedicated to identifying and
+    evaluating fairness concerns</li>
+</ul>
+<p>So, why look at individual slices? Evaluation over individual slices is
+important as strong overall metrics can obscure poor performance for certain
+groups. Similarly, performing well for a certain metric (accuracy, AUC) doesn’t
+always translate to acceptable performance for other metrics (false positive
+rate, false negative rate) that are equally important in assessing opportunity
+and harm for users.</p>
+<p>The below sections will walk through some of the aspects to consider.</p>
+<h2 id="which-groups-should-i-slice-by">Which groups should I slice by?<a class="headerlink" href="#which-groups-should-i-slice-by" title="Permanent link">&para;</a></h2>
+<p>In general, a good practice is to slice by as many groups as may be affected by
+your product, since you never know when performance might differ for one of the
+other. However, if you aren’t sure, think about the different users who may be
+engaging with your product, and how they might be affected. Consider,
+especially, slices related to sensitive characteristics such as race, ethnicity,
+gender, nationality, income, sexual orientation, and disability status.</p>
+<p><strong>What if I don’t have data labeled for the slices I want to investigate?</strong></p>
+<p>Good question. We know that many datasets don’t have ground-truth labels for
+individual identity attributes.</p>
+<p>If you find yourself in this position, we recommend a few approaches:</p>
+<ol>
+<li>Identify if there <em>are</em> attributes that you have that may give you some
+    insight into the performance across groups. For example, <em>geography</em> while
+    not equivalent to ethnicity &amp; race, may help you uncover any disparate
+    patterns in performance</li>
+<li>Identify if there are representative public datasets that might map well to
+    your problem. You can find a range of diverse and inclusive datasets on the
+    <a href="https://ai.google/responsibilities/responsible-ai-practices/?category=fairness">Google AI site</a>,
+    which include
+    <a href="https://www.blog.google/technology/ai/fairness-matters-promoting-pride-and-respect-ai/">Project Respect</a>,
+    <a href="https://www.kaggle.com/c/inclusive-images-challenge">Inclusive Images</a>, and
+    <a href="https://ai.google/tools/datasets/open-images-extended-crowdsourced/">Open Images Extended</a>,
+    among others.</li>
+<li>Leverage rules or classifiers, when relevant, to label your data with
+    objective surface-level attributes. For example, you can label text as to
+    whether or not there is an identity term <em>in</em> the sentence. Keep in mind
+    that classifiers have their own challenges, and if you’re not careful, may
+    introduce another layer of bias as well. Be clear about what your classifier
+    is <span style="text-decoration:underline;">actually</span> classifying. For
+    example, an age classifier on images is in fact classifying <em>perceived age</em>.
+    Additionally, when possible, leverage surface-level attributes that <em>can</em> be
+    objectively identified in the data. For example, it is ill-advised to build
+    an image classifier for race or ethnicity, because these are not visual
+    traits that can be defined in an image. A classifier would likely pick up on
+    proxies or stereotypes. Instead, building a classifier for skin tone may be
+    a more appropriate way to label and evaluate an image. Lastly, ensure high
+    accuracy for classifiers labeling such attributes.</li>
+<li>Find more representative data that is labeled</li>
+</ol>
+<p><strong>Always make sure to evaluate on multiple, diverse datasets.</strong></p>
+<p>If your evaluation data is not adequately representative of your user base, or
+the types of data likely to be encountered, you may end up with deceptively good
+fairness metrics. Similarly, high model performance on one dataset doesn’t
+guarantee high performance on others.</p>
+<p><strong>Keep in mind subgroups aren’t always the best way to classify individuals.</strong></p>
+<p>People are multidimensional and belong to more than one group, even within a
+single dimension -- consider someone who is multiracial, or belongs to multiple
+racial groups. Also, while overall metrics for a given racial group may look
+equitable, particular interactions, such as race and gender together may show
+unintended bias. Moreover, many subgroups have fuzzy boundaries which are
+constantly being redrawn.</p>
+<p><strong>When have I tested enough slices, and how do I know which slices to test?</strong></p>
+<p>We acknowledge that there are a vast number of groups or slices that may be
+relevant to test, and when possible, we recommend slicing and evaluating a
+diverse and wide range of slices and then deep-diving where you spot
+opportunities for improvement. It is also important to acknowledge that even
+though you may not see concerns on slices you have tested, that doesn’t imply
+that your product works for <em>all</em> users, and getting diverse user feedback and
+testing is important to ensure that you are continually identifying new
+opportunities.</p>
+<p>To get started, we recommend thinking through your particular use case and the
+different ways users may engage with your product. How might different users
+have different experiences? What does that mean for slices you should evaluate?
+Collecting feedback from diverse users may also highlight potential slices to
+prioritize.</p>
+<h2 id="which-metrics-should-i-choose">Which metrics should I choose?<a class="headerlink" href="#which-metrics-should-i-choose" title="Permanent link">&para;</a></h2>
+<p>When selecting which metrics to evaluate for your system, consider who will be
+experiencing your model, how it will be experienced, and the effects of that
+experience.</p>
+<p>For example, how does your model give people more dignity or autonomy, or
+positively impact their emotional, physical or financial wellbeing? In contrast,
+how could your model’s predictions reduce people's dignity or autonomy, or
+negatively impact their emotional, physical or financial wellbeing?</p>
+<p><strong>In general, we recommend slicing <em>all your existing performance metrics as
+good practice. We also recommend evaluating your metrics across
+<span style="text-decoration:underline;">multiple thresholds</span></em></strong> in order
+to understand how the threshold can affect the performance for different groups.</p>
+<p>In addition, if there is a predicted label which is uniformly "good" or “bad”,
+then consider reporting (for each subgroup) the rate at which that label is
+predicted. For example, a “good” label would be a label whose prediction grants
+a person access to some resource, or enables them to perform some action.</p>
+<h2 id="critical-fairness-metrics-for-classification">Critical fairness metrics for classification<a class="headerlink" href="#critical-fairness-metrics-for-classification" title="Permanent link">&para;</a></h2>
+<p>When thinking about a classification model, think about the effects of <em>errors</em>
+(the differences between the actual “ground truth” label, and the label from the
+model). If some errors may pose more opportunity or harm to your users, make
+sure you evaluate the rates of these errors across groups of users. These error
+rates are defined below, in the metrics currently supported by the Fairness
+Indicators beta.</p>
+<p><strong>Over the course of the next year, we hope to release case studies of different
+use cases and the metrics associated with these so that we can better highlight
+when different metrics might be most appropriate.</strong></p>
+<p><strong>Metrics available today in Fairness Indicators</strong></p>
+<p>Note: There are many valuable fairness metrics that are not currently supported
+in the Fairness Indicators beta. As we continue to add more metrics, we will
+continue to add guidance for these metrics, here. Below, you can access
+instructions to add your own metrics to Fairness Indicators. Additionally,
+please reach out to <a href="mailto:tfx@tensorflow.org">tfx@tensorflow.org</a> if there are
+metrics that you would like to see. We hope to partner with you to build this
+out further.</p>
+<p><strong>Positive Rate / Negative Rate</strong></p>
+<ul>
+<li><em><span style="text-decoration:underline;">Definition:</span></em> The percentage
+    of data points that are classified as positive or negative, independent of
+    ground truth</li>
+<li><em><span style="text-decoration:underline;">Relates to:</span></em> Demographic
+    Parity and Equality of Outcomes, when equal across subgroups</li>
+<li><em><span style="text-decoration:underline;">When to use this metric:</span></em>
+    Fairness use cases where having equal final percentages of groups is
+    important</li>
+</ul>
+<p><strong>True Positive Rate / False Negative Rate</strong></p>
+<ul>
+<li><em><span style="text-decoration:underline;">Definition:</span></em> The percentage
+    of positive data points (as labeled in the ground truth) that are
+    <em>correctly</em> classified as positive, or the percentage of positive data
+    points that are <em>incorrectly</em> classified as negative</li>
+<li><em><span style="text-decoration:underline;">Relates to:</span></em> Equality of
+    Opportunity (for the positive class), when equal across subgroups</li>
+<li><em><span style="text-decoration:underline;">When to use this metric:</span></em>
+    Fairness use cases where it is important that the same % of qualified
+    candidates are rated positive in each group. This is most commonly
+    recommended in cases of classifying positive outcomes, such as loan
+    applications, school admissions, or whether content is kid-friendly</li>
+</ul>
+<p><strong>True Negative Rate / False Positive Rate</strong></p>
+<ul>
+<li><em><span style="text-decoration:underline;">Definition:</span></em> The percentage
+    of negative data points (as labeled in the ground truth) that are correctly
+    classified as negative, or the percentage of negative data points that are
+    incorrectly classified as positive</li>
+<li><em><span style="text-decoration:underline;">Relates to:</span></em> Equality of
+    Opportunity (for the negative class), when equal across subgroups</li>
+<li><em><span style="text-decoration:underline;">When to use this metric:</span></em>
+    Fairness use cases where error rates (or misclassifying something as
+    positive) are more concerning than classifying the positives. This is most
+    common in abuse cases, where <em>positives</em> often lead to negative actions.
+    These are also important for Facial Analysis Technologies such as face
+    detection or face attributes</li>
+</ul>
+<p>Note: When both “positive” and “negative” mistakes are equally important, the
+metric is called “equality of
+<span style="text-decoration:underline;">odds</span>”. This can be measured by
+evaluating and aiming for equality across both the TNR &amp; FNR, or both the TPR &amp;
+FPR. For example, an app that counts how many cars go past a stop sign is
+roughly equally bad whether or not it accidentally includes an extra car (a
+false positive) or accidentally excludes a car (a false negative).</p>
+<p><strong>Accuracy &amp; AUC</strong></p>
+<ul>
+<li><em><span style="text-decoration:underline;">Relates to:</span></em> Predictive
+    Parity, when equal across subgroups</li>
+<li><em><span style="text-decoration:underline;">When to use these metrics:</span></em>
+    Cases where precision of the task is most critical (not necessarily in a
+    given direction), such as face identification or face clustering</li>
+</ul>
+<p><strong>False Discovery Rate</strong></p>
+<ul>
+<li><em><span style="text-decoration:underline;">Definition:</span></em> The percentage
+    of negative data points (as labeled in the ground truth) that are
+    incorrectly classified as positive out of all data points classified as
+    positive. This is also the inverse of PPV</li>
+<li><em><span style="text-decoration:underline;">Relates to:</span></em> Predictive
+    Parity (also known as Calibration), when equal across subgroups</li>
+<li><em><span style="text-decoration:underline;">When to use this metric:</span></em>
+    Cases where the fraction of correct positive predictions should be equal
+    across subgroups</li>
+</ul>
+<p><strong>False Omission Rate</strong></p>
+<ul>
+<li><em><span style="text-decoration:underline;">Definition:</span></em> The percentage
+    of positive data points (as labeled in the ground truth) that are
+    incorrectly classified as negative out of all data points classified as
+    negative. This is also the inverse of NPV</li>
+<li><em><span style="text-decoration:underline;">Relates to:</span></em> Predictive
+    Parity (also known as Calibration), when equal across subgroups</li>
+<li><em><span style="text-decoration:underline;">When to use this metric:</span></em>
+    Cases where the fraction of correct negative predictions should be equal
+    across subgroups</li>
+</ul>
+<p>Note: When used together, False Discovery Rate and False Omission Rate relate to
+Conditional Use Accuracy Equality, when FDR and FOR are both equal across
+subgroups. FDR and FOR are also similar to FPR and FNR, where FDR/FOR compare
+FP/FN to predicted negative/positive data points, and FPR/FNR compare FP/FN to
+ground truth negative/positive data points. FDR/FOR can be used instead of
+FPR/FNR when predictive parity is more critical than equality of opportunity.</p>
+<p><strong>Overall Flip Rate / Positive to Negative Prediction Flip Rate / Negative to
+Positive Prediction Flip Rate</strong></p>
+<ul>
+<li><em><span style="text-decoration:underline;">Definition:</span></em> The
+    probability that the classifier gives a different prediction if the identity
+    attribute in a given feature were changed.</li>
+<li><em><span style="text-decoration:underline;">Relates to:</span></em> Counterfactual
+    fairness</li>
+<li><em><span style="text-decoration:underline;">When to use this metric:</span></em>
+    When determining whether the model’s prediction changes when the sensitive
+    attributes referenced in the example is removed or replaced. If it does,
+    consider using the Counterfactual Logit Pairing technique within the
+    Tensorflow Model Remediation library.</li>
+</ul>
+<p><strong>Flip Count / Positive to Negative Prediction Flip Count / Negative to Positive
+Prediction Flip Count</strong> *</p>
+<ul>
+<li><em><span style="text-decoration:underline;">Definition:</span></em> The number of
+    times the classifier gives a different prediction if the identity term in a
+    given example were changed.</li>
+<li><em><span style="text-decoration:underline;">Relates to:</span></em> Counterfactual
+    fairness</li>
+<li><em><span style="text-decoration:underline;">When to use this metric:</span></em>
+    When determining whether the model’s prediction changes when the sensitive
+    attributes referenced in the example is removed or replaced. If it does,
+    consider using the Counterfactual Logit Pairing technique within the
+    Tensorflow Model Remediation library.</li>
+</ul>
+<p><strong>Examples of which metrics to select</strong></p>
+<ul>
+<li><em>Systematically failing to detect faces in a camera app can lead to a
+    negative user experience for certain user groups.</em> In this case, false
+    negatives in a face detection system may lead to product failure, while a
+    false positive (detecting a face when there isn’t one) may pose a slight
+    annoyance to the user. Thus, evaluating and minimizing the false negative
+    rate is important for this use case.</li>
+<li><em>Unfairly marking text comments from certain people as “spam” or “high
+    toxicity” in a moderation system leads to certain voices being silenced.</em> On
+    one hand, a high false positive rate leads to unfair censorship. On the
+    other, a high false negative rate could lead to a proliferation of toxic
+    content from certain groups, which may both harm the user and constitute a
+    representational harm for those groups. Thus, both metrics are important to
+    consider, in addition to metrics which take into account all types of errors
+    such as accuracy or AUC.</li>
+</ul>
+<p><strong>Don’t see the metrics you’re looking for?</strong></p>
+<p>Follow the documentation
+<a href="https://tensorflow.github.io/model-analysis/post_export_metrics/">here</a>
+to add you own custom metric.</p>
+<h2 id="final-notes">Final notes<a class="headerlink" href="#final-notes" title="Permanent link">&para;</a></h2>
+<p><strong>A gap in metric between two groups can be a sign that your model may have
+unfair skews</strong>. You should interpret your results according to your use case.
+However, the first sign that you may be treating one set of users <em>unfairly</em> is
+when the metrics between that set of users and your overall are significantly
+different. Make sure to account for confidence intervals when looking at these
+differences. When you have too few samples in a particular slice, the difference
+between metrics may not be accurate.</p>
+<p><strong>Achieving equality across groups on Fairness Indicators doesn’t mean the model
+is fair.</strong> Systems are highly complex, and achieving equality on one (or even
+all) of the provided metrics can’t guarantee Fairness.</p>
+<p><strong>Fairness evaluations should be run throughout the development process and
+post-launch (not the day before launch).</strong> Just like improving your product is
+an ongoing process and subject to adjustment based on user and market feedback,
+making your product fair and equitable requires ongoing attention. As different
+aspects of the model changes, such as training data, inputs from other models,
+or the design itself, fairness metrics are likely to change. “Clearing the bar”
+once isn’t enough to ensure that all of the interacting components have remained
+intact over time.</p>
+<p><strong>Adversarial testing should be performed for rare, malicious examples.</strong>
+Fairness evaluations aren’t meant to replace adversarial testing. Additional
+defense against rare, targeted examples is crucial as these examples probably
+will not manifest in training or evaluation data.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "content.code.select", "content.action.edit"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

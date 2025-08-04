@@ -1,0 +1,128 @@
+book_path: /responsible_ai/_book.yaml
+project_path: /responsible_ai/_project.yaml
+title: Fairness Indicators
+landing_page:
+  custom_css_path: /site-assets/css/style.css
+  nav: left
+  meta_tags:
+  - name: description
+    content: >
+      Fairness Indicators tool suite for TensorFlow.
+  rows:
+  - classname: devsite-landing-row-100
+  - heading: Fairness Indicators
+    options:
+    - description-50
+    items:
+    - description: >
+        <p>
+        Fairness Indicators is a library that enables easy computation of commonly-identified
+        fairness metrics for binary and multiclass classifiers. With the Fairness Indicators tool
+        suite, you can:
+        <ul>
+          <li>
+              Compute commonly-identified fairness metrics for classification models
+          </li>
+          <li>
+              Compare model performance across subgroups to a baseline, or to other models
+          </li>
+          <li>
+              Use confidence intervals to surface statistically significant disparities
+          </li>
+          <li>
+              Perform evaluation over multiple thresholds
+          </li>
+        </ul>
+        </p>
+        <p>
+        Use Fairness Indicators via the:
+        <ul>
+          <li>
+              <a href="https://www.tensorflow.org/tfx/guide/evaluator">Evaluator
+              component </a>in a <a href ="https://www.tensorflow.org/tfx">TFX pipeline</a>
+          </li>
+          <li>
+              <a href="https://github.com/tensorflow/tensorboard/blob/master/docs/fairness-indicators.md">
+              TensorBoard plugin</a>
+          </li>
+          <li>
+              <a href="https://www.tensorflow.org/tfx/guide/fairness_indicators">TensorFlow Model
+              Analysis library</a>
+          </li>
+          <li>
+              <a href="https://www.tensorflow.org/tfx/guide/fairness_indicators#using_fairness_indicators_with_non-tensorflow_models">Model
+              Agnostic TFMA library</a>
+          </li>
+
+    - code_block: |
+          <pre class = "prettyprint">
+          eval_config_pbtxt = """
+
+          model_specs {
+              label_key: "%s"
+          }
+
+          metrics_specs {
+              metrics {
+                  class_name: "FairnessIndicators"
+                  config: '{ "thresholds": [0.25, 0.5, 0.75] }'
+              }
+              metrics {
+                  class_name: "ExampleCount"
+              }
+          }
+
+          slicing_specs {}
+          slicing_specs {
+              feature_keys: "%s"
+          }
+
+          options {
+              compute_confidence_intervals { value: False }
+              disabled_outputs{values: "analysis"}
+          }
+          """ % (LABEL_KEY, GROUP_KEY)
+          </pre>
+  - classname: devsite-landing-row-100
+    items:
+    - description: >
+        <h3>Resources</h3>
+
+  - classname: devsite-landing-row-cards
+    items:
+    - heading: "ML Practicum: Fairness in Perspective API using Fairness Indicators"
+      image_path: /responsible_ai/fairness_indicators/images/mlpracticum.png
+      path: "https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body"
+      buttons:
+      - label: "Try the Case Study"
+        path: "https://developers.google.com/machine-learning/practica/fairness-indicators?utm_source=github&utm_medium=github&utm_campaign=fi-practicum&utm_term=&utm_content=repo-body"
+
+    - heading: "Fairness Indicators on the TensorFlow blog"
+      image_path: /resources/images/tf-logo-card-16x9.png
+      path: https://blog.tensorflow.org/2019/12/fairness-indicators-fair-ML-systems.html
+      buttons:
+      - label: "Read on the TensorFlow blog"
+        path: https://blog.tensorflow.org/2019/12/fairness-indicators-fair-ML-systems.html
+
+    - heading: "Fairness Indicators on GitHub"
+      image_path: /resources/images/github-card-16x9.png
+      path: https://github.com/tensorflow/fairness-indicators
+      buttons:
+      - label: "View on GitHub"
+        path: https://github.com/tensorflow/fairness-indicators
+
+  - classname: devsite-landing-row-cards
+    items:
+    - heading: "Fairness Indicators on the Google AI Blog"
+      image_path: /responsible_ai/fairness_indicators/images/googleai.png
+      path: https://ai.googleblog.com/2019/12/fairness-indicators-scalable.html
+      buttons:
+      - label: "Read on Google AI blog"
+        path: https://ai.googleblog.com/2019/12/fairness-indicators-scalable.html
+
+    - heading: "Fairness Indicators at Google I/O"
+      path: https://www.youtube.com/watch?v=6CwzDoE8J4M
+      youtube_id: 6CwzDoE8J4M?rel=0&show_info=0
+      buttons:
+      - label: "Watch the video"
+        path: https://www.youtube.com/watch?v=6CwzDoE8J4M
