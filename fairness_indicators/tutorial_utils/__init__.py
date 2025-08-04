@@ -12,5 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Init file for fairness_indicators.tutorial_utils."""
-from fairness_indicators.tutorial_utils.util import convert_comments_data
-from fairness_indicators.tutorial_utils.util import get_eval_results
+
+from fairness_indicators.tutorial_utils.util import (
+    convert_comments_data,
+    get_eval_results,
+)
