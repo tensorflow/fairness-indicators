@@ -64,7 +64,7 @@ options {
 -   ![Fairness Indicators on the TensorFlow blog](images/tf_full_color_primary_icon.svg)
 
     ### [Fairness Indicators on the TensorFlow blog](https://blog.tensorflow.org/2019/12/fairness-indicators-fair-ML-systems.html)
-    
+
     ---
 
     [Read on the TensorFlow blog](https://blog.tensorflow.org/2019/12/fairness-indicators-fair-ML-systems.html)

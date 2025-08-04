@@ -14,96 +14,91 @@
 # ==============================================================================
 """Setup to install Fairness Indicators Tensorboard plugin."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 import sys
 
-from setuptools import find_packages
-from setuptools import setup
-
+from setuptools import find_packages, setup
 
 if sys.version_info >= (3, 11):
-  sys.exit('Sorry, Python >= 3.11 is not supported')
+    sys.exit("Sorry, Python >= 3.11 is not supported")
 
 
 def select_constraint(default, nightly=None, git_master=None):
-  """Select dependency constraint based on TFX_DEPENDENCY_SELECTOR env var."""
-  selector = os.environ.get('TFX_DEPENDENCY_SELECTOR')
-  if selector == 'UNCONSTRAINED':
-    return ''
-  elif selector == 'NIGHTLY' and nightly is not None:
-    return nightly
-  elif selector == 'GIT_MASTER' and git_master is not None:
-    return git_master
-  else:
-    return default
+    """Select dependency constraint based on TFX_DEPENDENCY_SELECTOR env var."""
+    selector = os.environ.get("TFX_DEPENDENCY_SELECTOR")
+    if selector == "UNCONSTRAINED":
+        return ""
+    elif selector == "NIGHTLY" and nightly is not None:
+        return nightly
+    elif selector == "GIT_MASTER" and git_master is not None:
+        return git_master
+    else:
+        return default
+
 
 REQUIRED_PACKAGES = [
-    'protobuf>=4.21.6,<6.0.0',
-    'tensorboard>=2.17.0,<2.18.0',
-    'tensorflow>=2.17,<2.18',
-    'tf-keras>=2.17,<2.18',
-    'tensorflow-model-analysis>=0.48,<0.49',
-    'werkzeug<2',
+    "protobuf>=4.21.6,<6.0.0",
+    "tensorboard>=2.17.0,<2.18.0",
+    "tensorflow>=2.17,<2.18",
+    "tf-keras>=2.17,<2.18",
+    "tensorflow-model-analysis>=0.48,<0.49",
+    "werkzeug<2",
 ]
 
 TEST_PACKAGES = [
-    'pytest>=8.3.0,<9',
+    "pytest>=8.3.0,<9",
 ]
 
-with open('README.md', 'r', encoding='utf-8') as fh:
-  long_description = fh.read()
+with open("README.md", encoding="utf-8") as fh:
+    long_description = fh.read()
 
 # Get version from version module.
-with open('tensorboard_plugin_fairness_indicators/version.py') as fp:
-  globals_dict = {}
-  exec(fp.read(), globals_dict)  # pylint: disable=exec-used
-__version__ = globals_dict['__version__']
+with open("tensorboard_plugin_fairness_indicators/version.py") as fp:
+    globals_dict = {}
+    exec(fp.read(), globals_dict)  # pylint: disable=exec-used
+__version__ = globals_dict["__version__"]
 
 setup(
-    name='tensorboard_plugin_fairness_indicators',
+    name="tensorboard_plugin_fairness_indicators",
     version=__version__,
-    description='Fairness Indicators TensorBoard Plugin',
+    description="Fairness Indicators TensorBoard Plugin",
     long_description=long_description,
-    long_description_content_type='text/markdown',
-    url='https://github.com/tensorflow/fairness-indicators',
-    author='Google LLC',
-    author_email='packages@tensorflow.org',
+    long_description_content_type="text/markdown",
+    url="https://github.com/tensorflow/fairness-indicators",
+    author="Google LLC",
+    author_email="packages@tensorflow.org",
     packages=find_packages(),
     package_data={
-       'tensorboard_plugin_fairness_indicators': ['static/**'],
+        "tensorboard_plugin_fairness_indicators": ["static/**"],
     },
     entry_points={
-        'tensorboard_plugins': [
-            'fairness_indicators = tensorboard_plugin_fairness_indicators.plugin:FairnessIndicatorsPlugin',
+        "tensorboard_plugins": [
+            "fairness_indicators = tensorboard_plugin_fairness_indicators.plugin:FairnessIndicatorsPlugin",
         ],
     },
-    python_requires='>=3.9,<4',
+    python_requires=">=3.9,<4",
     install_requires=REQUIRED_PACKAGES,
     tests_require=REQUIRED_PACKAGES,
     extras_require={
-        'test': TEST_PACKAGES,
+        "test": TEST_PACKAGES,
     },
     classifiers=[
-        'Development Status :: 4 - Beta',
-        'Intended Audience :: Developers',
-        'Intended Audience :: Education',
-        'Intended Audience :: Science/Research',
-        'License :: OSI Approved :: Apache Software License',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.9',
-        'Programming Language :: Python :: 3 :: Only',
-        'Topic :: Scientific/Engineering',
-        'Topic :: Scientific/Engineering :: Mathematics',
-        'Topic :: Scientific/Engineering :: Artificial Intelligence',
-        'Topic :: Software Development',
-        'Topic :: Software Development :: Libraries',
-        'Topic :: Software Development :: Libraries :: Python Modules',
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Education",
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: Apache Software License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3 :: Only",
+        "Topic :: Scientific/Engineering",
+        "Topic :: Scientific/Engineering :: Mathematics",
+        "Topic :: Scientific/Engineering :: Artificial Intelligence",
+        "Topic :: Software Development",
+        "Topic :: Software Development :: Libraries",
+        "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    license='Apache 2.0',
-    keywords='tensorflow model analysis fairness indicators tensorboard machine learning',
+    license="Apache 2.0",
+    keywords="tensorflow model analysis fairness indicators tensorboard machine learning",
 )

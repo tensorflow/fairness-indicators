@@ -14,34 +14,31 @@
 # ==============================================================================
 """Fairness Indicators Plugin Demo."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-from absl import app
-from absl import flags
-from tensorboard_plugin_fairness_indicators import summary_v2
 import tensorflow.compat.v1 as tf
 import tensorflow.compat.v2 as tf2
+from absl import app, flags
+
+from tensorboard_plugin_fairness_indicators import summary_v2
 
 tf.enable_eager_execution()
 tf = tf2
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('eval_result_output_dir', '',
-                    'Log dir containing evaluation results.')
+flags.DEFINE_string(
+    "eval_result_output_dir", "", "Log dir containing evaluation results."
+)
 
-flags.DEFINE_string('logdir', '', 'Log dir where demo logs will be written.')
+flags.DEFINE_string("logdir", "", "Log dir where demo logs will be written.")
 
 
 def main(unused_argv):
-  writer = tf.summary.create_file_writer(FLAGS.logdir)
+    writer = tf.summary.create_file_writer(FLAGS.logdir)
 
-  with writer.as_default():
-    summary_v2.FairnessIndicators(FLAGS.eval_result_output_dir, step=1)
-  writer.close()
+    with writer.as_default():
+        summary_v2.FairnessIndicators(FLAGS.eval_result_output_dir, step=1)
+    writer.close()
 
 
-if __name__ == '__main__':
-  app.run(main)
+if __name__ == "__main__":
+    app.run(main)
