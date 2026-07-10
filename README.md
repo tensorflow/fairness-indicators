@@ -38,7 +38,7 @@ The pip package includes:
 * [**Tensorflow Data Validation (TFDV)**](https://github.com/tensorflow/data-validation) - analyze the distribution of your dataset
 * [**Tensorflow Model Analysis (TFMA)**](https://github.com/tensorflow/model-analysis) - analyze model performance
   * **Fairness Indicators** - an addition to TFMA that adds fairness metrics and easy performance comparison across slices
-* **The What-If Tool (WIT)**](https://github.com/PAIR-code/what-if-tool - an interactive visual interface designed to probe your models better
+* [**The What-If Tool (WIT)**](https://github.com/PAIR-code/what-if-tool) - an interactive visual interface designed to probe your models better
 
 ### Nightly Packages
 
@@ -85,7 +85,8 @@ other *untested* combinations may also work.
 
 |fairness-indicators                                                                        | tensorflow         | tensorflow-data-validation | tensorflow-model-analysis |
 |-------------------------------------------------------------------------------------------|--------------------|----------------------------|---------------------------|
-|[GitHub master](https://github.com/tensorflow/fairness-indicators/blob/master/RELEASE.md)  | nightly (1.x/2.x)  | 1.17.0                     | 0.48.0                    |
+|[GitHub master](https://github.com/tensorflow/fairness-indicators/blob/master/RELEASE.md)  | nightly (2.x)      | 1.21.0                     | 0.52.0                    |
+|[v0.52.0](https://github.com/tensorflow/fairness-indicators/blob/v0.52.0/RELEASE.md)       | 2.21               | 1.21.0                     | 0.52.0                    |
 |[v0.48.0](https://github.com/tensorflow/fairness-indicators/blob/v0.48.0/RELEASE.md)       | 2.17               | 1.17.0                     | 0.48.0                    |
 |[v0.47.0](https://github.com/tensorflow/fairness-indicators/blob/v0.47.0/RELEASE.md)       | 2.16               | 1.16.1                     | 0.47.1                    |
 |[v0.46.0](https://github.com/tensorflow/fairness-indicators/blob/v0.44.0/RELEASE.md)       | 2.15               | 1.15.1                     | 0.46.0                    |

@@ -22,6 +22,7 @@ import pandas as pd
 import tensorflow as tf
 import tensorflow_model_analysis as tfma
 from google.protobuf import text_format
+from tensorflow_model_analysis.proto import config_pb2 as tfma_config
 
 TEXT_FEATURE = "comment_text"
 LABEL = "toxicity"
@@ -219,7 +220,7 @@ def get_eval_results(
             slice_selection,
             "true" if compute_confidence_intervals else "false",
         ),
-        tfma.EvalConfig(),
+        tfma_config.EvalConfig(),
     )
 
     eval_shared_model = tfma.default_eval_shared_model(

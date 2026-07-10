@@ -19,8 +19,8 @@ import sys
 
 from setuptools import find_packages, setup
 
-if sys.version_info >= (3, 11):
-    sys.exit("Sorry, Python >= 3.11 is not supported")
+if sys.version_info >= (3, 14):
+    sys.exit("Sorry, Python >= 3.14 is not supported")
 
 
 def select_constraint(default, nightly=None, git_master=None):
@@ -37,12 +37,14 @@ def select_constraint(default, nightly=None, git_master=None):
 
 
 REQUIRED_PACKAGES = [
-    "protobuf>=4.21.6,<6.0.0",
-    "tensorboard>=2.17.0,<2.18.0",
-    "tensorflow>=2.17,<2.18",
-    "tf-keras>=2.17,<2.18",
-    "tensorflow-model-analysis>=0.48,<0.49",
+    "protobuf>=6.0.0,<7.0.0",
+    "tensorboard>=2.21.0,<2.22.0",
+    "tensorflow>=2.21,<2.22",
+    "tf-keras>=2.21,<2.22",
+    "tensorflow-model-analysis>=0.52,<0.53",
     "werkzeug<2",
+    "numpy>=1.23.5,<2.0.0; python_version < '3.13'",
+    "numpy>=2.1.0; python_version >= '3.13'",
 ]
 
 TEST_PACKAGES = [
@@ -76,7 +78,7 @@ setup(
             "fairness_indicators = tensorboard_plugin_fairness_indicators.plugin:FairnessIndicatorsPlugin",
         ],
     },
-    python_requires=">=3.9,<4",
+    python_requires=">=3.10,<4",
     install_requires=REQUIRED_PACKAGES,
     tests_require=REQUIRED_PACKAGES,
     extras_require={
@@ -90,7 +92,10 @@ setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
         "Programming Language :: Python :: 3 :: Only",
         "Topic :: Scientific/Engineering",
         "Topic :: Scientific/Engineering :: Mathematics",

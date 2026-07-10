@@ -30,6 +30,7 @@ from tensorboard.backend.event_processing import (
     plugin_event_multiplexer as event_multiplexer,
 )
 from tensorboard.plugins import base_plugin
+from tensorflow_model_analysis.proto import config_pb2 as tfma_config
 from tensorflow_model_analysis.utils import example_keras_model
 from werkzeug import test as werkzeug_test
 from werkzeug import wrappers
@@ -116,7 +117,7 @@ class PluginTest(tf.test.TestCase):
           }
         }
   """,
-            tfma.EvalConfig(),
+            tfma_config.EvalConfig(),
         )
 
     def testRoutes(self):

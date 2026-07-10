@@ -20,8 +20,8 @@ from pathlib import Path
 
 import setuptools
 
-if sys.version_info >= (3, 11):
-    sys.exit("Sorry, Python >= 3.11 is not supported")
+if sys.version_info >= (3, 14):
+    sys.exit("Sorry, Python >= 3.14 is not supported")
 
 
 def select_constraint(default, nightly=None, git_master=None):
@@ -38,12 +38,14 @@ def select_constraint(default, nightly=None, git_master=None):
 
 
 REQUIRED_PACKAGES = [
-    "tensorflow>=2.17,<2.18",
+    "tensorflow>=2.21,<2.22",
     "tensorflow-hub>=0.16.1,<1.0.0",
-    "tensorflow-data-validation>=1.17.0,<2.0.0",
-    "tensorflow-model-analysis>=0.48.0,<0.49.0",
+    "tensorflow-data-validation>=1.21.0,<1.22.0",
+    "tensorflow-model-analysis>=0.52.0,<0.53.0",
     "witwidget>=1.4.4,<2",
-    "protobuf>=4.21.6,<6.0.0",
+    "protobuf>=6.0.0,<7.0.0",
+    "numpy>=1.23.5,<2.0.0; python_version < '3.13'",
+    "numpy>=2.1.0; python_version >= '3.13'",
 ]
 
 TEST_PACKAGES = [
@@ -73,7 +75,7 @@ setuptools.setup(
     package_data={
         "fairness_indicators": ["documentation/*"],
     },
-    python_requires=">=3.9,<4",
+    python_requires=">=3.10,<4",
     install_requires=REQUIRED_PACKAGES,
     tests_require=REQUIRED_PACKAGES,
     extras_require={"docs": DOCS_PACKAGES, "test": TEST_PACKAGES, "dev": "pre-commit"},
@@ -86,7 +88,10 @@ setuptools.setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
         "Programming Language :: Python :: 3 :: Only",
         "Topic :: Scientific/Engineering",
         "Topic :: Scientific/Engineering :: Mathematics",

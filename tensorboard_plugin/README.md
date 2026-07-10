@@ -99,9 +99,10 @@ The following table shows the  package versions that are
 compatible with each other. This is determined by our testing framework, but
 other *untested* combinations may also work.
 
-|tensorboard-pluginn                                                                                          | tensorflow    | tensorflow-model-analysis |
+|tensorboard-plugin                                                                                           | tensorflow    | tensorflow-model-analysis |
 |-------------------------------------------------------------------------------------------------------------|---------------|---------------------------|
-|[GitHub master](https://github.com/tensorflow/fairness-indicators/blob/master/tensorboard_plugin/README.md)  | nightly (2.x) | 0.48.0                    |
+|[GitHub master](https://github.com/tensorflow/fairness-indicators/blob/master/tensorboard_plugin/README.md)  | nightly (2.x) | 0.52.0                    |
+|[v0.52.0](https://github.com/tensorflow/fairness-indicators/blob/v0.52.0/tensorboard_plugin/README.md)       | 2.21.0        | 0.52.0                    |
 |[v0.48.0](https://github.com/tensorflow/fairness-indicators/blob/v0.48.0/tensorboard_plugin/README.md)       | 2.17.1        | 0.48.0                    |
 |[v0.47.0](https://github.com/tensorflow/fairness-indicators/blob/v0.47.0/tensorboard_plugin/README.md)       | 2.16.2        | 0.47.1                    |
 |[v0.46.0](https://github.com/tensorflow/fairness-indicators/blob/v0.46.0/tensorboard_plugin/README.md)       | 2.15.0        | 0.46.0                    |

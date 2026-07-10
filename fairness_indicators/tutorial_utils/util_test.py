@@ -21,8 +21,8 @@ from unittest import mock
 
 import pandas as pd
 import tensorflow as tf
-import tensorflow_model_analysis as tfma
 from google.protobuf import text_format
+from tensorflow_model_analysis.proto import config_pb2 as tfma_config
 
 from fairness_indicators.tutorial_utils import util
 
@@ -329,7 +329,7 @@ class UtilTest(tf.test.TestCase):
          disabled_outputs{values: "analysis"}
      }
      """,
-            tfma.EvalConfig(),
+            tfma_config.EvalConfig(),
         )
 
         mock_run_model_analysis.assert_called_once_with(

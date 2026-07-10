@@ -28,6 +28,7 @@ import tensorflow.compat.v1 as tf
 import tensorflow_model_analysis as tfma
 from google.protobuf import text_format
 from tensorflow import keras
+from tensorflow_model_analysis.proto import config_pb2 as tfma_config
 
 from fairness_indicators import example_model
 
@@ -113,7 +114,7 @@ class ExampleModelTest(tf.test.TestCase):
           }
         }
   """,
-            tfma.EvalConfig(),
+            tfma_config.EvalConfig(),
         )
 
         validate_tf_file_path = self._write_tf_records(data)

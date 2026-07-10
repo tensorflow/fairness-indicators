@@ -4,18 +4,21 @@ on:
   push:
     branches:
       - master
+      - r*
+    tags:
+      - '*'
   pull_request:
     branches:
       - master
+      - r*
+  release:
+    types: [published]
   workflow_dispatch:
 
 jobs:
 
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.9", "3.10"]
 
     steps:
     - name: Checkout
@@ -24,7 +27,7 @@ jobs:
     - name: Set up python
       uses: actions/setup-python@v5
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: "3.12"
 
     - name: Install python build dependencies
       run: |
@@ -33,23 +36,25 @@ jobs:
     - name: Build wheels
       run: |
         python -m build --wheel --sdist
+        cd tensorboard_plugin && python -m build --wheel --sdist && cd ..
         mkdir wheelhouse
         mv dist/* wheelhouse/
+        mv tensorboard_plugin/dist/* wheelhouse/
     - name: List and check wheels
       run: |
         pip install twine pkginfo>=1.11.0
-        ${{ matrix.ls || 'ls -lh' }} wheelhouse/
+        ls -lh wheelhouse/
         twine check wheelhouse/*
     - name: Upload wheels
       uses: actions/upload-artifact@v4
       with:
-        name: wheels-${{ matrix.python-version }}
+        name: wheels
         path: ./wheelhouse/*
 
   upload_to_pypi:
     name: Upload to PyPI
     runs-on: ubuntu-latest
-    if: (github.event_name == 'release' && startsWith(github.ref, 'refs/tags')) || (github.event_name == 'workflow_dispatch')
+    if: (github.event_name == 'release' && github.event.action == 'published') || (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')) || (github.event_name == 'workflow_dispatch')
     needs: [build]
     environment:
       name: pypi
@@ -60,7 +65,7 @@ jobs:
       - name: Retrieve wheels
         uses: actions/download-artifact@v4.1.8
         with:
-          merge-multiple: true
+          name: wheels
           path: wheels
 
       - name: List the build artifacts
@@ -70,7 +75,8 @@ jobs:
       - name: Upload to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1.12
         with:
-          packages_dir: wheels/
-          repository_url: https://pypi.org/legacy/
-          verify_metadata: false
+          password: ${{ secrets.PYPI_API_TOKEN || secrets.PYPI_TOKEN || secrets.PYPI_PASSWORD }}
+          packages-dir: wheels/
+          skip-existing: true
+          verify-metadata: false
           verbose: true

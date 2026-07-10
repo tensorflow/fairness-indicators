@@ -113,3 +113,4 @@ ignore = [
 addopts = "--import-mode=importlib"
 testpaths = ["fairness_indicators"]
 python_files = ["*_test.py"]
+pythonpath = ["."]
