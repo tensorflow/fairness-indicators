@@ -77,5 +77,6 @@ jobs:
         with:
           password: ${{ secrets.PYPI_API_TOKEN || secrets.PYPI_TOKEN || secrets.PYPI_PASSWORD }}
           packages-dir: wheels/
+          skip-existing: true
           verify-metadata: false
           verbose: true
