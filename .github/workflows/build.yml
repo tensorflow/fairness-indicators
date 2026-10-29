@@ -1,0 +1,99 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+      - r*
+    tags:
+      - '*'
+  pull_request:
+    branches:
+      - master
+      - r*
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+    - name: Set up python
+      uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+      with:
+        python-version: "3.12"
+
+    - name: Install python build dependencies
+      run: |
+          python -m pip install --upgrade pip build
+
+    - name: Build wheels
+      run: |
+        python -m build --wheel --sdist
+        cd tensorboard_plugin && python -m build --wheel --sdist && cd ..
+        mkdir wheelhouse
+        mv dist/* wheelhouse/
+        mv tensorboard_plugin/dist/* wheelhouse/
+    - name: List and check wheels
+      run: |
+        pip install twine pkginfo>=1.11.0
+        ls -lh wheelhouse/
+        twine check wheelhouse/*
+    - name: Upload wheels
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      with:
+        name: wheels
+        path: ./wheelhouse/*
+
+  upload_to_pypi:
+    name: Upload to PyPI
+    runs-on: ubuntu-latest
+    if: (github.event_name == 'release' && github.event.action == 'published') || (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')) || (github.event_name == 'workflow_dispatch')
+    needs: [build]
+    environment:
+      name: pypi
+      url: https://pypi.org/p/fairness-indicators
+    permissions:
+      id-token: write
+    steps:
+      - name: Retrieve wheels
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
+        with:
+          name: wheels
+          path: wheels
+
+      - name: List the build artifacts
+        run: |
+          ls -lAs wheels/
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+
+      - name: Authenticate to Google Cloud (OSS Exit Gate)
+        uses: google-github-actions/auth@c200f3691d83b41bf9bbd8638997a462592937ed
+        with:
+          workload_identity_provider: 'projects/305452601764/locations/global/workloadIdentityPools/builders/providers/github'
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@e427ad8a34f8676edf47cf7d7925499adf3eb74f
+
+      - name: Upload to PyPI via OSS Exit Gate
+        run: |
+          python -m pip install --upgrade pip twine
+          python -m twine upload \
+            --skip-existing \
+            --repository-url "https://us-python.pkg.dev/oss-exit-gate-prod/fairness-indicators--pypi/" \
+            -u oauth2accesstoken \
+            -p "$(gcloud auth print-access-token)" \
+            wheels/*
+          echo '{"publish_all": true}' > manifest.json
+          gcloud storage cp manifest.json \
+            "gs://oss-exit-gate-prod-projects-bucket/fairness-indicators/pypi/manifests/manifest-${{ github.run_id }}-${{ github.run_attempt }}.json"
